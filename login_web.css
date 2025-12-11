@@ -1,3 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+button {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 10px;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to top left,
+            rgb(0 0 0 / 0.2),
+            rgb(0 0 0 / 0.2) 30%,
+            transparent);
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
+}
+
+button:hover {
+    background-color: #412b9a;
+}
+
+button:active {
+    box-shadow:
+        inset -2px -2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+
+
+body {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 header {
     z-index: 1000;
     position: fixed;
@@ -6,24 +45,27 @@ header {
 
 .logo {
     margin: 10px;
+    padding-right: 50px;
 }
 
 .gauche {
     display: flex;
     align-items: center;
+    padding-left: 30px;
+}
+
+.gauche .gauche-recherche {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 13px;
+    border-radius: 2em;
+    background: #f6f6f6;
+    border: 2px solid black;  
 }
 
 .gauche a {
     margin: 0 20px;
-}
-
-.centre {
-    width: max-content;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 2em;
-    background: #f6f6f6;
 }
 
 .recherche {
@@ -42,14 +84,13 @@ header {
 
 .navbar {
     position: fixed;
-    top: 0;
+    top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .navbar a {
-    color: white;
+    color: black;
 }

@@ -14,16 +14,16 @@
     <header>
         <nav class="navbar">
             <div class="gauche">
-                <a href="index.html"><img src="./images/TechMarket.png" alt="logo" class="logo" height="auto" width="200"></a>
-                <a href="index.php">Accueil</a>
-            </div>
-            <div class="centre">
-                <input type="search" placeholder="  recherche" class="recherche">
-                <span class="material-symbols-outlined">search</span>
+                <a href="index.html"><img src="./images/TechMarket.png" alt="logo" class="logo" height="auto" width="100"></a>
+                <div class="gauche-recherche">
+                    <input type="search" placeholder="  recherche" class="recherche">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
             </div>
             <div class="droite">
-                <a href="creation.html">Créer</a>
-                <a href="users.html">Profil</a>
+                <a href="index.php" style="text-decoration:none">Accueil</a>
+                <a href="creation.html" style="text-decoration:none">Connexion</a>
+                <a href="users.html" style="text-decoration:none" class="styled"><button>Inscription</button></a>
             </div>
         </nav>
     </header>
