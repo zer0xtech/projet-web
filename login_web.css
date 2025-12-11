@@ -1,0 +1,55 @@
+header {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+}
+
+.logo {
+    margin: 10px;
+}
+
+.gauche {
+    display: flex;
+    align-items: center;
+}
+
+.gauche a {
+    margin: 0 20px;
+}
+
+.centre {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 2em;
+    background: #f6f6f6;
+}
+
+.recherche {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.droite {
+    margin: 0px 50px;
+}
+
+.droite a {
+    margin: 0 30px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar a {
+    color: white;
+}
