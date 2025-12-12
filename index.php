@@ -10,11 +10,12 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>login</title>
     <link rel="stylesheet" href="login_web.css" />
+    <link rel="stylesheet" href="catalog.css" />
 </head>
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <h1>ACCEUIL</h1>
+    <?php require_once 'includes/catalog.php'; ?>
 </body>
 
 </html>
