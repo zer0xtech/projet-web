@@ -1,14 +1,3 @@
-<?php
-require_once 'data/user_test.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['password'])) {
-    $errorConnection = false;
-    if (login($_POST['username'], $_POST['password'])) {
-        header('Location: index.php');
-    } else {
-        $errorConnection = true;
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['pa
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>login</title>
-    <link rel="stylesheet" href="login_web.css" />
+    <link rel="stylesheet" href="inscription_web.css" />
 </head>
 
 <body>
@@ -38,18 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['pa
             </div>
         </nav>
     </header>
-    <div class="Connect">
+    <div class="Inscription">
         <?php if ($errorConnection ?? false) {
             echo "Erreur d'identifiants";
         } ?>
         <form method="POST" class="connexion">
-            <h2>Connexion</h2>
+            <h2>Inscription</h2>
             <label for="username">Username</label>
             <input type="text" name="username" id="username">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            <label for="ConfirmPassword">Confirmez le Password</label>
+            <input type="password" name="ConfirmPassword" id="ConfirmPassword">
             <div class="action">
-                <input type="submit" class="bouton" value="Se connecter">
+                <input type="submit" class="bouton" value="S'inscrire">
             </div>
         </form>
     </div>

@@ -110,9 +110,9 @@ header {
 /* bloc connexion */
 
 
-.Connect {
+.Inscription {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -128,7 +128,7 @@ header {
 }
 
 
-.Connect .form {
+.Inscription .form {
     display: flex;
     flex-direction: column;
     display: flex;
@@ -136,7 +136,7 @@ header {
 
 }
 
-.Connect .action {
+.Inscription .action {
     display: flex;
     justify-content: flex-end;
 }
@@ -184,7 +184,7 @@ form.connexion label {
     color: black;
 }
 
-.Connect .connexion {
+.Inscription .connexion {
     display: flex;
     flex-direction: column;
     display: flex;
@@ -192,7 +192,7 @@ form.connexion label {
 
 }
 
-.Connect input {
+.Inscription input {
     border: 2px solid #5D3FD3;
     border-radius: 10px;
     padding: 10px;
