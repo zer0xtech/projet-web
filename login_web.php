@@ -22,22 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['pa
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="gauche">
-                <a href="index.php"><img src="./images/TechMarket.png" alt="logo" class="logo" height="auto" width="100"></a>
-                <div class="gauche-recherche">
-                    <input type="search" placeholder="  recherche" class="recherche">
-                    <span class="material-symbols-outlined">search</span>
-                </div>
-            </div>
-            <div class="droite">
-                <a href="index.php" style="text-decoration:none">Accueil</a>
-                <a href="login_web.php" style="text-decoration:none">Connexion</a>
-                <a href="inscription_web.php" style="text-decoration:none" class="styled"><button>Inscription</button></a>
-            </div>
-        </nav>
-    </header>
+    <?php require_once 'includes/navbar.php' ?>
     <div class="Connect">
         <?php if ($errorConnection ?? false) {
             echo "Erreur d'identifiants";

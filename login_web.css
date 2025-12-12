@@ -3,13 +3,14 @@
 
 /* Navbar */
 
-.droite button {
+.droite .button {
     border: 0.3px solid #5D3FD3;
     color: white !important;
     transition: all 0.3s ease-in-out;
 }
 
-button {
+.button {
+    display: inline-block;
     border: 0;
     line-height: 2.5;
     padding: 0 15px;
@@ -28,13 +29,13 @@ button {
         inset -2px -2px 3px rgb(0 0 0 / 0.6);
 }
 
-button:active {
+.button:active {
     box-shadow:
         inset -2px -2px 3px rgb(255 255 255 / 0.6),
         inset 2px 2px 3px rgb(0 0 0 / 0.6);
 }
 
-button:hover {
+.button:hover {
     background-color: #5D3FD3;
     color: white !important;
     box-shadow: 0 0 15px #5D3FD3;
@@ -90,8 +91,12 @@ header {
     margin: 0px 50px;
 }
 
-.droite a {
+.droite a,
+.droite a:hover,
+.droite a:visited,
+.droite a:active {
     margin: 0 30px;
+    text-decoration: none;
 }
 
 .navbar {
