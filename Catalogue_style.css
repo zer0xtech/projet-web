@@ -1,69 +1,205 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+button {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 10px;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to top left,
+            rgb(0 0 0 / 0.2),
+            rgb(0 0 0 / 0.2) 30%,
+            transparent);
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
 }
 
-a {
-    color: white;
-    text-decoration: none;
+button:hover {
+    background-color: #412b9a;
+}
+
+button:active {
+    box-shadow:
+        inset -2px -2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+
+
+body {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 header {
-    width: 100%;
-    background-color: rgb(0, 0, 0);
-    border-bottom: 1px dotted #a0a0a0;
-    position: fixed;
     z-index: 1000;
-    top: 0;
-    left: 0;
-
+    position: fixed;
+    width: 100%;
 }
 
-body {
-    background-color: black;
-    padding-top: 120px;
+.logo {
+    margin: 10px;
+    padding-right: 50px;
 }
 
+.gauche {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
 
-nav {
-    width: 80%;
-    margin: 0 auto;
+.gauche .gauche-recherche {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 13px;
+    border-radius: 2em;
+    background: #f6f6f6;
+    border: 2px solid black;
+}
+
+.gauche a {
+    margin: 0 20px;
+}
+
+.recherche {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.droite {
+    margin: 0px 50px;
+}
+
+.droite a {
+    margin: 0 30px;
+}
+
+.navbar {
+    position: fixed;
+    top: 10px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2em 0;
 }
 
-.logo images {
-    width: 200px;
+.navbar a {
+    color: black;
 }
 
-.Accueil {
-    gap: 60px;
-    margin-left: 100px;
-}
+/*  ---  Sous Categorie --- */
 
-.Accueil ul {
+
+.Sous_catégorie {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 70px;
+    position: relative;
+    width: 100%;
+    padding-top: 80px;
 }
 
-.Accueil li {
-    list-style-type: none;
+.Sous_catégorie a {
+    color: black;
 }
 
-.Accueil a {
-    color: rgb(255, 255, 255);
+.item-menu {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.lien-categorie {
+    color: #ccc;
     text-decoration: none;
-    font-size: 18px;
-    cursor: pointer;
-    padding-bottom: 0.5em;
-    background-image: linear-gradient(#ffffff, #ffffff);
-    background-size: 0% 0.1em;
-    background-position-y: 100%;
-    background-position-x: 50%;
-    background-repeat: no-repeat;
-    transition: background-size ease-in-out 0.5s;
-    margin-right: 200px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.item-menu:hover .lien-categorie {
+    color: white;
+}
+
+.grand-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+
+}
+
+.item-menu:hover .grand-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+}
+
+.colonne-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 120px;
+}
+
+.colonne-menu.colonne-titre {
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.colonne-menu h3 {
+    color: #5D3FD3;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.colonne-menu h4 {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.colonne-menu a {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 8px;
+    text-transform: none;
+    background: none;
+    padding: 0;
+}
+
+.colonne-menu a:hover {
+    color: #ec5a13;
+    text-decoration: underline;
+}
+
+.Informatique-place {
+    display: flex;
+    margin-right: 20px;
+
 }
