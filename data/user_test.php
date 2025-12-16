@@ -28,3 +28,22 @@ function login($username, $password)
 
     return true;
 }
+
+function inscription()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['ConfirmPassword'])) {
+        if ($_POST['password'] == $_POST['ConfirmPassword']) {
+            $verif = db()->prepare("SELECT COUNT(*) FROM utilisateurs WHERE pseudo = ?");
+            $verif->execute([$_POST['username']]);
+            if ($verif->fetchColumn() > 0) {
+                return "Pseudo déjà utilisé";
+            }
+            $ajout = db()->prepare("INSERT INTO utilisateurs (pseudo, mot_de_passe, date_inscription) VALUES (?, ?, NOW())");
+            $ajout->execute([$_POST['username'], md5($_POST['password'])]);
+            return true;
+        } else {
+            return "Mots de passe ne correspondent pas";
+        }
+    }
+    return false;
+}
