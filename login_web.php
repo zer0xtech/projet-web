@@ -1,8 +1,8 @@
 <?php
 require_once 'data/user_test.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['password'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'], $_POST['password'])) {
     $errorConnection = false;
-    if (login($_POST['username'], $_POST['password'])) {
+    if (login($_POST['email'], $_POST['password'])) {
         header('Location: index.php');
     } else {
         $errorConnection = true;
@@ -29,16 +29,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['pa
         } ?>
         <form method="POST" class="connexion">
             <h2>Connexion</h2>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username">
-            <label for="password">Password</label>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email">
+            <label for="password">Mot de Passe</label>
             <input type="password" name="password" id="password">
             <div class="action">
                 <input type="submit" class="bouton" value="Se connecter">
             </div>
         </form>
     </div>
-
 </body>
 
 </html>
