@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'], $_POST['pa
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>login</title>
-    <link rel="stylesheet" href="login_web.css" />
+    <link rel="stylesheet" href="style_web.css" />
 </head>
 
 <body>

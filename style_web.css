@@ -1,5 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
+/* ---  Sous Categorie --- */
+
+
+.Sous_catégorie {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    position: relative;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.Sous_catégorie a {
+    color: black;
+}
+
+.item-menu {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.lien-categorie {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.item-menu:hover .lien-categorie {
+    color: white;
+}
+
+.grand-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+
+}
+
+.item-menu:hover .grand-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+}
+
+.colonne-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 120px;
+}
+
+.colonne-menu.colonne-titre {
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.colonne-menu h3 {
+    color: #5D3FD3;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.colonne-menu h4 {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.colonne-menu a {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 8px;
+    text-transform: none;
+    background: none;
+    padding: 0;
+}
+
+.colonne-menu a:hover {
+    color: #ec5a13;
+    text-decoration: underline;
+}
+
+.Informatique-place {
+    display: flex;
+    margin-right: 20px;
+
+}
 
 /* Navbar */
 
@@ -200,4 +308,97 @@ form.connexion label {
 
 .connexion h2 {
     color: #5D3FD3;
+}
+
+.droite .button {
+    border: 0.3px solid #5D3FD3;
+    color: white !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.button {
+    display: inline-block;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 15px;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 10px;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to top left,
+            rgb(0 0 0 / 0.2),
+            rgb(0 0 0 / 0.2) 30%,
+            transparent);
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
+}
+
+.button:active {
+    box-shadow:
+        inset -2px -2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}
+
+.button:hover {
+    background-color: #5D3FD3;
+    color: white !important;
+    box-shadow: 0 0 15px #5D3FD3;
+    transform: scale(1.05);
+    background-color: #412b9a;
+}
+
+.droite a,
+.droite a:hover,
+.droite a:visited,
+.droite a:active {
+    margin: 0 30px;
+    text-decoration: none;
+}
+
+.Connect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 50px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2.5px solid #5D3FD3;
+}
+
+
+.Connect .form {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+
+}
+
+.Connect .action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Connect .connexion {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+
+}
+
+.Connect input {
+    border: 2px solid #5D3FD3;
+    border-radius: 10px;
+    padding: 10px;
 }
