@@ -5,6 +5,13 @@ body {
     flex-direction: column;
 }
 
+.bouton-temporaire {
+    align-self: center;
+    width: fit-content;
+    margin-top: 250px;
+}
+
+
 /* ---  Sous Categorie --- */
 
 
@@ -14,7 +21,6 @@ body {
     gap: 70px;
     width: 100%;
     padding-top: 110px;
-    z-index: 1000;
     position: fixed;
 }
 
@@ -417,82 +423,21 @@ form.connexion label {
 }
 
 /* Publication d'annonces */
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-right: 20px;
-}
-
-.logo span {
-    color: #6C63FF;
-}
-
-.search-form {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-right: auto;
-    padding-left: 10px;
-}
-
-.search-form input {
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    flex-grow: 1;
-}
-
-.search-form button {
-    background: none;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.logout-btn {
-    background-color: #6C63FF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 20px;
-}
-
 /* Contenu Principal */
 main {
     padding: 40px;
-    padding-top: 150px;
+    padding-top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.publish-form-container,
+.publi-container,
 .existing-ads-container {
     background-color: #fff;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     width: 80%;
     max-width: 900px;
     margin-bottom: 40px;
@@ -502,19 +447,19 @@ h2,
 h3 {
     text-align: center;
     margin-top: 0;
-    color: #333;
+    color: #000000;
 }
 
 /* Formulaire */
-.field-group {
+.block {
     margin-bottom: 20px;
 }
 
-.field-group label {
+.block label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #555;
+    color: #000000;
 }
 
 input[type="text"],
@@ -523,14 +468,15 @@ textarea,
 select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
 textarea {
-    resize: vertical;
-    height: 120px;
+    resize: none;
+    flex: 1;
+
 }
 
 .description-prix-state {
@@ -538,8 +484,10 @@ textarea {
     gap: 20px;
 }
 
-.field-group-inner {
-    flex-grow: 1;
+.block-inter {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .prix-state {
@@ -556,12 +504,14 @@ textarea {
 }
 
 .prix-group input {
-    width: 80%;
+    width: 50%;
 }
 
-.prix-group span {
-    align-self: flex-start;
-    margin-top: 10px;
+.inter-prix-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 }
 
 select {
@@ -582,7 +532,7 @@ select {
 }
 
 .category-column {
-    flex-grow: 1;
+    flex: 1;
 }
 
 .photo-upload-container {
@@ -598,7 +548,7 @@ select {
 .photo-slot {
     width: 100px;
     height: 80px;
-    border: 1px solid #ddd;
+    border: 4px solid #ddd;
     border-radius: 4px;
     background-color: #f0f0f0;
     display: flex;
@@ -611,21 +561,31 @@ select {
     cursor: pointer;
 }
 
-.upload-slot span:first-child {
-    font-size: 24px;
-    margin-bottom: 5px;
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
 }
 
-.submit-cancel-btns {
+.cancel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.submit-btn {
-    background-color: #6C63FF;
+.submit-button {
+    transition: all 0.3s ease-in-out;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to top left,
+            rgb(0 0 0 / 0.2),
+            rgb(0 0 0 / 0.2) 30%,
+            transparent);
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
     color: #fff;
     border: none;
     padding: 15px 30px;
@@ -633,7 +593,6 @@ select {
     font-weight: bold;
     cursor: pointer;
     font-size: 16px;
-    width: 100%;
     max-width: 400px;
 }
 
@@ -647,72 +606,4 @@ select {
 .existing-ads-container {
     border: 1px solid #ddd;
     padding-top: 20px;
-}
-
-.ads-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.ad-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.ad-item:last-child {
-    border-bottom: none;
-}
-
-.ad-image-details {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.ad-image-details img {
-    border-radius: 4px;
-}
-
-.ad-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.ad-title {
-    font-weight: bold;
-    color: #333;
-}
-
-.ad-price {
-    color: #555;
-}
-
-.ad-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.modify-btn,
-.delete-btn {
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 8px 15px;
-}
-
-.modify-btn {
-    background-color: #6C63FF;
-    color: #fff;
-    border: none;
-}
-
-.delete-btn {
-    background-color: transparent;
-    border: 1px solid #FF6B6B;
-    color: #FF6B6B;
 }

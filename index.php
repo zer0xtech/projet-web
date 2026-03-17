@@ -15,7 +15,7 @@
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <?php require_once 'includes/catalog.php'; ?>
-    <a href="publication_web.php">Publie ton annonce</a>
+    <a href="publication_web.php" class="bouton-temporaire">Publie ton annonce</a>
 </body>
 
 </html>

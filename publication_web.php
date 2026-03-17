@@ -14,26 +14,26 @@
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <?php require_once 'includes/catalog.php'; ?>
     <main>
-        <div class="publish-form-container">
+        <div class="publi-container">
             <h2>PUBLIER UNE NOUVELLE ANNONCE</h2>
-
-            <form>
-                <div class="field-group">
+            <form method="POST" class="publish">
+                <div class="block">
                     <label for="title">TITRE</label>
                     <input type="text" id="title" name="title" placeholder="ex: iPhone 13 Pro 128Go Noir">
                 </div>
-
-                <div class="field-group description-prix-state">
-                    <div class="field-group-inner">
+                <div class="block description-prix-state">
+                    <div class="block-inter">
                         <label for="description">DESCRIPTION</label>
                         <textarea id="description" name="description" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
                     </div>
-                    <div class="field-group-inner prix-state">
+                    <div class="block-inter prix-state">
                         <div class="prix-group">
                             <label for="price">PRIX</label>
-                            <input type="number" id="price" name="price" placeholder="ex: 450"><span>€</span>
+                            <div class="inter-prix-group">
+                                <input type="text" placeholder="ex: 450">
+                                <span>€</span>
+                            </div>
                         </div>
                         <div class="state-group">
                             <label for="state">ÉTAT</label>
@@ -47,8 +47,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="field-group category-group">
+                <div class="block category-group">
                     <div class="category-selects">
                         <div class="category-column">
                             <label for="category1">CATÉGORIE (Niveau 1)</label>
@@ -71,13 +70,13 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="field-group photos-group">
+                <div class="block photos-group">
                     <label>PHOTOS</label>
                     <div class="photo-upload-container">
-                        <div class="photo-slot upload-slot">
-                            <span>📷</span>
-                            <span>Télécharger vos photos</span>
+                        <input type="file" id="file" name="file" accept="image/*" multiple style="display: none;" />
+                        <div class="photo-slot">
+                            <span style="font-size: 20px; margin-bottom: 5px;">+</span>
+                            Télécharger vos <br> photos
                         </div>
                         <div class="photo-slot"></div>
                         <div class="photo-slot"></div>
@@ -85,47 +84,43 @@
                         <div class="photo-slot"></div>
                     </div>
                 </div>
-
-                <div class="submit-cancel-btns">
-                    <button type="submit" class="submit-btn">SOUMETTRE POUR MODÉRATION (statut : en_attente)</button>
+                <div class="cancel">
+                    <button type="submit" class="submit-button">PUBLIER<br>(statut : en attente)</button>
                     <a href="#" class="cancel-link">Annuler</a>
                 </div>
 
             </form>
         </div>
-
         <div class="existing-ads-container">
             <h3>GÉRER VOS ANNONCES EXISTANTES</h3>
-            <ul class="ads-list">
-                <li class="ad-item">
-                    <div class="ad-image-details">
-                        <img src="https://via.placeholder.com/100x80" alt="iPhone 13 Pro">
-                        <div class="ad-details">
-                            <span class="ad-title">iPhone 13 Pro 128Go Noir</span>
-                            <span class="ad-price">450 €</span>
-                        </div>
-                    </div>
-                    <div class="ad-actions">
-                        <button class="modify-btn">MODIFIER</button>
-                        <button class="delete-btn">SUPPRIMER</button>
-                    </div>
-                </li>
-                <li class="ad-item">
-                    <div class="ad-image-details">
-                        <img src="https://via.placeholder.com/100x80" alt="Ordinateur Portable">
-                        <div class="ad-details">
-                            <span class="ad-title">Ordinateur Portable / Audio/Vidéo</span>
-                            <span class="ad-price">--- €</span>
-                        </div>
-                    </div>
-                    <div class="ad-actions">
-                        <button class="modify-btn">MODIFIER</button>
-                        <button class="delete-btn">SUPPRIMER</button>
-                    </div>
-                </li>
-            </ul>
         </div>
     </main>
+    <script>
+        const fileInput = document.getElementById('file');
+        const photoSlots = document.querySelectorAll('.photo-slot');
+
+        photoSlots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                fileInput.click();
+            });
+        });
+
+        fileInput.addEventListener('change', function() {
+            const files = Array.from(this.files);
+
+            photoSlots.forEach(slot => {
+                slot.innerHTML = '';
+            });
+
+            files.forEach((file, index) => {
+                if (index < photoSlots.length) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    photoSlots[index].appendChild(img);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
