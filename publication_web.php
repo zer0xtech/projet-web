@@ -1,14 +1,12 @@
 <?php
 require_once 'data/user_test.php';
+
+$categorieChoisie = $_GET['categorie1'] ?? '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    publication();
+    publication($categorieChoisie);
 }
 ?>
-<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <div style="color: #a70000; width: fit-content; margin-left: auto; margin-right: auto; margin-top: 100px; text-align: center; border-radius: 5px;">
-        Votre annonce a bien été publiée !
-    </div>
-<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <main>
+        <?php if ($categorieChoisie === ''): ?>
+            <div class="overlay-flou">
+                <h2>Dans quelle catégorie souhaitez-vous publier ?</h2>
+                <form method="GET" action="">
+                    <button type="submit" class="submit-button" name="categorie1" value="informatique">informatique</button>
+                    <button type="submit" class="submit-button" name="categorie1" value="telephone">telephone</button>
+                    <button type="submit" class="submit-button" name="categorie1" value="audio/video">audio/video</button>
+                </form>
+            </div>
+        <?php endif; ?>
         <div class="publi-container">
             <h2>PUBLIER UNE NOUVELLE ANNONCE</h2>
             <form method="POST" class="publish" enctype="multipart/form-data">
@@ -61,21 +69,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="category-selects">
                         <div class="category-column">
                             <label for="category1">CATÉGORIE (Niveau 1)</label>
-                            <select id="category1" name="category1">
-                                <option disabled selected hidden>Sélectionner une catégorie...</option>
-                                <option value="telephone">Téléphone</option>
-                                <option value="informatique">Informatique</option>
-                                <option value="audio_video">Audio/Vidéo</option>
+                            <select name="categorie1" id="categorie1">
+                                <?php if ($categorieChoisie === ''): ?>
+                                    <option value="" selected disabled>Sélectionner une catégorie...</option>
+                                <?php else: ?>
+                                    <?php if ($categorieChoisie === 'informatique'): ?>
+                                        <option value="informatique" selected disabled>Informatique</option>
+                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
+                                        <option value="telephone" selected disabled>Téléphone</option>
+                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
+                                        <option value="audio_video" selected disabled>Audio/Vidéo</option>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </select>
                         </div>
                         <div class="category-column">
                             <label for="category2">CATÉGORIE (Niveau 2)</label>
                             <select id="category2" name="category2">
-                                <option disabled selected hidden>Sélectionner une sous-catégorie...</option>
-                                <option value="smartphone">Smartphone</option>
-                                <option value="laptop">Ordinateur portable</option>
-                                <option value="headphones">Casque</option>
-                                <option value="camera">Caméra</option>
+                                <?php if ($categorieChoisie === 'informatique'): ?>
+                                    <<optgroup label="Ordinateurs">
+                                        <option value="portables">Portables</option>
+                                        <option value="fixes">Fixes</option>
+                                        <option value="gaming">Gaming</option>
+                                        </optgroup>
+
+                                        <optgroup label="Composants">
+                                            <option value="cartes_graphiques">Cartes graphiques</option>
+                                            <option value="processeurs">Processeurs</option>
+                                            <option value="carte_mere">Carte mère</option>
+                                        </optgroup>
+
+                                        <optgroup label="Périphériques">
+                                            <option value="souris">Souris</option>
+                                            <option value="claviers">Claviers</option>
+                                            <option value="ecrans">Écrans</option>
+                                        </optgroup>
+                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
+                                        <optgroup label="Marques">
+                                            <option value="iphone">iPhone</option>
+                                            <option value="samsung">Samsung</option>
+                                            <option value="xiaomi">Xiaomi</option>
+                                        </optgroup>
+
+                                        <optgroup label="Accessoires">
+                                            <option value="coques">Coques</option>
+                                            <option value="chargeurs">Chargeurs</option>
+                                        </optgroup>
+                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
+                                        <optgroup label="Casques">
+                                            <option value="gaming">Gaming</option>
+                                            <option value="musique">Musique</option>
+                                            <option value="confort">Confort</option>
+                                        </optgroup>
+
+                                        <optgroup label="Enceintes">
+                                            <option value="hi_fi">Hi-Fi</option>
+                                            <option value="home_cinema">Home Cinéma</option>
+                                            <option value="professionnel">Professionnel</option>
+                                        </optgroup>
+
+                                        <optgroup label="Caméras">
+                                            <option value="compacts">Compacts</option>
+                                            <option value="hybrides">Hybrides</option>
+                                            <option value="reflex">Reflex</option>
+                                        </optgroup>
+                                    <?php endif; ?>
                             </select>
                         </div>
                     </div>

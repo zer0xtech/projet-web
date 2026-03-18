@@ -1,4 +1,9 @@
-<?php require_once 'datab_web.php'; ?>
+<?php require_once 'datab_web.php';
+if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <div style="color: #a70000; width: fit-content; margin-left: auto; margin-right: auto; margin-top: 200px; text-align: center; border-radius: 5px;">
+        Votre annonce a bien été publiée !
+    </div>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
