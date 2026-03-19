@@ -4,7 +4,7 @@ require_once 'data/user_test.php';
 $categorieChoisie = $_GET['categorie1'] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    publication($categorieChoisie);
+    publication_ia($categorieChoisie);
 }
 ?>
 
@@ -42,8 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="block description-prix-state">
                     <div class="block-inter">
-                        <label for="description">DESCRIPTION</label>
-                        <textarea id="description" name="description" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                        <label for="question">DESCRIPTION</label>
+                        <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                        <button type="button" id="submit" class="submit_ia">Envoyer à l'IA</button>
+                        <span id="chargement" style="display: none;">Chargement en cours...</span>
+                        <span id="erreur" style="display: none;"></span>
+                        <textarea name="reponse" id="reponse"></textarea>
                     </div>
                     <div class="block-inter prix-state">
                         <div class="prix-group">
@@ -63,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="correct">correct</option>
                             </select>
                         </div>
+                        <p style="color: #000000;"><-- description soumise au formulaire</p>
                     </div>
                 </div>
                 <div class="block category-group">
@@ -187,6 +192,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     photoSlots[index].appendChild(img);
                 }
             });
+        });
+    </script>
+    <script type="text/javascript">
+        // Les éléments de la page avec lesquels on a besoin d'intéragir
+        var question = document.getElementById('question');
+        var submit = document.getElementById('submit');
+        var reponse = document.getElementById('reponse');
+        var chargement = document.getElementById('chargement');
+        var erreur = document.getElementById('erreur');
+
+        function genererPrompt(texte) {
+            return {
+                "model": "qwen2.5:3b",
+                "messages": [{
+                    "role": "user",
+                    "content": "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + texte
+                }],
+                // Pour pas recevoir la réponse mot par mot
+                "stream": false
+            };
+        }
+
+        function promptOllama() {
+            var texteQuestion = question.value;
+            // On génère le prompt
+            var prompt = genererPrompt(texteQuestion);
+            // Affichage du message de chargement
+            chargement.style.display = 'inline';
+            // On cache l'éventuelle erreur précédente
+            erreur.style.display = 'none';
+
+            // Envoi de la requête à ollama
+            fetch('http://localhost:11434/api/chat', {
+                    method: "POST",
+                    body: JSON.stringify(prompt)
+                })
+                .then((response) => {
+                    // On décode la réponse JSON
+                    return response.json();
+                })
+                .then((response) => {
+                    // Si la réponse contient la clé erreur la requête a échoué
+                    if (response.error) {
+                        throw new Error(response.error);
+                    }
+                    // On met à jour la <div> réponse avec la réponse retournée par ollama
+                    // En convertissant les retours à la ligne (\n) en <br>
+                    reponse.innerHTML = response.message.content.replaceAll('\n', '<br>');
+                })
+                .catch((err) => {
+                    // Si une erreur se produit, on affiche le message "Erreur"
+                    // On met les détail de l'erreur dans la réponse
+                    erreur.style.display = 'inline';
+                    reponse.innerHTML = err;
+                })
+                .finally(() => {
+                    // Dans tous les cas (OK ou non) on cache le message de chargement
+                    chargement.style.display = 'none';
+                })
+        };
+
+        // Réagier au clic sur le bouton
+        submit.addEventListener('click', function(event) {
+            event.preventDefault();
+            promptOllama();
         });
     </script>
 </body>

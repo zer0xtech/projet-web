@@ -130,6 +130,7 @@ body {
 }
 
 button {
+    transition: all 0.3s ease-in-out;
     border: 0;
     line-height: 2.5;
     padding: 0 15px;
@@ -468,7 +469,7 @@ textarea,
 select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #ddd;
+    border: 3.5px solid #cdc7c7;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -490,10 +491,15 @@ textarea {
     flex: 1;
 }
 
+.block-inter .submit_ia {
+    margin: 10px 0px 10px 0px;
+    max-width: 150px;
+}
+
 .prix-state {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 13px;
     width: 30%;
 }
 
