@@ -96,3 +96,12 @@ function publication($categorieChoisie)
         }
     }
 }
+
+function est_admin()
+{
+    $id = $_SESSION['userid'];
+    $req = db()->prepare("SELECT role FROM users WHERE id = ?");
+    $req->execute([$id]);
+    $role = $req->fetchColumn(0);
+    return $role;
+}

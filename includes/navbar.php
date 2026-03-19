@@ -13,10 +13,13 @@ require_once 'data/user_test.php';
         </div>
         <div class="droite">
             <?php if (estConnecte()): ?>
-                <a href="index.php">Acceuil</a>
+                <a href="index.php">Accueil</a>
                 <a href="/">Mon Profil</a>
                 <a href="/">Mes Annonces</a>
                 <a href="logout_web.php" class="button">Déconnexion</a>
+                <?php if (est_admin() === 'administrateur'): ?>
+                    <a href="Page de modération" class="button">Espace Admin</a>
+                <?php endif; ?>
             <?php else: ?>
                 <a href="index.php">Acceuil</a>
                 <a href="login_web.php">Connexion</a>

@@ -13,7 +13,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <title>login</title>
+    <title>Accueil</title>
     <link rel="stylesheet" href="style_web.css" />
 </head>
 
