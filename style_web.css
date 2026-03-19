@@ -409,3 +409,16 @@ form.connexion label {
     justify-content: center;
 
 }
+
+.infos_profil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 4vw;
+}
+
+.details_profil {
+    display: flex;
+    gap: 10px;
+    padding-top: 4vw;
+}

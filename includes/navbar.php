@@ -14,7 +14,7 @@ require_once 'data/user_test.php';
         <div class="droite">
             <?php if (estConnecte()): ?>
                 <a href="index.php">Acceuil</a>
-                <a href="/">Mon Profil</a>
+                <a href="consultation_profil.php">Mon Profil</a>
                 <a href="/">Mes Annonces</a>
                 <a href="logout_web.php" class="button">Déconnexion</a>
             <?php else: ?>
