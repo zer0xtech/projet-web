@@ -2,6 +2,7 @@
 require_once 'data/user_test.php';
 
 $categorieChoisie = $_GET['categorie1'] ?? '';
+$modeChoisie = $_GET['mode'] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     publication_ia($categorieChoisie);
@@ -23,10 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <main>
-        <?php if ($categorieChoisie === ''): ?>
+        <?php if ($modeChoisie === ''): ?>
+            <div class="overlay-flou">
+                <h2>Avec quel mode souhaitez-vous publier ?</h2>
+                <form method="GET" action="">
+                    <button type="submit" class="submit-button" name="mode" value="classique">Mode Classique</button>
+                    <button type="submit" class="submit-button" name="mode" value="assiste">Mode Assisté</button>
+                </form>
+            </div>
+        <?php elseif ($categorieChoisie === ''): ?>
             <div class="overlay-flou">
                 <h2>Dans quelle catégorie souhaitez-vous publier ?</h2>
                 <form method="GET" action="">
+                    <input type="hidden" name="mode" value="<?php echo htmlspecialchars($modeChoisie); ?>">
                     <button type="submit" class="submit-button" name="categorie1" value="informatique">informatique</button>
                     <button type="submit" class="submit-button" name="categorie1" value="telephone">telephone</button>
                     <button type="submit" class="submit-button" name="categorie1" value="audio/video">audio/video</button>
@@ -42,12 +52,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="block description-prix-state">
                     <div class="block-inter">
-                        <label for="question">DESCRIPTION</label>
-                        <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
-                        <button type="button" id="submit" class="submit_ia">Envoyer à l'IA</button>
-                        <span id="chargement" style="display: none;">Chargement en cours...</span>
-                        <span id="erreur" style="display: none;"></span>
-                        <textarea name="reponse" id="reponse"></textarea>
+                        <?php if ($modeChoisie === 'classique'): ?>
+                            <label for="question">DESCRIPTION</label>
+                            <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                            <button type="button" id="submit" class="submit_ia">Envoyer à l'IA</button>
+                            <span id="chargement" style="display: none;">Chargement en cours...</span>
+                            <span id="erreur" style="display: none;"></span>
+                            <textarea name="reponse" id="reponse"></textarea>
+                        <?php else: ?>
+                            <label for="question">DESCRIPTION</label>
+                            <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                            <button type="button" id="submit" style="width: 200px; margin: 10px 0px 10px 0px;">Générer la description</button>
+                            <span id="chargement" style="display: none;">Chargement en cours...</span>
+                            <span id="erreur" style="display: none;"></span>
+                            <textarea name="reponse" id="reponse"></textarea>
+                        <?php endif; ?>
+
                     </div>
                     <div class="block-inter prix-state">
                         <div class="prix-group">
