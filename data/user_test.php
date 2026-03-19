@@ -33,12 +33,12 @@ function inscription()
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['password']) && isset($_POST['ConfirmPassword'])) {
         if ($_POST['password'] == $_POST['ConfirmPassword']) {
-            $verif = db()->prepare("SELECT COUNT(*) FROM utilisateurs WHERE email = ?");
+            $verif = db()->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
             $verif->execute([$_POST['email']]);
             if ($verif->fetchColumn() > 0) {
                 return "Email déjà utilisé";
             }
-            $ajout = db()->prepare("INSERT INTO utilisateurs (email, prenom, nom, numero_tel, mot_de_passe, date_inscription) VALUES (?, ?, ?, ?, ?, NOW())");
+            $ajout = db()->prepare("INSERT INTO users (email, prenom, nom, numero_tel, mot_de_passe, date_inscription) VALUES (?, ?, ?, ?, ?, NOW())");
             $ajout->execute([$_POST['email'], $_POST['prenom'], $_POST['nom'], $_POST['telephone'], md5($_POST['password'])]);
             return true;
         } else {
