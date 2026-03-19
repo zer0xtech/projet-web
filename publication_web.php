@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="cancel">
                     <button type="submit" class="submit-button">PUBLIER<br>(statut : en attente)</button>
-                    <a href="#" class="cancel-link">Annuler</a>
+                    <a href="publication_web.php" class="cancel-link">Annuler</a>
                 </div>
 
             </form>
