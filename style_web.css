@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.bouton-temporaire {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-self: center;
+    width: fit-content;
+}
+
+
 /* ---  Sous Categorie --- */
 
 
@@ -7,9 +25,9 @@
     display: flex;
     justify-content: center;
     gap: 70px;
-    position: relative;
     width: 100%;
-    padding-top: 100px;
+    padding-top: 110px;
+    position: fixed;
 }
 
 .Sous_catégorie a {
@@ -118,6 +136,7 @@
 }
 
 button {
+    transition: all 0.3s ease-in-out;
     border: 0;
     line-height: 2.5;
     padding: 0 15px;
@@ -408,4 +427,212 @@ form.connexion label {
     display: flex;
     justify-content: center;
 
+}
+
+/* Publication d'annonces */
+/* Contenu Principal */
+main {
+    padding: 40px;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.publi-container,
+.existing-ads-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    width: 80%;
+    max-width: 900px;
+    margin-bottom: 40px;
+}
+
+h2,
+h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #000000;
+}
+
+/* Formulaire */
+.block {
+    margin-bottom: 20px;
+}
+
+.block label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 3.5px solid #cdc7c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+    flex: 1;
+
+}
+
+.description-prix-state {
+    display: flex;
+    gap: 20px;
+}
+
+.block-inter {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.block-inter .submit_ia {
+    margin: 10px 0px 10px 0px;
+    max-width: 150px;
+}
+
+.prix-state {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    width: 30%;
+}
+
+.prix-group,
+.state-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.prix-group input {
+    width: 50%;
+}
+
+.inter-prix-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236C63FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.3c0%204.9%201.8%209.2%205.4%2012.8l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095.1c3.6-3.6%205.4-7.8%205.4-12.8%200-5-1.8-9.3-5.4-12.9z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%;
+    background-size: .65em auto;
+    border-color: #6C63FF;
+    color: #6C63FF;
+}
+
+.category-group .category-selects {
+    display: flex;
+    gap: 20px;
+}
+
+.category-column {
+    flex: 1;
+}
+
+.photo-upload-container {
+    display: flex;
+    gap: 15px;
+    border: 1px dashed #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.photo-slot {
+    width: 100px;
+    height: 80px;
+    border: 4px solid #ddd;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    cursor: pointer;
+}
+
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.cancel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.submit-button {
+    transition: all 0.3s ease-in-out;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to top left,
+            rgb(0 0 0 / 0.2),
+            rgb(0 0 0 / 0.2) 30%,
+            transparent);
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 400px;
+}
+
+.cancel-link {
+    text-decoration: underline;
+    color: #777;
+    font-size: 14px;
+}
+
+/* Annonces existantes */
+.existing-ads-container {
+    border: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+/* L'arrière-plan flou */
+.overlay-flou {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.400);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
 }

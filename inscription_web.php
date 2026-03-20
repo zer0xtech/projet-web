@@ -33,6 +33,8 @@ if ($inscription === true) {
             <input type="text" name="nom" id="nom" />
             <label for="telephone">Téléphone</label>
             <input type="telephone" name="telephone" id="telephone" />
+            <label for="ville">Ville</label>
+            <input type="ville" name="ville" id="ville" />
             <label for="password">Mot de Passe</label>
             <input type="password" name="password" id="password" />
             <label for="ConfirmPassword">Confirmez le Mot de Passe</label>
