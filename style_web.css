@@ -413,8 +413,9 @@ form.connexion label {
 .infos_profil {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     padding-top: 4vw;
+    padding-left: 4vw;
 }
 
 .details_profil {

@@ -1,7 +1,7 @@
 <?php
 require_once 'datab_web.php';
 
-// Rediriger si non connecté
+
 if (!isset($_SESSION['userid'])) {
     header('Location: login.php');
     exit;
@@ -10,12 +10,12 @@ if (!isset($_SESSION['userid'])) {
 $pdo = db();
 $userId = $_SESSION['userid'];
 
-// Récupérer les infos de l'utilisateur
+
 $stmtUser = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmtUser->execute([$userId]);
 $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
 
-// Récupérer les annonces de l'utilisateur
+
 $stmtAnnonces = $pdo->prepare("SELECT * FROM annonces WHERE user_id = ? ORDER BY creation_date DESC");
 $stmtAnnonces->execute([$userId]);
 $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
@@ -41,6 +41,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="infos_profil">
             <h1>Mon Profil</h1>
+            <a class="" href="modification_profil.php"> Modifier mon profil <? ?> </a>
             <div class="">
                 <p>Nom : <span><?= htmlspecialchars($user['nom']) ?> <?= htmlspecialchars($user['prenom']) ?></span></p>
                 <p>Email : <span><?= htmlspecialchars($user['email']) ?></span></p>
@@ -50,7 +51,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <div class="">
+        <div class="infos_profil">
             <h2>Mes annonces (<?= count($annonces) ?>)</h2>
             <?php if (empty($annonces)): ?>
                 <div class="">
