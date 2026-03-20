@@ -3,7 +3,7 @@ require_once 'datab_web.php';
 
 
 if (!isset($_SESSION['userid'])) {
-    header('Location: login.php');
+    header('Location: login_web.php');
     exit;
 }
 
@@ -41,7 +41,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="infos_profil">
             <h1>Mon Profil</h1>
-            <a class="" href="modification_profil.php"> Modifier mon profil <? ?> </a>
+            <a class="" href="modification_profil.php"> Modifier mon profil </a>
             <div class="">
                 <p>Nom : <span><?= htmlspecialchars($user['nom']) ?> <?= htmlspecialchars($user['prenom']) ?></span></p>
                 <p>Email : <span><?= htmlspecialchars($user['email']) ?></span></p>

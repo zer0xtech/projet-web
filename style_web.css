@@ -423,3 +423,25 @@ form.connexion label {
     gap: 10px;
     padding-top: 4vw;
 }
+
+.details_modifs_profil {
+    display: flex;
+    gap: 13px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.bouton_modifs_profil {
+    display: flex;
+    color: white !important;
+    transition: all 0.3s ease-in-out;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.infos_modifs_profil {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 4vw;
+}
