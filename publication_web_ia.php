@@ -61,11 +61,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <textarea name="reponse" id="reponse"></textarea>
                         <?php else: ?>
                             <label for="question">DESCRIPTION</label>
-                            <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                            <form action="">
+                                <label for="categorie_ia_desc">Catégorie</label>
+                                <input type="text" id="categorie_ia_desc" name="categorie_ia_desc">
+                                <label for="marque">Marque</label>
+                                <input type="text" id="marque" name="marque">
+                                <label for="modele">Modèle</label>
+                                <input type="text" id="modele" name="modele">
+                                <label for="etat">État</label>
+                                <input type="text" id="etat" name="etat">
+                                <label for="detail_etat">Détails de l'État</label>
+                                <input type="text" id="detail_etat" name="detail_etat">
+                                <label for="annee">Année</label>
+                                <input type="text" id="annee" name="annee">
+                                <label for="carac_princ">Caractéristiques principales </label>
+                                <input type="text" id="carac_princ" name="carac_princ">
+                                <div style="display: flex; flex-direction: row; gap: 5px">
+                                    <label for="access_include">Accessoires inclus</label><label for="" style="color: red;">(optionnel)</label>
+                                </div>
+                                <input type="text" id="access_include" name="access_include">
+                                <div style="display: flex; flex-direction: row; gap: 5px">
+                                    <label for="reason_sell">Raison de la vente </label><label for="" style="color: red;">(optionnel)</label>
+                                </div>
+                                <input type="text" id="reason_sell" name="reason_sell">
+                            </form>
+
+
+
+                            <!-- <textarea name="question" id="question" rows="4" style="width: 500px;" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
                             <button type="button" id="submit" style="width: 200px; margin: 10px 0px 10px 0px;">Générer la description</button>
                             <span id="chargement" style="display: none;">Chargement en cours...</span>
                             <span id="erreur" style="display: none;"></span>
-                            <textarea name="reponse" id="reponse"></textarea>
+                            <textarea name="reponse" id="reponse"></textarea> -->
                         <?php endif; ?>
 
                     </div>
