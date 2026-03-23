@@ -1,46 +1,29 @@
+<?php require_once 'datab_web.php';
+if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <div style="color: #a70000; width: fit-content; margin-left: auto; margin-right: auto; margin-top: 200px; text-align: center; border-radius: 5px;">
+        Votre annonce a bien été publiée !
+    </div>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Accueil</title>
+    <link rel="stylesheet" href="style_web.css" />
 </head>
+
 <body>
-    <button>Créer un post</button>
-    <?php
-        function db(): ?PDO {
-            try {
-                return new PDO(
-                    'mysql:host=127.0.0.1;dbname=bibliotheque;charset=utf8',
-                    'root',
-                    ''
-                );
-            } catch (Exception $e) {
-                echo "Erreur de connexion à la BDD";
-                return null;
-            }
-            
-        }
-        $addUsers = db()->prepare("INSERT INTO users (username, password) VALUES (?,?)");
-        $addUsers->execute([$pseudo, md5($password)]);
-        // $printUsers = ("SELECT * FROM users");
-        echo $printUsers;
-    ?>
+    <?php require_once 'includes/navbar.php'; ?>
+    <?php require_once 'includes/catalog.php'; ?>
+    <div class="bouton-temporaire">
+        <a href="publication_web.php">Publie ton annonce</a>
+        <a href="publication_web_ia.php">Publie ton annonce avec l'IA</a>
+    </div>
 </body>
+
 </html>
-<?php 
-
-// listeAttentes($posts);
-
-class Moderation {
-    public $post_id;
-    public $user_id;
-    public $post_content;
-    public $post_description;
-    public $post_image;
-
-    function moderatePost() {
-        $moderatePostOption = readline('Vous etes en train de voir le post numéro' . ($post_id) . ', voulez vous modérer ce poste ?');
-    }
-}
-?>

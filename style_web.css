@@ -417,6 +417,14 @@ form.connexion label {
 
 }
 
+.moderation-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    border: 2px solid black;
+}
+
 .Connect input {
     border: 2px solid #5D3FD3;
     border-radius: 10px;

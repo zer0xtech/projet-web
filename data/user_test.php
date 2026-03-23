@@ -1,5 +1,5 @@
 <?php
-require_once 'datab_web.php';
+require_once './datab_web.php';
 
 function estConnecte(): bool
 {

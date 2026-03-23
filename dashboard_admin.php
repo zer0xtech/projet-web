@@ -16,6 +16,17 @@
 <body>
     <?php require_once 'includes/navbar.php'; ?>
 
+    <div class= moderation-container>
+        <div class= title-post>
+            <h1>Titreeeeeeeeeeeee</h1>
+        </div>
+        <div class= title-post>
+            <img src="./images/69bc16c851207.png" width="250">
+        </div>
+        <div class= informations-post>
+            <h1>description</h1>
+        </div>
+    </div>
 
     <div class="buttons-container">
         <button>Test</button>
