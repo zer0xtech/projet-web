@@ -3,6 +3,8 @@
 body {
     display: flex;
     flex-direction: column;
+    background-image: url("images/Gemini_Generated_Image_yf4i84yf4i84yf4i.png");
+    background-size: cover;
 }
 
 .bouton-temporaire {
@@ -36,7 +38,6 @@ body {
 
 .item-menu {
     position: relative;
-    padding-bottom: 20px;
 }
 
 .lien-categorie {
@@ -229,7 +230,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: #E4D6F9;
 }
 
 .navbar a {
@@ -240,31 +241,26 @@ header {
 
 
 .Inscription {
-    position: absolute;
+    position: relative;
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    width: 100%;
+    background-color: #fff;
     padding: 30px;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 2.5px solid #5D3FD3;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .Inscription form.connexion {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    gap: 10px;
-    align-items: center;
+    gap: 2vw;
 
     h2,
     div.action {
-        grid-column-start: span 2;
+        grid-column-start: span 1;
+        padding-top: 1vh;
     }
 }
 
@@ -283,6 +279,7 @@ header {
     border: 0.3px solid #5D3FD3;
     color: white !important;
     transition: all 0.3s ease-in-out;
+    border-radius: 10px;
 }
 
 .bouton {
@@ -323,9 +320,10 @@ form.connexion label {
 }
 
 .Inscription input {
-    border: 2px solid #5D3FD3;
-    border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    border: 3.5px solid #cdc7c7;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .connexion h2 {
@@ -380,28 +378,35 @@ form.connexion label {
     text-decoration: none;
 }
 
-.Connect {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 48vh auto 0 auto;
+}
 
+.login-wrapper2 {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 79vh auto 0 auto;
+}
+
+.Connect {
+    position: relative;
+    z-index: 10;
     background-color: #fff;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    width: 80%;
-    max-width: 300px;
-    margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
 }
-
 
 .Connect .form {
     display: flex;
     flex-direction: column;
-    display: flex;
     gap: 20px;
-
 }
 
 .Connect .action {
@@ -412,9 +417,7 @@ form.connexion label {
 .Connect .connexion {
     display: flex;
     flex-direction: column;
-    display: flex;
     gap: 20px;
-
 }
 
 .Connect input {
@@ -422,6 +425,104 @@ form.connexion label {
     border: 3.5px solid #cdc7c7;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.reveal-title {
+    position: absolute;
+    width: 35vw;
+    height: auto;
+    top: -40vh;
+    left: 47%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: revealUpAndBounce 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+}
+
+.reveal-title2 {
+    position: absolute;
+    width: 35vw;
+    height: auto;
+    top: -68vh;
+    left: 47%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: revealUpAndBounce2 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+}
+
+@keyframes revealUpAndBounce {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 250px) scale(0.8);
+        z-index: 1;
+    }
+
+    25% {
+        z-index: 11;
+    }
+
+    50% {
+        z-index: 9999;
+    }
+
+    51% {
+        z-index: 9999;
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -25px) scale(1.05);
+        z-index: 9999;
+    }
+
+    85% {
+        transform: translate(-50%, 15px) scale(0.98);
+        z-index: 11;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        z-index: 11;
+    }
+}
+
+@keyframes revealUpAndBounce2 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 250px) scale(0.8);
+        z-index: 1;
+    }
+
+    25% {
+        z-index: 11;
+    }
+
+    50% {
+        z-index: 9999;
+    }
+
+    51% {
+        z-index: 9999;
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -25px) scale(1.05);
+        z-index: 9999;
+    }
+
+    85% {
+        transform: translate(-50%, 15px) scale(0.98);
+        z-index: 11;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        z-index: 11;
+    }
 }
 
 .Inscription .infos {
@@ -472,6 +573,7 @@ h3 {
 
 input[type="text"],
 input[type="number"],
+input[type="telephone"],
 textarea,
 select {
     width: 100%;

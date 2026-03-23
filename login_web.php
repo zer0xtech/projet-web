@@ -23,20 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'], $_POST['passw
 
 <body>
     <?php require_once 'includes/navbar.php' ?>
-    <div class="Connect">
-        <?php if ($errorConnection ?? false) {
-            echo "Erreur d'identifiants";
-        } ?>
-        <form method="POST" class="connexion">
-            <h2>Connexion</h2>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email">
-            <label for="password">Mot de Passe</label>
-            <input type="password" name="password" id="password">
-            <div class="action">
-                <input type="submit" class="bouton" value="Se connecter">
-            </div>
-        </form>
+    <div class="login-wrapper">
+        <img src="images/TechMarket_preview_rev_1.png" class="reveal-title">
+        <div class="Connect">
+            <?php if ($errorConnection ?? false) {
+                echo "Erreur d'identifiants";
+            } ?>
+            <form method="POST" class="connexion">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+                <label for="password">Mot de Passe</label>
+                <input type="password" name="password" id="password">
+                <div class="action">
+                    <input type="submit" class="bouton" value="Se connecter">
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 
