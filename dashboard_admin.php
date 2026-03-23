@@ -17,21 +17,49 @@
     <?php require_once 'includes/navbar.php'; ?>
 
     <div class= moderation-container>
-        <div class= title-post>
-            <h1>Titreeeeeeeeeeeee</h1>
+        <div class="title-post">
+            <h2>Iphone 16, 32 Go</h2>
         </div>
-        <div class= title-post>
-            <img src="./images/69bc16c851207.png" width="250">
+        <div class="image-post">
+            <img src="./images/69bc16c851207.png" width="200">
+
         </div>
-        <div class= informations-post>
-            <h1>description</h1>
+        <div class="informations-post">
+            <div class="description-post">
+                <h4>DESCRIPTION : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+            </div>
+            <div class="categorie-post">
+                <h4>CATEGORIE : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+            </div>
+            <div class="sous_categorie-post">
+                <h4>SOUS-CATEGORIE : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+            </div>
+            <div class="ville-post">
+                <h4>VILLE : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+            </div>
+            <div class="etat-post">
+                <h4>ETAT : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+            </div>
+            <div class="prix-post">
+                <h4>PRIX : </h4>
+                <label>aaaaaaaaaaaaaaaaaaaa</label>
+                <h4>$</h4>
+            </div>
         </div>
+    </div>
+    <div class= "statistiques-site">
+        <h1>test</h1>
     </div>
 
     <div class="buttons-container">
-        <button>Test</button>
-        <button>Test</button>
-        <button>Test</button>
+        <button>Valider</button>
+        <button>Valider avec modification</button>
+        <button>Refuser</button>
     </div>
 </body>
 

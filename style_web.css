@@ -417,13 +417,7 @@ form.connexion label {
 
 }
 
-.moderation-container {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    border: 2px solid black;
-}
+
 
 .Connect input {
     border: 2px solid #5D3FD3;
@@ -435,6 +429,51 @@ form.connexion label {
     display: flex;
     justify-content: center;
 
+}
+/* dashboard admin */
+
+.moderation-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);;
+    top: 50%;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+
+}
+
+.informations-post {
+    left: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    align-items: center;
+}
+
+.title-post {
+    left: 50%;
+}
+
+.description-post, .categorie-post, .sous_categorie-post, .ville-post, .etat-post,.prix-post {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    border: 3.5px solid #cdc7c7;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.statistiques-site {
+    right: auto;
 }
 
 /* Publication d'annonces */
