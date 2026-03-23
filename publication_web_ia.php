@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <p style="color: #000000;"><-- description soumise au formulaire</p>
                                 <?php else: ?>
                                     <textarea class="desc_rep_ia" name="reponse" id="reponse" style="height: 600px; margin-top: 20px"></textarea>
-                                    <p style="color: #000000;">formulaire généreé</p>
+                                    <p style="color: #000000;">formulaire généreé <span style="font-size: 30px;">&#11023;</span></p>
                                 <?php endif; ?>
                     </div>
                 </div>
