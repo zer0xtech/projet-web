@@ -151,7 +151,7 @@ button {
             rgb(0 0 0 / 0.2) 30%,
             transparent);
     box-shadow:
-        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgba(214, 12, 12, 0.6),
         inset -2px -2px 3px rgb(0 0 0 / 0.6);
 }
 
@@ -386,15 +386,13 @@ form.connexion label {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    padding: 50px;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 2.5px solid #5D3FD3;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 40px;
 }
 
 
@@ -420,9 +418,10 @@ form.connexion label {
 }
 
 .Connect input {
-    border: 2px solid #5D3FD3;
-    border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    border: 3.5px solid #cdc7c7;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .Inscription .infos {

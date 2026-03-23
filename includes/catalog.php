@@ -41,14 +41,14 @@
             </div>
             <div class="colonne-menu">
                 <h4>Marques</h4>
-                <a href="#">iPhone</a>
-                <a href="#">Samsung</a>
-                <a href="#">Xiaomi</a>
+                <a href="affiche_catalogu.php?cat2=iphone">iPhone</a>
+                <a href="affiche_catalogu.php?cat2=samsung">Samsung</a>
+                <a href="affiche_catalogu.php?cat2=xiaomi">Xiaomi</a>
             </div>
             <div class="colonne-menu">
                 <h4>Accessoires</h4>
-                <a href="#">Coques</a>
-                <a href="#">Chargeurs</a>
+                <a href="affiche_catalogu.php?cat2=coques">Coques</a>
+                <a href="affiche_catalogu.php?cat2=chargeurs">Chargeurs</a>
             </div>
         </div>
     </div>
@@ -64,23 +64,23 @@
 
             <div class="colonne-menu">
                 <h4>Casques</h4>
-                <a href="#">Gaming</a>
-                <a href="#">Musique</a>
-                <a href="#">Confort</a>
+                <a href="affiche_catalogu.php?cat2=gaming2">Gaming</a>
+                <a href="affiche_catalogu.php?cat2=musique">Musique</a>
+                <a href="affiche_catalogu.php?cat2=confort">Confort</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Enceintes</h4>
-                <a href="#">Hi-Fi</a>
-                <a href="#">Home Cinéma</a>
-                <a href="#">Professionnel</a>
+                <a href="affiche_catalogu.php?cat2=">Hi-Fi</a>
+                <a href="affiche_catalogu.php?cat2=">Home Cinéma</a>
+                <a href="affiche_catalogu.php?cat2=">Professionnel</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Caméras</h4>
-                <a href="#">Compacts</a>
-                <a href="#">Hybrides</a>
-                <a href="#">Reflex</a>
+                <a href="affiche_catalogu.php?cat2=">Compacts</a>
+                <a href="affiche_catalogu.php?cat2=">Hybrides</a>
+                <a href="affiche_catalogu.php?cat2=">Reflex</a>
             </div>
 
         </div>
