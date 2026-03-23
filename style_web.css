@@ -646,3 +646,17 @@ select {
     max-width: 900px;
     margin-bottom: 40px;
 }
+
+p {
+    font-weight: bold;
+}
+
+.publi-container_catalg {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 40px;
+}

@@ -11,23 +11,23 @@
 
             <div class="colonne-menu">
                 <h4>Ordinateurs</h4>
-                <a href="#">Portables</a>
-                <a href="#">Fixes</a>
-                <a href="#">Gaming</a>
+                <a href="affiche_catalogu.php?cat2=portables">Portables</a>
+                <a href="affiche_catalogu.php?cat2=fixes">Fixes</a>
+                <a href="affiche_catalogu.php?cat2=gaming">Gaming</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Composants</h4>
-                <a href="#">Cartes graphiques</a>
-                <a href="#">Processeurs</a>
-                <a href="#">Carte mère</a>
+                <a href="affiche_catalogu.php?cat2=cartes_graphiques">Cartes graphiques</a>
+                <a href="affiche_catalogu.php?cat2=processeurs">Processeurs</a>
+                <a href="affiche_catalogu.php?cat2=carte_mere">Carte mère</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Périphériques</h4>
-                <a href="#">Souris</a>
-                <a href="#">Claviers</a>
-                <a href="#">Écrans</a>
+                <a href="affiche_catalogu.php?cat2=souris">Souris</a>
+                <a href="affiche_catalogu.php?cat2=claviers">Claviers</a>
+                <a href="affiche_catalogu.php?cat2=ecrans">Écrans</a>
             </div>
         </div>
     </div>
