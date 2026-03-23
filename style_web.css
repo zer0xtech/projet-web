@@ -450,6 +450,16 @@ main {
     margin-bottom: 40px;
 }
 
+.buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right:0;
+    padding: 20px 250px;
+}
+
 h2,
 h3 {
     text-align: center;
