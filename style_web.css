@@ -3,20 +3,25 @@
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+
+    backdrop-filter: blur(5px);
     background-image: url("images/Gemini_Generated_Image_yf4i84yf4i84yf4i.png");
     background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+
 }
 
 .bouton-temporaire {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    align-self: center;
-    width: fit-content;
+    text-align: center;
+    margin-top: 9vh;
+    padding: 3rem 0;
+    width: 80vw;
+    margin-bottom: 2rem;
+    border-radius: 20px;
 }
 
 
@@ -30,6 +35,7 @@ body {
     width: 100%;
     padding-top: 110px;
     position: fixed;
+    background-color: #E4D6F9;
 }
 
 .Sous_catégorie a {
@@ -178,9 +184,9 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
     z-index: 1000;
-    position: fixed;
-    width: 100%;
 }
 
 .logo {
@@ -223,8 +229,9 @@ header {
 }
 
 .navbar {
-    position: fixed;
-    top: 0px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     padding-top: 10px;
     width: 100%;
     display: flex;
@@ -444,7 +451,7 @@ form.connexion label {
     width: 35vw;
     height: auto;
     top: -68vh;
-    left: 47%;
+    left: 51%;
     transform: translateX(-50%);
     opacity: 0;
     animation: revealUpAndBounce2 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -535,7 +542,7 @@ form.connexion label {
 /* Contenu Principal */
 main {
     padding: 40px;
-    padding-top: 120px;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -757,7 +764,41 @@ p {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 400px;
     margin-bottom: 40px;
+}
+
+/* Main index */
+
+.topic {
+    text-align: center;
+    margin-top: 9vh;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #8271c8, #DAC6F9);
+    color: white;
+    width: 80vw;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+}
+
+/* Footer */
+
+.main-footer {
+    background-color: #E4D6F9;
+    padding: 2rem 0 0.2rem;
+    margin-top: auto;
+}
+
+.container-site {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.buttom-footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(0, 0, 0);
+    color: rgba(0, 0, 0);
 }

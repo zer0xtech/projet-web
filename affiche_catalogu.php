@@ -22,7 +22,7 @@ if (isset($_GET['cat2']) ?? '') {
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <div style="padding-top: 200px; display: flex; flex-wrap: wrap; gap:50px; align-items: center; justify-content: center;">
+    <div style="padding-top: 20vh; display: flex; flex-wrap: wrap; gap:50px; align-items: center; justify-content: center;">
         <?php if (empty($aff_ann)): ?>
             <div style="color: #a70000; width: fit-content; margin-left: auto; margin-right: auto; margin-top: 200px; text-align: center; border-radius: 5px;">
                 Il n'y a pas d'annonces dans cette catégorie !
@@ -31,7 +31,7 @@ if (isset($_GET['cat2']) ?? '') {
             <?php foreach ($aff_ann as $annonce): ?>
                 <?php if ($annonce['statut'] == 'en_attente'): ?>
                     <div style="color: #a70000; text-align: center; border-radius: 5px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">
-                        <p>Cette annonce est en attente de validation par l'équipe de modération !</p>
+                        <p>Cette annonce est en attente de <br> validation par l'équipe de modération !</p>
                     </div>
                 <?php else: ?>
                     <div class="publi-container_catalg">
