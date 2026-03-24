@@ -417,8 +417,6 @@ form.connexion label {
 
 }
 
-
-
 .Connect input {
     border: 2px solid #5D3FD3;
     border-radius: 10px;
@@ -434,25 +432,22 @@ form.connexion label {
 /* dashboard admin */
 
 .dashboard-layout {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    max-width: 1300px;
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 850px) 1fr; 
+    gap: 50px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 120px 20px 50px 20px;
-    gap: 50px;
 }
 
 .zone-annonces {
-    flex: 1;
-    max-width: 850px;
-    display: flex;
-    flex-direction: column;
+    grid-column: 2;
+    width: 100%;
 }
 
 .zone-stats {
-    width: 300px;
-    flex-shrink: 0;
+    grid-column: 3;
+    align-self: start;
     position: sticky;
     top: 120px;
     border: 2px solid #5D3FD3;
@@ -476,15 +471,17 @@ form.connexion label {
 .content-post {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;
     width: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .gauche-post {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
 .gauche-post .title-post h2 {
@@ -510,10 +507,12 @@ form.connexion label {
     color: #5D3FD3;
 }
 
-
 .droite-post {
     flex: 1.5;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre le panneau d'informations verticalement */
+}   
 
 .encadre-infos {
     border: 1px solid black;

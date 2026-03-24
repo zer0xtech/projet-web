@@ -18,13 +18,13 @@ if (isset($_POST['action'])) {
     }
 
     if ($action_choisie == 'modifier') {
-        $motif = $_POST['motif_modification'];
-        $update = $bdd->prepare("UPDATE annonces SET statut = 'validee', motif_modification = ? WHERE id = ?");
+        $motif = $_POST['motif_modification'] ?? ""; 
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'en_attente', motif_modification = ? WHERE id = ?");
         $update->execute([$motif, $id_annonce]);
     }
 
     if ($action_choisie == 'refuser') {
-        $motif = $_POST['motif_refus'];
+        $motif = $_POST['motif_refus'] ?? ""; 
         $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
         $update->execute([$motif, $id_annonce]);
     }
@@ -52,7 +52,7 @@ $requete = $bdd->query("
     FROM annonces 
     JOIN users ON annonces.user_id = users.id 
     WHERE annonces.statut = 'en_attente' 
-    ORDER BY annonces.id ASC
+    ORDER BY annonces.creation_date ASC
 ");
 $annonces_en_attente = $requete->fetchAll();
 
@@ -73,34 +73,25 @@ $annonces_en_attente = $requete->fetchAll();
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-
     <div class="dashboard-layout">
-
         <div class="zone-annonces">
-
             <?php foreach ($annonces_en_attente as $annonce) { ?>
-
                 <div class="moderation-container-admin">
-
                     <div class="content-post">
-
                         <div class="gauche-post">
                             <div class="title-post">
                                 <h2><?php echo ($annonce['titre']); ?></h2>
+                            </div>
+                            <div class="user-post">
+                                <p>Publié par : <span><?php echo ($annonce['prenom'] . ' ' . $annonce['nom']); ?></span></p>
                             </div>
                             <div class="image-post">
                                 <?php $photos = explode(',', $annonce['url_photo']); ?>
                                 <img src="<?php echo ($photos[0]); ?>">
                             </div>
-
-                            <div class="user-post">
-                                <p>Publié par : <span><?php echo ($annonce['prenom'] . ' ' . $annonce['nom']); ?></span></p>
-                            </div>
                         </div>
-
                         <div class="droite-post">
                             <div class="encadre-infos">
-
                                 <div class="ligne-info">
                                     <h4>DESCRIPTION : </h4>
                                     <label><?php echo (($annonce['description'])); ?></label>
@@ -132,42 +123,33 @@ $annonces_en_attente = $requete->fetchAll();
                     </div>
 
                     <div class="buttons-container-admin">
-
                         <form method="POST" class="form-action-admin">
                             <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
                             <input type="hidden" name="action" value="valider">
                             <button type="submit" class="btn-valider-admin">Valider</button>
                         </form>
-
                         <form method="POST" class="form-action-admin">
                             <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
                             <input type="hidden" name="action" value="modifier">
                             <input type="text" name="motif_modification" placeholder="Modifications à prévoir">
                             <button type="submit" class="btn-modifier-admin">Modifier</button>
                         </form>
-
                         <form method="POST" class="form-action-admin">
                             <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
                             <input type="hidden" name="action" value="refuser">
+                            <input type="text" name="motif_refus" placeholder="Motif du refus">
                             <button type="submit" class="btn-refuser-admin">Refuser</button>
                         </form>
-
                     </div>
-
                 </div>
             <?php } ?>
-
         </div>
         <div class="zone-stats">
             <h1>Statistiques</h1>
             <p>Total Utilisateurs : <strong><?php echo $totalUsers; ?></strong></p>
             <p>Total Annonces : <strong><?php echo $totalAnnonces; ?></strong></p>
-            <p>En attente : <strong><?php echo $totalAttente; ?></strong></p>
+            <p>Annonces en attente : <strong><?php echo $totalAttente; ?></strong></p>
         </div>
-
-    </div>
-
-    </div>
     </div>
 </body>
 
