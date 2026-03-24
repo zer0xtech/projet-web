@@ -18,13 +18,13 @@ if (isset($_POST['action'])) {
     }
 
     if ($action_choisie == 'modifier') {
-        $motif = $_POST['motif_modification'] ?? ""; 
+        $motif = $_POST['motif_modification'] ?? "";
         $update = $bdd->prepare("UPDATE annonces SET statut = 'en_attente', motif_modification = ? WHERE id = ?");
         $update->execute([$motif, $id_annonce]);
     }
 
     if ($action_choisie == 'refuser') {
-        $motif = $_POST['motif_refus'] ?? ""; 
+        $motif = $_POST['motif_refus'] ?? "";
         $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
         $update->execute([$motif, $id_annonce]);
     }
@@ -149,6 +149,13 @@ $annonces_en_attente = $requete->fetchAll();
             <p>Total Utilisateurs : <strong><?php echo $totalUsers; ?></strong></p>
             <p>Total Annonces : <strong><?php echo $totalAnnonces; ?></strong></p>
             <p>Annonces en attente : <strong><?php echo $totalAttente; ?></strong></p>
+        </div>
+        <div class="zone-menu-admin">
+            <div class="encadre-menu">
+                <h3>Gestion admin</h3>
+                <a href="dashboard_admin.php" class="btn-menu-admin">Modération Annonces</a>
+                <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+            </div>
         </div>
     </div>
 </body>

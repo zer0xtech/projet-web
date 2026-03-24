@@ -432,12 +432,13 @@ form.connexion label {
 /* dashboard admin */
 
 .dashboard-layout {
-    display: grid;
-    grid-template-columns: 1fr minmax(auto, 850px) 1fr; 
-    gap: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     max-width: 1400px;
     margin: 0 auto;
     padding: 120px 20px 50px 20px;
+    gap: 40px;
 }
 
 .zone-annonces {
@@ -511,8 +512,9 @@ form.connexion label {
     flex: 1.5;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centre le panneau d'informations verticalement */
-}   
+    justify-content: center;
+    /* Centre le panneau d'informations verticalement */
+}
 
 .encadre-infos {
     border: 1px solid black;
@@ -585,7 +587,118 @@ form.connexion label {
     outline: none;
 }
 
+/* Menu droite */
 
+.zone-menu-admin {
+    width: 250px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+}
+
+.encadre-menu {
+    border: 2px solid #5D3FD3;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.encadre-menu h3 {
+    color: #5D3FD3;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.btn-menu-admin {
+    display: block;
+    background-color: #5D3FD3;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.btn-menu-admin:hover {
+    background-color: #412b9a;
+}
+
+.btn-menu-admin.inactif {
+    background-color: #ccc;
+    color: black;
+}
+
+.zone-contenu-admin {
+    flex: 1;
+    background-color: white;
+    border: 2px solid #5D3FD3;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.zone-contenu-admin h2 {
+    color: #5D3FD3;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Gestion personnes */
+
+table-users {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-users th,
+.table-users td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+.table-users th {
+    background-color: #f9f9f9;
+    color: #5D3FD3;
+}
+
+.select-role {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-family: inherit;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.btn-icon:hover {
+    color: #5D3FD3;
+}
+
+.btn-icon.delete:hover {
+    color: red;
+}
 
 /* Publication d'annonces */
 /* Contenu Principal */
