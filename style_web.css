@@ -416,6 +416,7 @@ form.connexion label {
     gap: 5px;
     padding-top: 4vw;
     padding-left: 4vw;
+    color: #5D3FD3;
 }
 
 .details_profil {
@@ -431,9 +432,10 @@ form.connexion label {
     justify-content: center;
 }
 
+
 .bouton_modifs_profil {
     display: flex;
-    color: white !important;
+    color: #5D3FD3 !important;
     transition: all 0.3s ease-in-out;
     justify-content: center;
     padding-top: 5px;
@@ -442,6 +444,16 @@ form.connexion label {
 .infos_modifs_profil {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding-top: 4vw;
+    gap: 3px;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    color: #5D3FD3;
+    margin-right: 20vw;
+    margin-left: 16vw;
+    border: #5D3FD3 2px solid;
+    box-shadow: #333137 0px 0px 5px;
+    background-color: #e1deee;
+    border-radius: 4% 4%;
 }

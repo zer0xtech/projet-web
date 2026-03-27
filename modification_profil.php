@@ -57,37 +57,37 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <?php endif; ?>
         <form class="infos_modifs_profil" method="POST" action="">
             <div class="details_modifs_profil">
-                <label for="nom">Nom</label>
+                <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" required>
             </div>
             <div class="details_modifs_profil">
-                <label for="prenom">Prénom</label>
+                <label for="prenom">Prénom :</label>
                 <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($user['prenom']) ?>" required>
             </div>
             <div class="details_modifs_profil">
-                <label for="email">Email</label>
+                <label for="email">Email :</label>
                 <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
             </div>
             <div class="details_modifs_profil">
-                <label for="phone">Téléphone</label>
+                <label for="phone">Téléphone :</label>
                 <input type="tel" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
             </div>
             <div class="details_modifs_profil">
-                <label for="ville">Ville</label>
+                <label for="ville">Ville :</label>
                 <input type="text" id="ville" name="ville" value="<?= htmlspecialchars($user['ville']) ?>" required>
             </div>
             <div class="details_modifs_profil">
-                <label for="password">Nouveau mot de passe <small>(laisser vide pour ne pas changer)</small></label>
+                <label for="password">Nouveau mot de passe :<small> (laisser vide pour ne pas changer)</small></label>
                 <input type="password" id="password" name="password">
             </div>
             <div class="details_modifs_profil">
-                <label for="confirm_password">Confirmer le mot de passe</label>
+                <label for="confirm_password">Confirmer le mot de passe :</label>
                 <input type="password" id="confirm_password" name="confirm_password">
             </div>
             <div class="bouton_modifs_profil">
                 <button type="submit">Enregistrer</button>
-                <div><a class="" href="consultation_profil.php">Annuler</a></div>
             </div>
+            <div><a class="bouton_modifs_profil" href="consultation_profil.php">Annuler</a></div>
         </form>
     </div>
 </body>
