@@ -513,7 +513,6 @@ form.connexion label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Centre le panneau d'informations verticalement */
 }
 
 .encadre-infos {
@@ -536,6 +535,68 @@ form.connexion label {
     margin: 0;
 }
 
+.total-posts {
+    width: 70%;
+    margin: 0 auto;
+    height:auto;
+    display:grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap:40px 30px;
+    padding: 20px;
+}
+
+.publication {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.publication img {
+    display: block;
+    margin: 0 auto;
+}
+
+.statut-post h2.statut-attente {
+    background-color: orange;
+    border-radius: 20px;
+    padding: 10px;
+}
+.statut-post h2.statut-validee {
+    background-color: green;
+    border-radius: 20px;
+    padding: 10px;
+}
+.statut-post h2.statut-refusee {
+    background-color: #cc0000;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.publication-bottom {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.publication-bottom h3 span {
+    color: #412b9a;
+}
+
+.publication-top h1, h2, h3 {
+    text-align: center;
+}
+
+.view-button {
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #5D3FD3;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
 
 .buttons-container-admin {
     padding-top: 30px;
@@ -648,7 +709,7 @@ form.connexion label {
 
 /* Gestion personnes */
 
-table-users {
+.table-users {
     width: 100%;
     border-collapse: collapse;
 }
@@ -729,11 +790,12 @@ main {
     gap: 20px;
 }
 
-h2,
-h3 {
+
+h1, h2, h3, a {
     text-align: center;
     margin-top: 0;
     color: #000000;
+    text-decoration: none;
 }
 
 /* Formulaire */

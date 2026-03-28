@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         try {
             return new PDO(
-                'mysql:host=127.0.0.1;dbname=bibliotheque;charset=utf8',
+                'mysql:host=127.0.0.1;dbname=techmarket;charset=utf8',
                 'root',
                 ''
             );

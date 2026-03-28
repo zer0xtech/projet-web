@@ -17,7 +17,7 @@ require_once 'data/user_test.php';
                 <a href="/">Mon Profil</a>
                 <a href="/">Mes Annonces</a>
                 <a href="logout_web.php" class="button">Déconnexion</a>
-                <?php if (est_admin() === 'administrateur'): ?>
+                <?php if (est_admin() === 'administrateur' || est_admin() === 'moderateur'): ?>
                     <a href="dashboard_admin.php" class="button">Espace Admin</a>
                 <?php endif; ?>
             <?php else: ?>

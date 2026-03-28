@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="Neuf">Neuf</option>
                                 <option value="Très bon">Très bon</option>
                                 <option value="Bon">Bon</option>
-                                <option value="correct">correct</option>
+                                <option value="correct">Correct</option>
                             </select>
                         </div>
                     </div>

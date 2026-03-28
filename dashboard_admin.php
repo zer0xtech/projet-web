@@ -4,10 +4,7 @@ require_once 'data/user_test.php';
 $bdd = db();
 
 
-
 # Les différents boutons 
-
-
 if (isset($_POST['action'])) {
     $action_choisie = $_POST['action'];
     $id_annonce = $_POST['annonce_id'];
@@ -53,10 +50,16 @@ $requete = $bdd->query("
     JOIN users ON annonces.user_id = users.id 
     WHERE annonces.statut = 'en_attente' 
     ORDER BY annonces.creation_date ASC
+    LIMIT 1
 ");
-$annonces_en_attente = $requete->fetchAll();
+$annonce = $requete->fetch();
 
 
+// check si l'utilisateur est un modérateur / admin 
+if (est_admin() !== 'administrateur' && est_admin() !== 'moderateur') { 
+    header('Location: index.php');
+    exit(); 
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,12 +78,11 @@ $annonces_en_attente = $requete->fetchAll();
     <?php require_once 'includes/navbar.php'; ?>
     <div class="dashboard-layout">
         <div class="zone-annonces">
-            <?php foreach ($annonces_en_attente as $annonce) { ?>
                 <div class="moderation-container-admin">
                     <div class="content-post">
                         <div class="gauche-post">
                             <div class="title-post">
-                                <h2><?php echo ($annonce['titre']); ?></h2>
+                                <h2><?php echo ($annonce['titre']); ?></h2> 
                             </div>
                             <div class="user-post">
                                 <p>Publié par : <span><?php echo ($annonce['prenom'] . ' ' . $annonce['nom']); ?></span></p>
@@ -142,7 +144,6 @@ $annonces_en_attente = $requete->fetchAll();
                         </form>
                     </div>
                 </div>
-            <?php } ?>
         </div>
         <div class="zone-stats">
             <h1>Statistiques</h1>
@@ -154,7 +155,10 @@ $annonces_en_attente = $requete->fetchAll();
             <div class="encadre-menu">
                 <h3>Gestion admin</h3>
                 <a href="dashboard_admin.php" class="btn-menu-admin">Modération Annonces</a>
-                <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+                <?php if (est_admin() === 'administrateur'): ?>
+                    <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+                    <a href="visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
