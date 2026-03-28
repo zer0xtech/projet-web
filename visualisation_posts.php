@@ -96,7 +96,6 @@ if (est_admin() !== 'administrateur') {
                 <a href="visualisation_posts.php" class="btn-menu-admin">Visualisation de tous les posts</a>
             </div>
         </div>
-
     </div>
 </body>
 
