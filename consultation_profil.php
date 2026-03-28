@@ -49,9 +49,6 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                 <p>Ville : <span><?= htmlspecialchars($user['ville']) ?></span></p>
                 <p>Inscrit depuis le : <span><?= date('d/m/Y', strtotime($user['date_inscription'])) ?></span></p>
             </div>
-        </div>
-
-        <div class="infos_profil">
             <h2>Mes annonces (<?= count($annonces) ?>)</h2>
             <?php if (empty($annonces)): ?>
                 <div class="">
