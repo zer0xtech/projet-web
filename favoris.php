@@ -45,16 +45,16 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php require_once 'includes/navbar.php'; ?>
 
-    <div class="container">
+    <div class="infos_favoris">
         <h1>Mes favoris (<?= count($favoris) ?>)</h1>
 
         <?php if (empty($favoris)): ?>
-            <div class="aucun-favori">
+            <div class="infos_favoris_container">
                 <p>Tu n'as pas encore d'annonces en favoris.</p>
                 <a href="index.php">Parcourir les annonces</a>
             </div>
         <?php else: ?>
-            <div class="favoris-liste">
+            <div class="infos_favoris_container">
                 <?php foreach ($favoris as $fav): ?>
                     <div class="favori-card">
                         <img src="<?= htmlspecialchars($fav['url_photo']) ?>" alt="photo annonce">

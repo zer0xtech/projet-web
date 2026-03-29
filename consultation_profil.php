@@ -38,7 +38,6 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
     <?php require_once 'includes/navbar.php'; ?>
 
     <div class="infos_profil">
-
         <div class="infos_profil_outer">
             <h1>Mon Profil</h1>
             <a class="" href="modification_profil.php"> Modifier mon profil </a>
@@ -50,6 +49,11 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                 <p>Inscrit depuis le : <span><?= date('d/m/Y', strtotime($user['date_inscription'])) ?></span></p>
             </div>
         </div>
+        <div class="infos_profil_lower">
+            <h2>Annonces Favorites</h2>
+            <a href="favoris.php">Voir mes favoris</a>
+        </div>
+    </div>
     </div>
 </body>
 

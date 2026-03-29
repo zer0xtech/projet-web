@@ -428,7 +428,33 @@ form.connexion label {
     color: #5D3FD3;
 }
 
+.infos_favoris {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 4vw;
+    padding-left: 4vw;
+    color: #5D3FD3;
+}
+
 .infos_annonces_container {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    color: #5D3FD3;
+    margin-right: 20vw;
+    margin-left: 16vw;
+    border: #5D3FD3 2px solid;
+    box-shadow: #333137 0px 0px 5px;
+    background-color: #e1deee;
+    border-radius: 4% 4%;
+}
+
+.infos_favoris_container {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -493,7 +519,25 @@ form.connexion label {
     padding-left: 4vw;
     padding-right: 4vw;
     color: #5D3FD3;
-    margin-top: 12vw;
+    margin-top: 8vw;
+    margin-right: 28vw;
+    margin-left: 24vw;
+    border: #5D3FD3 2px solid;
+    box-shadow: #333137 0px 0px 5px;
+    background-color: #e1deee;
+    border-radius: 4% 4%;
+}
+
+.infos_profil_lower {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    color: #5D3FD3;
+    margin-top: 1vw;
     margin-right: 28vw;
     margin-left: 24vw;
     border: #5D3FD3 2px solid;
