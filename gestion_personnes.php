@@ -2,6 +2,11 @@
 require_once 'data/user_test.php';
 $bdd = db();
 
+if (est_admin() !== 'administrateur') { 
+    header('Location: index.php');
+    exit(); 
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     if ($_POST['action'] === 'modifier_role') {
@@ -26,11 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 $requete = $bdd->query("SELECT * FROM users ORDER BY id ASC");
 $utilisateurs = $requete->fetchAll();
-
-if (est_admin() !== 'administrateur') { 
-    header('Location: index.php');
-    exit(); 
-}
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +55,7 @@ if (est_admin() !== 'administrateur') {
                 <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
                 <a href="gestion_personnes.php" class="btn-menu-admin">Gestion personne</a>
                 <a href="visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+                <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
             </div>
         </div>
 

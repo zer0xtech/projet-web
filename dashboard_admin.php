@@ -3,6 +3,11 @@
 require_once 'data/user_test.php';
 $bdd = db();
 
+// check si l'utilisateur est un modérateur / admin 
+if (est_admin() !== 'administrateur' && est_admin() !== 'moderateur') { 
+    header('Location: index.php');
+    exit(); 
+}
 
 # Les différents boutons 
 if (isset($_POST['action'])) {
@@ -53,13 +58,6 @@ $requete = $bdd->query("
     LIMIT 1
 ");
 $annonce = $requete->fetch();
-
-
-// check si l'utilisateur est un modérateur / admin 
-if (est_admin() !== 'administrateur' && est_admin() !== 'moderateur') { 
-    header('Location: index.php');
-    exit(); 
-}
 ?>
 
 <!DOCTYPE html>
@@ -158,6 +156,7 @@ if (est_admin() !== 'administrateur' && est_admin() !== 'moderateur') {
                 <?php if (est_admin() === 'administrateur'): ?>
                     <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
                     <a href="visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+                    <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
                 <?php endif; ?>
             </div>
         </div>

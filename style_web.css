@@ -535,6 +535,7 @@ form.connexion label {
     margin: 0;
 }
 
+/* vue de tous les posts */
 .total-posts {
     width: 70%;
     margin: 0 auto;
@@ -550,6 +551,9 @@ form.connexion label {
     border: 2px solid black;
     border-radius: 20px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .publication img {
@@ -579,6 +583,7 @@ form.connexion label {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    flex-grow: 1;
 }
 
 .publication-bottom h3 span {
@@ -590,12 +595,29 @@ form.connexion label {
 }
 
 .view-button {
-    border: 1px solid black;
+    border: 2px solid #5D3FD3;
     border-radius: 20px;
-    background-color: #5D3FD3;
     padding: 10px;
     text-align: center;
     margin-top: 10px;
+}
+
+.admin-buttons {
+    display: flex;
+    padding: 5px;
+    justify-content: space-evenly;
+}
+.remove-button {
+    border: 2px solid red;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+}
+
+.accept-button {
+    border: 2px solid green;
+    border-radius: 20px;
+    width: 200px;
 }
 
 .buttons-container-admin {

@@ -2,6 +2,11 @@
 require_once 'data/user_test.php';
 $bdd = db();
 
+if (est_admin() !== 'administrateur') { 
+    header('Location: index.php');
+    exit(); 
+}
+
 // recupere toutes les annonces
 $requete = $bdd->query("
     SELECT annonces.*, users.prenom, users.nom 
@@ -18,12 +23,25 @@ $status_request = $bdd->query("
 );
 $get_status = $status_request->fetchColumn();
 
-if (est_admin() !== 'administrateur') { 
-    header('Location: index.php');
-    exit(); 
-}
-?>
+# boutons valider / refuser
+if (isset($_POST['action'])) {
+    $action_choisie = $_POST['action'];
+    $id_annonce = $_POST['annonce_id'];
 
+    if ($action_choisie == 'VALIDER') {
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'validee', motif_refus = NULL WHERE id = ?");
+        $update->execute([$id_annonce]);
+    }
+
+    if ($action_choisie == 'REFUSER') {
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = 'contenu inapproprié' WHERE id = ?");
+        $update->execute([$id_annonce]);
+    }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -34,7 +52,6 @@ if (est_admin() !== 'administrateur') {
     <title>Gestion des Posts</title>
     <link rel="stylesheet" href="style_web.css" />
 </head>
-
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <div style="display: flex; align-items: flex-start; padding-top: 135px;">
@@ -84,7 +101,12 @@ if (est_admin() !== 'administrateur') {
                 <div class="view-button">
                     <a href="#"><strong>VOIR</strong></a>
                 </div>
+                <form method="POST" class="admin-buttons">
+                    <input type="hidden" name="annonce_id" value="<?php echo $post['id']; ?>">
 
+                    <input type="submit" name="action" class="accept-button" value="VALIDER">
+                    <input type="submit" name="action" class="remove-button" value="REFUSER">
+                </form>
             </div>
             <?php } ?>
         </div>
@@ -94,6 +116,7 @@ if (est_admin() !== 'administrateur') {
                 <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
                 <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
                 <a href="visualisation_posts.php" class="btn-menu-admin">Visualisation de tous les posts</a>
+                <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
             </div>
         </div>
     </div>
