@@ -37,9 +37,9 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 
     <?php require_once 'includes/navbar.php'; ?>
 
-    <div class="">
+    <div class="infos_profil">
 
-        <div class="infos_profil">
+        <div class="infos_profil_outer">
             <h1>Mon Profil</h1>
             <a class="" href="modification_profil.php"> Modifier mon profil </a>
             <div class="">
@@ -49,29 +49,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                 <p>Ville : <span><?= htmlspecialchars($user['ville']) ?></span></p>
                 <p>Inscrit depuis le : <span><?= date('d/m/Y', strtotime($user['date_inscription'])) ?></span></p>
             </div>
-            <h2>Mes annonces (<?= count($annonces) ?>)</h2>
-            <?php if (empty($annonces)): ?>
-                <div class="">
-                    <p>Tu n'as pas encore d'annonces.</p>
-                </div>
-            <?php else: ?>
-                <?php foreach ($annonces as $annonce): ?>
-                    <div class="">
-                        <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce">
-                        <div class="">
-                            <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
-                            <p><?= htmlspecialchars($annonce['sous_categorie']) ?> — <?= htmlspecialchars($annonce['ville']) ?></p>
-                            <p><?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
-                            <div class="">
-                                <span class="prix"><?= number_format($annonce['prix'], 2, ',', ' ') ?> €</span>
-                                <span class="statut statut-<?= $annonce['statut'] ?>"><?= ucfirst($annonce['statut']) ?></span>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
         </div>
-
     </div>
 </body>
 
