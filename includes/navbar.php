@@ -5,7 +5,7 @@ require_once 'data/user_test.php';
 <header>
     <nav class="navbar">
         <div class="gauche">
-            <a href="index.php"><img src="./images/TechMarket.png" alt="logo" class="logo" height="auto" width="100"></a>
+            <a href="index.php"><img src="/images/TechMarket-removebg.png" alt="logo" class="logo" height="auto" width="100"></a>
             <div class="gauche-recherche">
                 <input type="search" placeholder="  recherche" class="recherche">
                 <span class="material-symbols-outlined">search</span>
@@ -24,4 +24,5 @@ require_once 'data/user_test.php';
             <?php endif; ?>
         </div>
     </nav>
+    <?php require_once 'includes/catalog.php'; ?>
 </header>
