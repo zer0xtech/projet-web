@@ -50,7 +50,7 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <?php if (empty($favoris)): ?>
             <div class="infos_favoris_container">
-                <p>Tu n'as pas encore d'annonces en favoris.</p>
+                <p>Vous n'avez pas encore d'annonces en favoris.</p>
                 <a href="index.php">Parcourir les annonces</a>
             </div>
         <?php else: ?>
