@@ -2,9 +2,9 @@
 require_once 'data/user_test.php';
 $bdd = db();
 
-if (est_admin() !== 'administrateur') { 
+if (est_admin() !== 'administrateur') {
     header('Location: index.php');
-    exit(); 
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -53,9 +53,10 @@ $utilisateurs = $requete->fetchAll();
             <div class="encadre-menu">
                 <h3>Gestion admin</h3>
                 <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
-                <a href="gestion_personnes.php" class="btn-menu-admin">Gestion personne</a>
-                <a href="visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+                <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+                <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
                 <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
+                <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
             </div>
         </div>
 
@@ -85,7 +86,6 @@ $utilisateurs = $requete->fetchAll();
                                 <select name="role" class="select-role" form="form-role-<?php echo $user['id']; ?>">
                                     <option value="utilisateur" <?php if ($user['role'] == 'utilisateur') echo 'selected'; ?>>Utilisateur</option>
                                     <option value="moderateur" <?php if ($user['role'] == 'moderateur') echo 'selected'; ?>>Modérateur</option>
-                                    <option value="administrateur" <?php if ($user['role'] == 'administrateur') echo 'selected'; ?>>Administrateur</option>
                                 </select>
                             </td>
 

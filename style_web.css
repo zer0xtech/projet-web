@@ -539,11 +539,11 @@ form.connexion label {
 .total-posts {
     width: 70%;
     margin: 0 auto;
-    height:auto;
-    display:grid;
+    height: auto;
+    display: grid;
     justify-content: center;
     grid-template-columns: repeat(4, 1fr);
-    gap:40px 30px;
+    gap: 40px 30px;
     padding: 20px;
 }
 
@@ -566,11 +566,13 @@ form.connexion label {
     border-radius: 20px;
     padding: 10px;
 }
+
 .statut-post h2.statut-validee {
     background-color: green;
     border-radius: 20px;
     padding: 10px;
 }
+
 .statut-post h2.statut-refusee {
     background-color: #cc0000;
     border-radius: 20px;
@@ -590,7 +592,9 @@ form.connexion label {
     color: #412b9a;
 }
 
-.publication-top h1, h2, h3 {
+.publication-top h1,
+h2,
+h3 {
     text-align: center;
 }
 
@@ -607,6 +611,7 @@ form.connexion label {
     padding: 5px;
     justify-content: space-evenly;
 }
+
 .remove-button {
     border: 2px solid red;
     border-radius: 20px;
@@ -695,8 +700,8 @@ form.connexion label {
 
 .btn-menu-admin {
     display: block;
-    background-color: #5D3FD3;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 8px;
@@ -783,6 +788,116 @@ form.connexion label {
     color: red;
 }
 
+/* Catégories */
+
+.forms-ajout-container {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.form-ajout-categorie {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-ajout-categorie h4 {
+    margin: 0;
+    color: #5D3FD3;
+}
+
+.form-ajout-categorie .btn-valider-admin {
+    width: fit-content;
+}
+
+.liste-sous-categories {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.item-sous-categorie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.form-inline {
+    margin: 0;
+}
+
+.icon-small {
+    font-size: 18px;
+}
+
+.text-muted {
+    color: #888;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.forms-ajout-container {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.form-ajout-categorie {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-ajout-categorie h4 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.form-ajout-categorie .btn-valider-admin {
+    width: fit-content;
+}
+
+.liste-sous-categories {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.item-sous-categorie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.form-inline {
+    margin: 0;
+}
+
+.icon-small {
+    font-size: 18px;
+}
+
+.text-muted {
+    color: #888;
+}
+
+.text-center {
+    text-align: center;
+}
+
 /* Publication d'annonces */
 /* Contenu Principal */
 main {
@@ -813,7 +928,10 @@ main {
 }
 
 
-h1, h2, h3, a {
+h1,
+h2,
+h3,
+a {
     text-align: center;
     margin-top: 0;
     color: #000000;

@@ -19,7 +19,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <?php require_once 'includes/catalog.php'; ?>
     <div class="bouton-temporaire">
         <a href="publication_web.php">Publie ton annonce</a>
         <a href="publication_web_ia.php">Publie ton annonce avec l'IA</a>

@@ -1,15 +1,22 @@
 <?php
 require_once 'data/user_test.php';
-
-$categorieChoisie = $_GET['categorie1'] ?? '';
+$bdd = db();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    publication($categorieChoisie);
+    // La catégorie est maintenant envoyée par le formulaire en POST
+    publication($_POST['categorie1'] ?? '');
 }
+
+$reqCat = $bdd->query("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY nom ASC");
+$categories_principales = $reqCat->fetchAll();
+
+$reqSousCat = $bdd->query("SELECT * FROM categories WHERE parent_id IS NOT NULL ORDER BY nom ASC");
+$sous_categories = $reqSousCat->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -23,40 +30,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <main>
-        <?php if ($categorieChoisie === ''): ?>
-            <div class="overlay-flou">
-                <h2>Dans quelle catégorie souhaitez-vous publier ?</h2>
-                <form method="GET" action="">
-                    <button type="submit" class="submit-button" name="categorie1" value="informatique">informatique</button>
-                    <button type="submit" class="submit-button" name="categorie1" value="telephone">telephone</button>
-                    <button type="submit" class="submit-button" name="categorie1" value="audio/video">audio/video</button>
-                </form>
-            </div>
-        <?php endif; ?>
+
         <div class="publi-container">
             <h2>PUBLIER UNE NOUVELLE ANNONCE</h2>
             <form method="POST" class="publish" enctype="multipart/form-data">
                 <div class="block">
                     <label for="title">TITRE</label>
-                    <input type="text" id="title" name="title" placeholder="ex: iPhone 13 Pro 128Go Noir">
+                    <input type="text" id="title" name="title" placeholder="ex: iPhone 13 Pro 128Go Noir" required>
                 </div>
                 <div class="block description-prix-state">
                     <div class="block-inter">
                         <label for="description">DESCRIPTION</label>
-                        <textarea id="description" name="description" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..."></textarea>
+                        <textarea id="description" name="description" placeholder="Décrivez l'état de votre article, ses fonctionnalités, ses défauts éventuels..." required></textarea>
                     </div>
                     <div class="block-inter prix-state">
                         <div class="prix-group">
                             <label for="price">PRIX</label>
                             <div class="inter-prix-group">
-                                <input type="text" id="price" name="price" placeholder="ex: 450" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <input type="text" id="price" name="price" placeholder="ex: 450" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                 <span>€</span>
                             </div>
                         </div>
                         <div class="state-group">
                             <label for="state">ÉTAT</label>
-                            <select id="state" name="state">
-                                <option disabled selected hidden>Choisir l'état...</option>
+                            <select id="state" name="state" required>
+                                <option value="" disabled selected hidden>Choisir l'état...</option>
                                 <option value="Neuf">Neuf</option>
                                 <option value="Très bon">Très bon</option>
                                 <option value="Bon">Bon</option>
@@ -68,72 +66,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="block category-group">
                     <div class="category-selects">
                         <div class="category-column">
-                            <label for="category1">CATÉGORIE (Niveau 1)</label>
-                            <select name="categorie1" id="categorie1">
-                                <?php if ($categorieChoisie === ''): ?>
-                                    <option value="" selected disabled>Sélectionner une catégorie...</option>
-                                <?php else: ?>
-                                    <?php if ($categorieChoisie === 'informatique'): ?>
-                                        <option value="informatique" selected disabled>Informatique</option>
-                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
-                                        <option value="telephone" selected disabled>Téléphone</option>
-                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
-                                        <option value="audio_video" selected disabled>Audio/Vidéo</option>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+                            <label for="categorie1">CATÉGORIE (Niveau 1)</label>
+                            <select name="categorie1" id="categorie1" required>
+                                <option value="" selected disabled>Sélectionner une catégorie...</option>
+                                <?php foreach ($categories_principales as $cat): ?>
+                                    <option value="<?php echo $cat['id']; ?>">
+                                        <?php echo htmlspecialchars($cat['nom']); ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="category-column">
                             <label for="category2">CATÉGORIE (Niveau 2)</label>
-                            <select id="category2" name="category2">
-                                <?php if ($categorieChoisie === 'informatique'): ?>
-                                    <<optgroup label="Ordinateurs">
-                                        <option value="portables">Portables</option>
-                                        <option value="fixes">Fixes</option>
-                                        <option value="gaming">Gaming</option>
-                                        </optgroup>
-
-                                        <optgroup label="Composants">
-                                            <option value="cartes_graphiques">Cartes graphiques</option>
-                                            <option value="processeurs">Processeurs</option>
-                                            <option value="carte_mere">Carte mère</option>
-                                        </optgroup>
-
-                                        <optgroup label="Périphériques">
-                                            <option value="souris">Souris</option>
-                                            <option value="claviers">Claviers</option>
-                                            <option value="ecrans">Écrans</option>
-                                        </optgroup>
-                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
-                                        <optgroup label="Marques">
-                                            <option value="iphone">iPhone</option>
-                                            <option value="samsung">Samsung</option>
-                                            <option value="xiaomi">Xiaomi</option>
-                                        </optgroup>
-
-                                        <optgroup label="Accessoires">
-                                            <option value="coques">Coques</option>
-                                            <option value="chargeurs">Chargeurs</option>
-                                        </optgroup>
-                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
-                                        <optgroup label="Casques">
-                                            <option value="gaming">Gaming</option>
-                                            <option value="musique">Musique</option>
-                                            <option value="confort">Confort</option>
-                                        </optgroup>
-
-                                        <optgroup label="Enceintes">
-                                            <option value="hi_fi">Hi-Fi</option>
-                                            <option value="home_cinema">Home Cinéma</option>
-                                            <option value="professionnel">Professionnel</option>
-                                        </optgroup>
-
-                                        <optgroup label="Caméras">
-                                            <option value="compacts">Compacts</option>
-                                            <option value="hybrides">Hybrides</option>
-                                            <option value="reflex">Reflex</option>
-                                        </optgroup>
-                                    <?php endif; ?>
+                            <select id="category2" name="category2" required>
+                                <option value="" selected disabled>Sélectionner une sous-catégorie...</option>
+                                <?php foreach ($sous_categories as $sub): ?>
+                                    <option value="<?php echo $sub['id']; ?>" data-parent="<?php echo $sub['parent_id']; ?>">
+                                        <?php echo htmlspecialchars($sub['nom']); ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -164,6 +115,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </main>
     <script>
+        const selectCategorie = document.getElementById('categorie1');
+        const selectSousCategorie = document.getElementById('category2');
+        const toutesLesSousCategories = Array.from(selectSousCategorie.options).filter(opt => opt.value !== "");
+
+        function filtrerSousCategories() {
+            const idCategorieChoisie = selectCategorie.value;
+            selectSousCategorie.innerHTML = '<option value="" disabled selected>Sélectionner une sous-catégorie...</option>';
+
+            toutesLesSousCategories.forEach(function(option) {
+                if (option.getAttribute('data-parent') === idCategorieChoisie) {
+                    selectSousCategorie.appendChild(option);
+                }
+            });
+        }
+
+        selectCategorie.addEventListener('change', filtrerSousCategories);
+
+        if (selectCategorie.value !== "") {
+            filtrerSousCategories();
+        }
+
         const fileInput = document.getElementById('file');
         const photoSlots = document.querySelectorAll('.photo-slot');
 

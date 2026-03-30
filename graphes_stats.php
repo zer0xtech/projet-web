@@ -3,9 +3,9 @@ require_once 'data/user_test.php';
 $bdd = db();
 
 // check si le user est admin ou pas
-if (est_admin() !== 'administrateur') { 
+if (est_admin() !== 'administrateur') {
     header('Location: index.php');
-    exit(); 
+    exit();
 }
 
 // création du graphe depuis 30j
@@ -24,9 +24,9 @@ $qA = $bdd->query("
 
 // remplace les 0 du graphe par les valeurs
 while ($ligne = $qA->fetch()) {
-    $dateDuJour = $ligne['j']; 
+    $dateDuJour = $ligne['j'];
     $nombreAnnonces = $ligne['tot'];
-    
+
     $stats[$dateDuJour]['annonces'] = (int)$nombreAnnonces;
 }
 
@@ -39,9 +39,9 @@ $qU = $bdd->query("
 
 // remplace les 0 du graphe par les valeurs
 while ($ligne = $qU->fetch()) {
-    $dateDuJour = $ligne['j']; 
+    $dateDuJour = $ligne['j'];
     $nombreInscrits = $ligne['tot'];
-    
+
     $stats[$dateDuJour]['users'] = (int)$nombreInscrits;
 }
 
@@ -51,7 +51,7 @@ $dataAnnonces = [];
 $dataUsers = [];
 
 // applique les valeurs au graphe
-foreach($stats as $date => $v) {
+foreach ($stats as $date => $v) {
     $labels[] = date("d/m", strtotime($date));
     $dataAnnonces[] = $v['annonces'];
     $dataUsers[] = $v['users'];
@@ -60,6 +60,7 @@ foreach($stats as $date => $v) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +70,7 @@ foreach($stats as $date => $v) {
     <title>Evolution des statistiques</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <div style="width: 100%; max-width: 800px; margin: 20px auto; margin-top: 250px;">
@@ -84,70 +86,72 @@ foreach($stats as $date => $v) {
     </div>
 
     <script>
-    const ctxAnnonces = document.getElementById('chartAnnonces').getContext('2d');
-    new Chart(ctxAnnonces, {
-        type: 'line',
-        data: {
-            labels: <?php echo json_encode($labels); ?>,
-            datasets: [{
-                label: 'Nouvelles annonces',
-                data: <?php echo json_encode($dataAnnonces); ?>,
-                fill: true,
-                backgroundColor: 'rgba(85, 87, 218, 0.2)',
-                borderColor: 'rgb(98, 61, 182)',
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    precision: 0, 
-                    stepSize: 1 
-                },
-                suggestedMax: 10 
+        const ctxAnnonces = document.getElementById('chartAnnonces').getContext('2d');
+        new Chart(ctxAnnonces, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($labels); ?>,
+                datasets: [{
+                    label: 'Nouvelles annonces',
+                    data: <?php echo json_encode($dataAnnonces); ?>,
+                    fill: true,
+                    backgroundColor: 'rgba(85, 87, 218, 0.2)',
+                    borderColor: 'rgb(98, 61, 182)',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            stepSize: 1
+                        },
+                        suggestedMax: 10
+                    }
+                }
             }
-        }
-    }
-    });
+        });
 
-    const ctxUsers = document.getElementById('chartUsers').getContext('2d');
-    new Chart(ctxUsers, {
-        type: 'bar',
-        data: {
-            labels: <?php echo json_encode($labels); ?>,
-            datasets: [{
-                label: 'Nouveaux utilisateurs',
-                data: <?php echo json_encode($dataUsers); ?>,
-                fill: true,
-                backgroundColor: 'rgba(86, 54, 228, 0.2)',
-                borderColor: 'rgb(67, 35, 153)',
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    precision: 0, 
-                    stepSize: 1 
-                },
-                suggestedMax: 5 
+        const ctxUsers = document.getElementById('chartUsers').getContext('2d');
+        new Chart(ctxUsers, {
+            type: 'bar',
+            data: {
+                labels: <?php echo json_encode($labels); ?>,
+                datasets: [{
+                    label: 'Nouveaux utilisateurs',
+                    data: <?php echo json_encode($dataUsers); ?>,
+                    fill: true,
+                    backgroundColor: 'rgba(86, 54, 228, 0.2)',
+                    borderColor: 'rgb(67, 35, 153)',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            stepSize: 1
+                        },
+                        suggestedMax: 5
+                    }
+                }
             }
-        }
-    }
-    });
+        });
     </script>
     <div class="zone-menu-admin">
         <div class="encadre-menu">
             <h3>Gestion admin</h3>
             <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
             <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
-            <a href="visualisation_posts.php" class="btn-menu-admin">Visualisation de tous les posts</a>
+            <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
             <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
+            <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
         </div>
     </div>
 </body>
+
 </html>
