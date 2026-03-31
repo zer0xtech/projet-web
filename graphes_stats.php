@@ -83,7 +83,7 @@ foreach ($stats as $date => $v) {
             <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
         </div>
     </div>
-    <div class="zone-contenu-admin" style="display: flex; gap: 40px; width: 80%; max-width: 1400px; margin-left: auto; margin-right: auto;">
+    <div class="zone-contenu-admin" style="display: flex; gap: 40px; width: 80%; max-width: 1400px; margin-left: auto; margin-right: auto; margin-bottom: 380px;">
         <div style="flex: 1; min-width: 0;">
             <h2 style="text-align: center;">Evolution du nombre d'annonces</h2>
             <canvas id="chartAnnonces"></canvas>

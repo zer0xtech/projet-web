@@ -100,7 +100,6 @@ $sous_categories = $reqSousCat->fetchAll();
                         <div class="photo-slot"></div>
                         <div class="photo-slot"></div>
                         <div class="photo-slot"></div>
-                        <div class="photo-slot"></div>
                     </div>
                 </div>
                 <div class="cancel">
@@ -109,9 +108,6 @@ $sous_categories = $reqSousCat->fetchAll();
                 </div>
 
             </form>
-        </div>
-        <div class="existing-ads-container">
-            <h3>GÉRER VOS ANNONCES EXISTANTES</h3>
         </div>
     </main>
     <script>

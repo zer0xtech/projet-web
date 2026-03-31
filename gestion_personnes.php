@@ -27,6 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $update = $bdd->prepare("UPDATE users SET blocked = 0 WHERE id = ?");
         $update->execute([$user_id]);
     }
+    if ($_POST['action'] === 'supprimer') {
+        $user_id = $_POST['user_id'];
+        $deleteAnnonces = $bdd->prepare("DELETE FROM annonces WHERE user_id = ?");
+        $deleteAnnonces->execute([$user_id]);
+        $deleteUser = $bdd->prepare("DELETE FROM users WHERE id = ?");
+        $deleteUser->execute([$user_id]);
+    }
 }
 
 $requete = $bdd->query("SELECT * FROM users ORDER BY id ASC");
@@ -86,6 +93,7 @@ $utilisateurs = $requete->fetchAll();
                                 <select name="role" class="select-role" form="form-role-<?php echo $user['id']; ?>">
                                     <option value="utilisateur" <?php if ($user['role'] == 'utilisateur') echo 'selected'; ?>>Utilisateur</option>
                                     <option value="moderateur" <?php if ($user['role'] == 'moderateur') echo 'selected'; ?>>Modérateur</option>
+                                    <option value="administrateur" <?php if ($user['role'] == 'administrateur') echo 'selected'; ?>>Administrateur</option>
                                 </select>
                             </td>
 
@@ -118,9 +126,13 @@ $utilisateurs = $requete->fetchAll();
                                         </form>
                                     <?php } ?>
 
-                                    <button type="button" class="btn-icon delete" title="Supprimer">
-                                        <span class="material-symbols-outlined">delete</span>
-                                    </button>
+                                    <form method="POST" style="margin: 0;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                        <input type="hidden" name="action" value="supprimer">
+                                        <button type="submit" class="btn-icon delete" title="Supprimer">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </form>
 
                                 </div>
                             </td>

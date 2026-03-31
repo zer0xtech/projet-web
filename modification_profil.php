@@ -70,7 +70,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="details_modifs_profil">
                 <label for="phone">Téléphone :</label>
-                <input type="tel" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
+                <input type="number" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
             </div>
             <div class="details_modifs_profil">
                 <label for="ville">Ville :</label>

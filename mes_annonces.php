@@ -18,9 +18,11 @@ $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
 $stmtAnnonces = $pdo->prepare("
     SELECT 
         annonces.*,
-        categories.nom AS categorie_nom
+        c1.nom AS categorie_nom,
+        c2.nom AS sous_categorie_nom
     FROM annonces
-    JOIN categories ON annonces.categorie = categories.id
+    LEFT JOIN categories AS c1 ON annonces.categorie = c1.id
+    LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id
     WHERE annonces.user_id = ?
     ORDER BY annonces.creation_date DESC
 ");
@@ -41,9 +43,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-
     <?php require_once 'includes/navbar.php'; ?>
-
     <div class="">
         <div class="infos_annonces">
             <h1>Mes annonces (<?= count($annonces) ?>)</h2>
@@ -57,13 +57,12 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                             <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width=350px height=300px>
                             <div>
                                 <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
-                                <p>Sous-catégorie : <?= htmlspecialchars($annonce['categorie_nom']) ?> — <?= htmlspecialchars($annonce['ville']) ?> (Ville)</p>
+                                <p>Catégorie : <?= htmlspecialchars($annonce['categorie_nom']) ?></p>
+                                <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie_nom']) ?></p>
+                                <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
                                 <p>Description : <?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
-                                <div>
-                                    <span class="prix"> Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</span>
-                                    <br>
-                                    <span class="statut statut-<?= $annonce['statut'] ?>">Statut : <?= ucfirst($annonce['statut']) ?></span>
-                                </div>
+                                <p>Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</p>
+                                <p>Statut : <?= ucfirst($annonce['statut']) ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
