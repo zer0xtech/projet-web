@@ -1010,7 +1010,10 @@ main {
 }
 
 
-h1, h2, h3, a {
+h1,
+h2,
+h3,
+a {
     text-align: center;
     margin-top: 0;
     color: #000000;
@@ -1196,16 +1199,17 @@ select {
     align-items: center;
     z-index: 9999;
 }
+
 /* ----------------PARTIE TEST -------------------------------- */
 .blocs {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     /* justify-content: center; */
     padding: 10px;
     gap: 30px;
     /* position: relative; */
     /* z-index: 1; */
-    margin-top : 100px;
+    margin-top: 100px;
 }
 
 .annonces {
