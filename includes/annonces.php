@@ -3,7 +3,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <a href="/visualisation.php"><img src="/images/Minato.jpg" alt="" class="imagesannonces"></a>
+            <a href="/visualisation.php"><img src="/images/casque gaming.webp" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -18,7 +18,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/Ragebait.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/chargeur.webp" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -33,7 +33,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/who want me.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/coque telephone.webp" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -48,7 +48,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/hold on.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/macbook pro.webp" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -63,7 +63,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/luffy.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/luffy.jpg" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -78,7 +78,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/jjk.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/jjk.jpg" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -93,7 +93,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/sga.jpg" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/sga.jpg" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">
@@ -108,7 +108,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <img src="/images/ted satan.png" alt="" class="imagesannonces">
+             <a href="/visualisation.php"><img src="/images/ted satan.png" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">

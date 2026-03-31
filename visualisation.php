@@ -18,7 +18,7 @@
         </div>
 
         <div class="imagesannonces">
-            <img src="/images/rabbit time.png" alt="" >
+            <img src="/images/samsung.webp" alt="" >
         </div>
 
         <div class="bio">
