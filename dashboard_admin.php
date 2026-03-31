@@ -50,14 +50,19 @@ $totalAttente = $reqAttenteStats->fetchColumn();
 # On récupère les annonces en attente :
 
 $requete = $bdd->query("
-    SELECT annonces.*, users.prenom, users.nom 
+    SELECT annonces.*, users.prenom, users.nom, 
+           c1.nom AS nom_cat_principale, 
+           c2.nom AS nom_sous_cat
     FROM annonces 
     JOIN users ON annonces.user_id = users.id 
+    LEFT JOIN categories AS c1 ON annonces.categorie = c1.id
+    LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id
     WHERE annonces.statut = 'en_attente' 
     ORDER BY annonces.creation_date ASC
     LIMIT 1
 ");
 $annonce = $requete->fetch();
+
 ?>
 
 <!DOCTYPE html>
@@ -97,12 +102,10 @@ $annonce = $requete->fetch();
                                 <label><?php echo (($annonce['description'])); ?></label>
                             </div>
                             <div class="ligne-info">
-                                <h4>CATEGORIE : </h4>
-                                <label><?php echo ($annonce['categorie']); ?></label>
+                                CATEGORIE : <?php echo htmlspecialchars($annonce['nom_cat_principale'] ?? 'Inconnue'); ?>
                             </div>
                             <div class="ligne-info">
-                                <h4>SOUS-CATEGORIE : </h4>
-                                <label><?php echo ($annonce['sous_categorie']); ?></label>
+                                SOUS-CATEGORIE : <?php echo htmlspecialchars($annonce['nom_sous_cat'] ?? 'Inconnue'); ?>
                             </div>
                             <div class="ligne-info">
                                 <h4>VILLE : </h4>
