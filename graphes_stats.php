@@ -73,7 +73,7 @@ foreach ($stats as $date => $v) {
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <div style="width: 100%; max-width: 800px; margin: 20px auto; margin-top: 250px;">
+    <div style="width: 100%; max-width: 800px; margin: 20px auto; margin-top: 200px;">
         <div>
             <h2 style="text-align: center;">Evolution du nombre d'annonces</h2>
             <canvas id="chartAnnonces"></canvas>
