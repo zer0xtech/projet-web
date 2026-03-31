@@ -423,7 +423,7 @@ form.connexion label {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding-top: 4vw;
+    padding-top: 8vw;
     padding-left: 4vw;
     color: #5D3FD3;
 }

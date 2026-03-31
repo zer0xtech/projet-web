@@ -22,7 +22,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -48,7 +48,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                 <?php else: ?>
                     <?php foreach ($annonces as $annonce): ?>
                         <div class="infos_annonces_container">
-                            <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce">
+                            <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width="30%" height="auto">
                             <div>
                                 <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
                                 <p><?= htmlspecialchars($annonce['sous_categorie']) ?> — <?= htmlspecialchars($annonce['ville']) ?></p>
