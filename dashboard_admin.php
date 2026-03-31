@@ -154,7 +154,6 @@ $annonce = $requete->fetch();
                 <h3>Gestion admin</h3>
                 <a href="dashboard_admin.php" class="btn-menu-admin">Modération Annonces</a>
                 <?php if (est_admin() === 'administrateur'): ?>
-                    <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
                     <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
                     <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
                     <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
