@@ -1017,8 +1017,7 @@ main {
     align-items: center;
 }
 
-.publi-container,
-.existing-ads-container {
+.publi-container {
     background-color: #fff;
     padding: 30px;
     border-radius: 15px;

@@ -110,9 +110,6 @@ $sous_categories = $reqSousCat->fetchAll();
 
             </form>
         </div>
-        <div class="existing-ads-container">
-            <h3>GÉRER VOS ANNONCES EXISTANTES</h3>
-        </div>
     </main>
     <script>
         const selectCategorie = document.getElementById('categorie1');

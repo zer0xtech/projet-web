@@ -212,9 +212,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </form>
         </div>
-        <div class="existing-ads-container">
-            <h3>GÉRER VOS ANNONCES EXISTANTES</h3>
-        </div>
     </main>
     <script>
         const fileInput = document.getElementById('file');
