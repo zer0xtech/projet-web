@@ -19,7 +19,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <?php require_once 'includes/catalog.php'; ?>
     <main class="container-site">
         <section class="topic">
             <h1>TechMarket</h1>
