@@ -11,23 +11,23 @@
 
             <div class="colonne-menu">
                 <h4>Ordinateurs</h4>
-                <a href="#">Portables</a>
-                <a href="#">Fixes</a>
-                <a href="#">Gaming</a>
+                <a href="affiche_catalogu.php?cat2=portables">Portables</a>
+                <a href="affiche_catalogu.php?cat2=fixes">Fixes</a>
+                <a href="affiche_catalogu.php?cat2=gaming">Gaming</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Composants</h4>
-                <a href="#">Cartes graphiques</a>
-                <a href="#">Processeurs</a>
-                <a href="#">Carte mère</a>
+                <a href="affiche_catalogu.php?cat2=cartes_graphiques">Cartes graphiques</a>
+                <a href="affiche_catalogu.php?cat2=processeurs">Processeurs</a>
+                <a href="affiche_catalogu.php?cat2=carte_mere">Carte mère</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Périphériques</h4>
-                <a href="#">Souris</a>
-                <a href="#">Claviers</a>
-                <a href="#">Écrans</a>
+                <a href="affiche_catalogu.php?cat2=souris">Souris</a>
+                <a href="affiche_catalogu.php?cat2=claviers">Claviers</a>
+                <a href="affiche_catalogu.php?cat2=ecrans">Écrans</a>
             </div>
         </div>
     </div>
@@ -41,14 +41,14 @@
             </div>
             <div class="colonne-menu">
                 <h4>Marques</h4>
-                <a href="#">iPhone</a>
-                <a href="#">Samsung</a>
-                <a href="#">Xiaomi</a>
+                <a href="affiche_catalogu.php?cat2=iphone">iPhone</a>
+                <a href="affiche_catalogu.php?cat2=samsung">Samsung</a>
+                <a href="affiche_catalogu.php?cat2=xiaomi">Xiaomi</a>
             </div>
             <div class="colonne-menu">
                 <h4>Accessoires</h4>
-                <a href="#">Coques</a>
-                <a href="#">Chargeurs</a>
+                <a href="affiche_catalogu.php?cat2=coques">Coques</a>
+                <a href="affiche_catalogu.php?cat2=chargeurs">Chargeurs</a>
             </div>
         </div>
     </div>
@@ -64,23 +64,23 @@
 
             <div class="colonne-menu">
                 <h4>Casques</h4>
-                <a href="#">Gaming</a>
-                <a href="#">Musique</a>
-                <a href="#">Confort</a>
+                <a href="affiche_catalogu.php?cat2=gaming2">Gaming</a>
+                <a href="affiche_catalogu.php?cat2=musique">Musique</a>
+                <a href="affiche_catalogu.php?cat2=confort">Confort</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Enceintes</h4>
-                <a href="#">Hi-Fi</a>
-                <a href="#">Home Cinéma</a>
-                <a href="#">Professionnel</a>
+                <a href="affiche_catalogu.php?cat2=">Hi-Fi</a>
+                <a href="affiche_catalogu.php?cat2=">Home Cinéma</a>
+                <a href="affiche_catalogu.php?cat2=">Professionnel</a>
             </div>
 
             <div class="colonne-menu">
                 <h4>Caméras</h4>
-                <a href="#">Compacts</a>
-                <a href="#">Hybrides</a>
-                <a href="#">Reflex</a>
+                <a href="affiche_catalogu.php?cat2=">Compacts</a>
+                <a href="affiche_catalogu.php?cat2=">Hybrides</a>
+                <a href="affiche_catalogu.php?cat2=">Reflex</a>
             </div>
 
         </div>

@@ -3,18 +3,25 @@
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+
+    backdrop-filter: blur(5px);
+    background-image: url("images/Gemini_Generated_Image_yf4i84yf4i84yf4i.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+
 }
 
 .bouton-temporaire {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    align-self: center;
-    width: fit-content;
+    text-align: center;
+    margin-top: 9vh;
+    padding: 3rem 0;
+    width: 80vw;
+    margin-bottom: 2rem;
+    border-radius: 20px;
 }
 
 
@@ -28,6 +35,7 @@ body {
     width: 100%;
     padding-top: 110px;
     position: fixed;
+    background-color: #E4D6F9;
 }
 
 .Sous_catégorie a {
@@ -36,7 +44,6 @@ body {
 
 .item-menu {
     position: relative;
-    padding-bottom: 20px;
 }
 
 .lien-categorie {
@@ -151,7 +158,7 @@ button {
             rgb(0 0 0 / 0.2) 30%,
             transparent);
     box-shadow:
-        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgba(214, 12, 12, 0.6),
         inset -2px -2px 3px rgb(0 0 0 / 0.6);
 }
 
@@ -177,9 +184,9 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
     z-index: 1000;
-    position: fixed;
-    width: 100%;
 }
 
 .logo {
@@ -222,12 +229,15 @@ header {
 }
 
 .navbar {
-    position: fixed;
-    top: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding-top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #E4D6F9;
 }
 
 .navbar a {
@@ -238,31 +248,26 @@ header {
 
 
 .Inscription {
-    position: absolute;
+    position: relative;
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    width: 100%;
+    background-color: #fff;
     padding: 30px;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 2.5px solid #5D3FD3;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .Inscription form.connexion {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    gap: 10px;
-    align-items: center;
+    gap: 2vw;
 
     h2,
     div.action {
-        grid-column-start: span 2;
+        grid-column-start: span 1;
+        padding-top: 1vh;
     }
 }
 
@@ -281,6 +286,7 @@ header {
     border: 0.3px solid #5D3FD3;
     color: white !important;
     transition: all 0.3s ease-in-out;
+    border-radius: 10px;
 }
 
 .bouton {
@@ -321,9 +327,10 @@ form.connexion label {
 }
 
 .Inscription input {
-    border: 2px solid #5D3FD3;
-    border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    border: 3.5px solid #cdc7c7;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .connexion h2 {
@@ -378,30 +385,35 @@ form.connexion label {
     text-decoration: none;
 }
 
-.Connect {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    padding: 50px;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 2.5px solid #5D3FD3;
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 48vh auto 0 auto;
 }
 
+.login-wrapper2 {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 79vh auto 0 auto;
+}
+
+.Connect {
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
+    box-sizing: border-box;
+}
 
 .Connect .form {
     display: flex;
     flex-direction: column;
-    display: flex;
     gap: 20px;
-
 }
 
 .Connect .action {
@@ -412,15 +424,112 @@ form.connexion label {
 .Connect .connexion {
     display: flex;
     flex-direction: column;
-    display: flex;
     gap: 20px;
-
 }
 
 .Connect input {
-    border: 2px solid #5D3FD3;
-    border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    border: 3.5px solid #cdc7c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.reveal-title {
+    position: absolute;
+    width: 35vw;
+    height: auto;
+    top: -40vh;
+    left: 47%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: revealUpAndBounce 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+}
+
+.reveal-title2 {
+    position: absolute;
+    width: 35vw;
+    height: auto;
+    top: -68vh;
+    left: 51%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: revealUpAndBounce2 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+}
+
+@keyframes revealUpAndBounce {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 250px) scale(0.8);
+        z-index: 1;
+    }
+
+    25% {
+        z-index: 11;
+    }
+
+    50% {
+        z-index: 9999;
+    }
+
+    51% {
+        z-index: 9999;
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -25px) scale(1.05);
+        z-index: 9999;
+    }
+
+    85% {
+        transform: translate(-50%, 15px) scale(0.98);
+        z-index: 11;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        z-index: 11;
+    }
+}
+
+@keyframes revealUpAndBounce2 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 250px) scale(0.8);
+        z-index: 1;
+    }
+
+    25% {
+        z-index: 11;
+    }
+
+    50% {
+        z-index: 9999;
+    }
+
+    51% {
+        z-index: 9999;
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -25px) scale(1.05);
+        z-index: 9999;
+    }
+
+    85% {
+        transform: translate(-50%, 15px) scale(0.98);
+        z-index: 11;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        z-index: 11;
+    }
 }
 
 .Inscription .infos {
@@ -591,7 +700,7 @@ form.connexion label {
 /* Contenu Principal */
 main {
     padding: 40px;
-    padding-top: 120px;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -637,6 +746,7 @@ h3 {
 
 input[type="text"],
 input[type="number"],
+input[type="telephone"],
 textarea,
 select {
     width: 100%;
@@ -648,8 +758,6 @@ select {
 
 textarea {
     resize: none;
-    flex: 1;
-
 }
 
 .description-prix-state {
@@ -801,4 +909,62 @@ select {
     flex-direction: column;
     align-items: center;
     z-index: 9999;
+}
+
+.publi-container .block.description-prix-state .block-inter .form_ia {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    width: 80%;
+    max-width: 900px;
+    margin-bottom: 40px;
+}
+
+p {
+    font-weight: bold;
+}
+
+.publi-container_catalg {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+/* Main index */
+
+.topic {
+    text-align: center;
+    margin-top: 9vh;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #8271c8, #DAC6F9);
+    color: white;
+    width: 80vw;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+}
+
+/* Footer */
+
+.main-footer {
+    background-color: #E4D6F9;
+    padding: 2rem 0 0.2rem;
+    margin-top: auto;
+}
+
+.container-site {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.buttom-footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(0, 0, 0);
+    color: rgba(0, 0, 0);
 }
