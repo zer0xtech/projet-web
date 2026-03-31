@@ -3,7 +3,7 @@
     <div class="annonces">
         <div class="titre">
             <h2>Macbook Pro</h2>
-            <a href="/visualisation.php">=<img src="/images/Minato.jpg" alt="" class="imagesannonces"></a>
+            <a href="/visualisation.php"><img src="/images/Minato.jpg" alt="" class="imagesannonces"></a>
         </div>
         
         <div class="bio">

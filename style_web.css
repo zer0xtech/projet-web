@@ -4,6 +4,7 @@
 
 
 .Sous_catégorie {
+    position: fixed;
     display: flex;
     justify-content: center;
     gap: 70px;
@@ -439,4 +440,30 @@ form.connexion label {
 .imagesannonces {
     align-items: center;
     max-height: 50vh;
+}
+
+/* AJOUTS */
+
+.conteneur-visu {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 100px;
+    padding-top: 200px;
+}
+
+.posts-contenu {
+    width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 5px 6px;
+    padding: 15px;
+}
+
+.imagesannonces img {
+    float: left;
+    margin-right: 20px;
+    max-height: 500px;
+    border-radius: 10px;
 }
