@@ -2,6 +2,11 @@
 require_once 'data/user_test.php';
 $bdd = db();
 
+if (est_admin() !== 'administrateur') {
+    header('Location: dashboard_admin.php');
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     if ($_POST['action'] === 'ajouter_principale') {

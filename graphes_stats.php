@@ -4,7 +4,7 @@ $bdd = db();
 
 // check si le user est admin ou pas
 if (est_admin() !== 'administrateur') {
-    header('Location: index.php');
+    header('Location: dashboard_admin.php');
     exit();
 }
 
@@ -73,13 +73,23 @@ foreach ($stats as $date => $v) {
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
-    <div style="width: 100%; max-width: 800px; margin: 20px auto; margin-top: 250px;">
-        <div>
+    <div class="zone-menu-admin">
+        <div class="encadre-menu">
+            <h3>Gestion admin</h3>
+            <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
+            <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+            <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+            <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
+            <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
+        </div>
+    </div>
+    <div class="zone-contenu-admin" style="display: flex; gap: 40px; width: 80%; max-width: 1400px; margin-left: auto; margin-right: auto;">
+        <div style="flex: 1; min-width: 0;">
             <h2 style="text-align: center;">Evolution du nombre d'annonces</h2>
             <canvas id="chartAnnonces"></canvas>
         </div>
-        <br>
-        <div>
+        
+        <div style="flex: 1; min-width: 0;">
             <h2 style="text-align: center;">Evolution du nombre d'utilisateurs</h2>
             <canvas id="chartUsers"></canvas>
         </div>
@@ -142,16 +152,6 @@ foreach ($stats as $date => $v) {
             }
         });
     </script>
-    <div class="zone-menu-admin">
-        <div class="encadre-menu">
-            <h3>Gestion admin</h3>
-            <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
-            <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
-            <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
-            <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
-            <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
-        </div>
-    </div>
 </body>
 
 </html>

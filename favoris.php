@@ -23,7 +23,7 @@ $stmt = $pdo->prepare("
     FROM favoris
     JOIN annonces ON favoris.id_annonce = annonces.id
     JOIN users ON annonces.user_id = users.id
-    JOIN categories ON annonces.categorie_id = categories.id
+    JOIN categories ON annonces.categorie = categories.id
     WHERE favoris.id_user = ?
     ORDER BY favoris.id DESC
 ");
@@ -38,6 +38,7 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Favoris</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="style_web.css">
 </head>
 

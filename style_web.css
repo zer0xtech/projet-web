@@ -1122,7 +1122,7 @@ select {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding-top: 2vw;
+    padding-top: 150px;
     padding-left: 4vw;
     color: #5D3FD3;
 }
@@ -1136,7 +1136,11 @@ select {
     color: #5D3FD3;
 }
 
-.infos_favoris {
+.infos_annonces h1 {
+    color: #5D3FD3;
+}
+
+.infos_favoris h1 {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -1146,8 +1150,8 @@ select {
 }
 
 .infos_annonces_container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
     gap: 3px;
     padding-top: 1vw;
     padding-bottom: 1vw;
@@ -1160,6 +1164,10 @@ select {
     box-shadow: #333137 0px 0px 5px;
     background-color: #e1deee;
     border-radius: 4% 4%;
+}
+
+.details_annonces_container {
+    gap: 10px;
 }
 
 .infos_favoris_container {
@@ -1236,6 +1244,10 @@ select {
     border-radius: 4% 4%;
 }
 
+.infos_profil_outer h1 {
+    color: #5D3FD3;
+}
+
 .infos_profil_lower {
     display: flex;
     flex-direction: column;
@@ -1252,4 +1264,8 @@ select {
     box-shadow: #333137 0px 0px 5px;
     background-color: #e1deee;
     border-radius: 4% 4%;
+}
+
+.infos_profil_lower h2 {
+    color: #5D3FD3;
 }

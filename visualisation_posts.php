@@ -3,7 +3,7 @@ require_once 'data/user_test.php';
 $bdd = db();
 
 if (est_admin() !== 'administrateur') {
-    header('Location: index.php');
+    header('Location: dashboard_admin.php');
     exit();
 }
 

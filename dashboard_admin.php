@@ -76,72 +76,79 @@ $annonce = $requete->fetch();
     <?php require_once 'includes/navbar.php'; ?>
     <div class="dashboard-layout">
         <div class="zone-annonces">
-            <div class="moderation-container-admin">
-                <div class="content-post">
-                    <div class="gauche-post">
-                        <div class="title-post">
-                            <h2><?php echo ($annonce['titre']); ?></h2>
+            <?php if ($annonce): ?>
+                <div class="moderation-container-admin">
+                    <div class="content-post">
+                        <div class="gauche-post">
+                            <div class="title-post">
+                                <h2><?php echo ($annonce['titre']); ?></h2>
+                            </div>
+                            <div class="user-post">
+                                <p>Publié par : <span><?php echo ($annonce['prenom'] . ' ' . $annonce['nom']); ?></span></p>
+                            </div>
+                            <div class="image-post">
+                                <?php $photos = explode(',', $annonce['url_photo']); ?>
+                                <img src="<?php echo ($photos[0]); ?>">
+                            </div>
                         </div>
-                        <div class="user-post">
-                            <p>Publié par : <span><?php echo ($annonce['prenom'] . ' ' . $annonce['nom']); ?></span></p>
-                        </div>
-                        <div class="image-post">
-                            <?php $photos = explode(',', $annonce['url_photo']); ?>
-                            <img src="<?php echo ($photos[0]); ?>">
+                        <div class="droite-post">
+                            <div class="encadre-infos">
+                                <div class="ligne-info">
+                                    <h4>DESCRIPTION : </h4>
+                                    <label><?php echo (($annonce['description'])); ?></label>
+                                </div>
+                                <div class="ligne-info">
+                                    <h4>CATEGORIE : </h4>
+                                    <label><?php echo ($annonce['categorie']); ?></label>
+                                </div>
+                                <div class="ligne-info">
+                                    <h4>SOUS-CATEGORIE : </h4>
+                                    <label><?php echo ($annonce['sous_categorie']); ?></label>
+                                </div>
+                                <div class="ligne-info">
+                                    <h4>VILLE : </h4>
+                                    <label><?php echo ($annonce['ville']); ?></label>
+                                </div>
+                                <div class="ligne-info">
+                                    <h4>ETAT : </h4>
+                                    <label><?php echo ($annonce['etat']); ?></label>
+                                </div>
+                                <div class="ligne-info">
+                                    <h4>PRIX : </h4>
+                                    <label><?php echo ($annonce['prix']); ?></label>
+                                    <h4>€</h4>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="droite-post">
-                        <div class="encadre-infos">
-                            <div class="ligne-info">
-                                <h4>DESCRIPTION : </h4>
-                                <label><?php echo (($annonce['description'])); ?></label>
-                            </div>
-                            <div class="ligne-info">
-                                <h4>CATEGORIE : </h4>
-                                <label><?php echo ($annonce['categorie']); ?></label>
-                            </div>
-                            <div class="ligne-info">
-                                <h4>SOUS-CATEGORIE : </h4>
-                                <label><?php echo ($annonce['sous_categorie']); ?></label>
-                            </div>
-                            <div class="ligne-info">
-                                <h4>VILLE : </h4>
-                                <label><?php echo ($annonce['ville']); ?></label>
-                            </div>
-                            <div class="ligne-info">
-                                <h4>ETAT : </h4>
-                                <label><?php echo ($annonce['etat']); ?></label>
-                            </div>
-                            <div class="ligne-info">
-                                <h4>PRIX : </h4>
-                                <label><?php echo ($annonce['prix']); ?></label>
-                                <h4>€</h4>
-                            </div>
 
-                        </div>
+                    <div class="buttons-container-admin">
+                        <form method="POST" class="form-action-admin">
+                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                            <input type="hidden" name="action" value="valider">
+                            <button type="submit" class="btn-valider-admin">Valider</button>
+                        </form>
+                        <form method="POST" class="form-action-admin">
+                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                            <input type="hidden" name="action" value="modifier">
+                            <input type="text" name="motif_modification" placeholder="Modifications à prévoir">
+                            <button type="submit" class="btn-modifier-admin">Modifier</button>
+                        </form>
+                        <form method="POST" class="form-action-admin">
+                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                            <input type="hidden" name="action" value="refuser">
+                            <input type="text" name="motif_refus" placeholder="Motif du refus">
+                            <button type="submit" class="btn-refuser-admin">Refuser</button>
+                        </form>
                     </div>
                 </div>
-
-                <div class="buttons-container-admin">
-                    <form method="POST" class="form-action-admin">
-                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                        <input type="hidden" name="action" value="valider">
-                        <button type="submit" class="btn-valider-admin">Valider</button>
-                    </form>
-                    <form method="POST" class="form-action-admin">
-                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                        <input type="hidden" name="action" value="modifier">
-                        <input type="text" name="motif_modification" placeholder="Modifications à prévoir">
-                        <button type="submit" class="btn-modifier-admin">Modifier</button>
-                    </form>
-                    <form method="POST" class="form-action-admin">
-                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                        <input type="hidden" name="action" value="refuser">
-                        <input type="text" name="motif_refus" placeholder="Motif du refus">
-                        <button type="submit" class="btn-refuser-admin">Refuser</button>
-                    </form>
+            <?php else: ?>
+                <div class="moderation-container-admin" style="text-align: center; padding: 10px; background: white; border-radius: 15px; border: 2px solid #5D3FD3;">
+                    <h2 style="color: #5D3FD3;">Aucune annonce en attente</h2>
+                    <p>Aucune annonce à modérer.</p>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
         <div class="zone-stats">
             <h1>Statistiques</h1>
