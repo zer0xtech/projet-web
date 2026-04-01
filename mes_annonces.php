@@ -44,29 +44,33 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
+    <section class="bouton-temporaire">
+        <a href="publication_web.php" class="button">Publie ton annonce</a>
+    </section>
     <div class="">
+        <h1 style="margin-top: 5vh;">Mes annonces (<?= count($annonces) ?>)</h1>
         <div class="infos_annonces">
-            <h1>Mes annonces (<?= count($annonces) ?>)</h2>
-                <?php if (empty($annonces)): ?>
+
+            <?php if (empty($annonces)): ?>
+                <div class="infos_annonces_container">
+                    <p>Tu n'as pas encore d'annonces.</p>
+                </div>
+            <?php else: ?>
+                <?php foreach ($annonces as $annonce): ?>
                     <div class="infos_annonces_container">
-                        <p>Tu n'as pas encore d'annonces.</p>
-                    </div>
-                <?php else: ?>
-                    <?php foreach ($annonces as $annonce): ?>
-                        <div class="infos_annonces_container">
-                            <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width=350px height=300px>
-                            <div>
-                                <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
-                                <p>Catégorie : <?= htmlspecialchars($annonce['categorie_nom']) ?></p>
-                                <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie_nom']) ?></p>
-                                <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
-                                <p>Description : <?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
-                                <p>Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</p>
-                                <p>Statut : <?= ucfirst($annonce['statut']) ?></p>
-                            </div>
+                        <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width=350px height=300px>
+                        <div>
+                            <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
+                            <p>Catégorie : <?= htmlspecialchars($annonce['categorie_nom']) ?></p>
+                            <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie_nom']) ?></p>
+                            <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
+                            <p>Description : <?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
+                            <p>Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</p>
+                            <p>Statut : <?= ucfirst($annonce['statut']) ?></p>
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </body>
