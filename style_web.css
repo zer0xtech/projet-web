@@ -645,11 +645,10 @@ form.connexion label {
 
 /* vue de tous les posts */
 .total-posts {
-    width: 70%;
-    margin: 15px auto;
+    flex: 1;
+    margin: 15px 0;
     display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
     gap: 40px 30px;
     padding: 20px;
 }
@@ -667,6 +666,9 @@ form.connexion label {
 .publication img {
     display: block;
     margin: 0 auto;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
 
 .statut-post h2.statut-attente {
