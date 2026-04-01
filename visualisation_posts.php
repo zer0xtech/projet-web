@@ -12,13 +12,9 @@ $requete = $bdd->query("
     SELECT 
         annonces.*, 
         users.prenom, 
-        users.nom,
-        c1.nom AS categorie_nom,
-        c2.nom AS sous_categorie_nom
+        users.nom
     FROM annonces 
     JOIN users ON annonces.user_id = users.id 
-    LEFT JOIN categories AS c1 ON annonces.categorie = c1.id
-    LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id
     ORDER BY annonces.creation_date DESC
 ");
 $all_posts = $requete->fetchAll();
@@ -86,25 +82,25 @@ if (isset($_POST['action'])) {
                         <h1><?php echo ($post['titre']); ?></h1>
                         <h2><strong>Auteur : </strong><?php echo ($post['prenom']); ?></h2>
                         <?php $photos = explode(',', $post['url_photo']); ?>
-                        <img src="<?php echo ($photos[0]); ?>" width="350" height="350"></img>
+                        <img src="<?php echo ($photos[0]); ?>" alt="Image de l'annonce">
                         <br>
                         <h3>Description : <?php echo ($post['description']); ?></h3>
                     </div>
                     <div class="publication-bottom">
                         <div class="ligne-info">
-                            <h3>Catégorie : <span><?php echo htmlspecialchars($post['categorie_nom']); ?></span></h3>
+                            <h3>Catégorie : <span><?php echo ($post['categorie']); ?></span></h3>
                         </div>
                         <div class="ligne-info">
-                            <h3>Sous-catégorie : <span><?php echo htmlspecialchars($post['sous_categorie_nom']); ?></span></h3>
+                            <h3>Sous-catégorie : <span><?php echo ($post['sous_categorie']); ?></span></h3>
                         </div>
                         <div class="ligne-info">
-                            <h3>Etat : <span><?php echo htmlspecialchars($post['etat']); ?></span></h3>
+                            <h3>Etat : <span><?php echo ($post['etat']); ?></span></h3>
                         </div>
                         <div class="ligne-info">
-                            <h3>Prix : <span><?php echo htmlspecialchars($post['prix']); ?> $</span></h3>
+                            <h3>Prix : <span><?php echo ($post['prix']); ?> $</span></h3>
                         </div>
                         <div class="ligne-info">
-                            <h3>Ville : <span><?php echo htmlspecialchars($post['ville']); ?></span></h3>
+                            <h3>Ville : <span><?php echo ($post['ville']); ?></span></h3>
                         </div>
                     </div>
                     <div class="view-button">
