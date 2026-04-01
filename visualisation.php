@@ -56,9 +56,6 @@ if (!$annonce) {
 
         <div style="clear: both;"></div>
 
-        <!-- <div class="visu-bouton">
-            <button>Ajouter aux favoris</button>
-        </div> -->
 
     </div>
 </div>
