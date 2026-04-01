@@ -7,7 +7,6 @@ $categories_principales = $reqCat->fetchAll();
 $reqSousCat = $pdo->query("SELECT * FROM categories WHERE parent_id IS NOT NULL ORDER BY nom ASC");
 $sous_categories = $reqSousCat->fetchAll();
 
-
 $q = $_GET['q'] ?? '';
 $categorie = $_GET['categorie'] ?? '';
 $sous_categorie = $_GET['sous_categorie'] ?? '';
@@ -16,7 +15,6 @@ $prix_max = $_GET['prix_max'] ?? '';
 $ville = $_GET['ville'] ?? '';
 $etat = $_GET['etat'] ?? '';
 $tri = $_GET['tri'] ?? 'date_desc';
-
 
 $nom_categorie_affichee = '';
 if ($categorie) {

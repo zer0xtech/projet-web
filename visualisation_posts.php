@@ -103,9 +103,9 @@ if (isset($_POST['action'])) {
                             <h3>Ville : <span><?php echo ($post['ville']); ?></span></h3>
                         </div>
                     </div>
-                    <div class="view-button">
+                    <!-- <div class="view-button">
                         <a href="#"><strong>VOIR</strong></a>
-                    </div>
+                    </div> -->
                     <form method="POST" class="admin-buttons">
                         <input type="hidden" name="annonce_id" value="<?php echo $post['id']; ?>">
 
