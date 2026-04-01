@@ -14,14 +14,14 @@ require_once 'data/user_test.php';
         <div class="droite">
             <?php if (estConnecte()): ?>
                 <a href="index.php">Accueil</a>
-                <a href="/">Mon Profil</a>
-                <a href="/">Mes Annonces</a>
+                <a href="consultation_profil.php">Mon Profil</a>
+                <a href="mes_annonces.php">Mes Annonces</a>
                 <a href="logout_web.php" class="button">Déconnexion</a>
-                <?php if (est_admin() === 'administrateur'): ?>
-                    <a href="#" class="button">Espace Admin</a>
+                <?php if (est_admin() === 'administrateur' || est_admin() === 'moderateur'): ?>
+                    <a href="dashboard_admin.php" class="button">Espace Admin</a>
                 <?php endif; ?>
             <?php else: ?>
-                <a href="index.php">Acceuil</a>
+                <a href="index.php">Accueil</a>
                 <a href="login_web.php">Connexion</a>
                 <a href="inscription_web.php" class="button">Inscription</a>
             <?php endif; ?>

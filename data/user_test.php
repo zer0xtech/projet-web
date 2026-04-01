@@ -1,5 +1,5 @@
 <?php
-require_once 'datab_web.php';
+require_once './datab_web.php';
 
 function estConnecte(): bool
 {
@@ -37,8 +37,8 @@ function inscription()
             if ($verif->fetchColumn() > 0) {
                 return "Email déjà utilisé";
             }
-            $ajout = db()->prepare("INSERT INTO users (email, prenom, nom, phone, ville, password, date_inscription) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-            $ajout->execute([$_POST['email'], $_POST['prenom'], $_POST['nom'], $_POST['telephone'], $_POST['ville'], md5($_POST['password'])]);
+            $ajout = db()->prepare("INSERT INTO users (email, prenom, nom, phone, password, ville, date_inscription) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+            $ajout->execute([$_POST['email'], $_POST['prenom'], $_POST['nom'], $_POST['telephone'], md5($_POST['password']), $_POST['ville'] ?? '']);
             return true;
         } else {
             return "Mots de passe ne correspondent pas";
@@ -154,4 +154,13 @@ function est_admin()
     $req->execute([$id]);
     $role = $req->fetchColumn(0);
     return $role;
+}
+
+function affiche_annonces()
+{
+    $categorie2 = $_GET['cat2'];
+    $req = db()->prepare("SELECT * FROM annonces WHERE sous_categorie = ?");
+    $req->execute([$categorie2]);
+    $aff_ann = $req->fetchALL();
+    return $aff_ann;
 }
