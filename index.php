@@ -105,10 +105,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             <h1>TechMarket</h1>
             <p>plateforme d'achat et de revente de vos objets high-tech préférés</p>
         </section>
-        <section class="bouton-temporaire">
-            <a href="publication_web.php">Publie ton annonce</a>
-            <a href="publication_web_ia.php">Publie ton annonce avec l'IA</a>
-        </section>
         <div class="bloc-recherche">
             <form method="GET" action="/recherche.php">
                 <div class="recherche-principale">
