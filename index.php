@@ -43,8 +43,8 @@
                 <option value="Casques">Casques</option>
             </select>
 
-            <input type="number" name="prix_min" placeholder="Prix min">
-            <input type="number" name="prix_max" placeholder="Prix max">
+            <input type="number" name="prix_min" placeholder="Prix min" min="0">
+            <input type="number" name="prix_max" placeholder="Prix max" min="0">
             <input type="text" name="ville" placeholder="Ville">
 
             <select name="etat">

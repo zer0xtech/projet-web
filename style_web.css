@@ -354,7 +354,8 @@ form.connexion label {
 .imagesannonces img {
     float: left;
     margin-right: 20px;
-    max-height: 500px;
+    max-height: 250px;
+    width: auto;
     border-radius: 10px;
 }
 

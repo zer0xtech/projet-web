@@ -2,7 +2,7 @@
 require_once 'datab_web.php';
 require_once 'includes/navbar.php';
 
-$pdo = db(); // On connecte la base de données tout en haut maintenant
+$pdo = db(); 
 
 
 $reqCat = $pdo->query("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY nom ASC");
@@ -131,8 +131,8 @@ $resultats = $stmt->fetchAll();
                     <?php endforeach; ?>
                 </select>
 
-                <input type="number" name="prix_min" placeholder="Prix min" value="<?= htmlspecialchars($prix_min) ?>">
-                <input type="number" name="prix_max" placeholder="Prix max" value="<?= htmlspecialchars($prix_max) ?>">
+                <input type="number" name="prix_min" placeholder="Prix min" min="0" value="<?= htmlspecialchars($prix_min) ?>">
+                <input type="number" name="prix_max" placeholder="Prix max" min="0" value="<?= htmlspecialchars($prix_max) ?>">
                 <input type="text" name="ville" placeholder="Ville" value="<?= htmlspecialchars($ville) ?>">
 
                 <select name="etat">
@@ -172,8 +172,7 @@ $resultats = $stmt->fetchAll();
                         <h2><?= htmlspecialchars($annonce['titre']) ?></h2>
                         <a href="/visualisation.php?id=<?= $annonce['id'] ?>">
                             <?php
-                            // On prend la première photo si l'URL contient plusieurs photos séparées par des virgules
-                            $photos = explode(',', $annonce['url_photo']);
+                            
                             ?>
                             <img src="<?= htmlspecialchars($photos[0]) ?>" alt="Photo de l'annonce" class="imagesannonces">
                         </a>
