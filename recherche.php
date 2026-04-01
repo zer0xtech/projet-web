@@ -96,15 +96,8 @@ $resultats = $stmt->fetchAll();
 </head>
 
 <body>
-
-    <div class="hero">
-        <h1>TechMarket</h1>
-        <p>La plateforme de petites annonces pour votre matériel high-tech d'occasion</p>
-    </div>
-
     <div class="bloc-recherche">
         <form method="GET" action="/recherche.php">
-
             <div class="recherche-principale">
                 <input type="search" name="q" placeholder="Rechercher un produit..." value="<?= htmlspecialchars($q) ?>">
                 <button type="submit">Rechercher</button>
@@ -171,7 +164,6 @@ $resultats = $stmt->fetchAll();
                         <h2><?= htmlspecialchars($annonce['titre']) ?></h2>
                         <a href="/visualisation.php?id=<?= $annonce['id'] ?>">
                             <?php
-                            // On prend la première photo si l'URL contient plusieurs photos séparées par des virgules
                             $photos = explode(',', $annonce['url_photo']);
                             ?>
                             <img src="<?= htmlspecialchars($photos[0]) ?>" alt="Photo de l'annonce" class="imagesannonces">
