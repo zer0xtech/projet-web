@@ -132,7 +132,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                         <?php endforeach; ?>
                     </select>
 
-                    <input type="number" name="prix_min" placeholder="Prix min" min="0"value="<?= htmlspecialchars($prix_min) ?>">
+                    <input type="number" name="prix_min" placeholder="Prix min" min="0" value="<?= htmlspecialchars($prix_min) ?>">
                     <input type="number" name="prix_max" placeholder="Prix max" min="0" value="<?= htmlspecialchars($prix_max) ?>">
                     <input type="text" name="ville" placeholder="Ville" value="<?= htmlspecialchars($ville) ?>">
 
