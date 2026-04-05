@@ -1,35 +1,51 @@
 <?php
-require_once 'datab_web.php';
-$pdo = db();
+require_once 'data/user_test.php';
+$bdd = db();
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    die("<h2>Annonce introuvable.</h2>");
+if (est_admin() !== 'administrateur') {
+    header('Location: dashboard_admin.php');
+    exit();
 }
 
-$id_annonce = $_GET['id'];
-
-$stmt = $pdo->prepare("
+// recupere toutes les annonces
+$requete = $bdd->query("
     SELECT 
         annonces.*, 
-        users.prenom, users.email, users.phone,
-        c1.nom AS categorie_nom, 
-        c2.nom AS sous_categorie_nom
-    FROM annonces
-    JOIN users ON annonces.user_id = users.id
-    LEFT JOIN categories AS c1 ON annonces.categorie = c1.id
-    LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id
-    WHERE annonces.id = ?
+        users.prenom, 
+        users.nom
+    FROM annonces 
+    JOIN users ON annonces.user_id = users.id 
+    ORDER BY annonces.creation_date DESC
 ");
-$stmt->execute([$id_annonce]);
-$annonce = $stmt->fetch(PDO::FETCH_ASSOC);
+$all_posts = $requete->fetchAll();
 
-if (!$annonce) {
-    die("<h2>Cette annonce n'existe pas ou a été supprimée.</h2>");
+// recupere le statut de l'annonce
+$status_request = $bdd->query(
+    "
+    SELECT annonces.statut 
+    FROM annonces"
+);
+$get_status = $status_request->fetchColumn();
+
+# boutons valider / refuser
+if (isset($_POST['action'])) {
+    $action_choisie = $_POST['action'];
+    $id_annonce = $_POST['annonce_id'];
+
+    if ($action_choisie == 'VALIDER') {
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'validee', motif_refus = NULL WHERE id = ?");
+        $update->execute([$id_annonce]);
+    }
+
+    if ($action_choisie == 'REFUSER') {
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = 'contenu inapproprié' WHERE id = ?");
+        $update->execute([$id_annonce]);
+    }
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
-$photos = explode(',', $annonce['url_photo']);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -37,60 +53,79 @@ $photos = explode(',', $annonce['url_photo']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <title><?= htmlspecialchars($annonce['titre']) ?> — TechMarket</title>
+    <title>Gestion des Posts</title>
     <link rel="stylesheet" href="style_web.css" />
 </head>
 
 <body>
     <?php require_once 'includes/navbar.php'; ?>
+    <div style="display: flex; align-items: flex-start;">
+        <div class="total-posts">
+            <?php foreach ($all_posts as $post) { ?>
+                <div class="publication">
+                    <div class="publication-top">
+                        <?php
+                        if ($post['statut'] == "en_attente") {
+                            $classe = "statut-attente";
+                            $texte = "EN ATTENTE";
+                        } elseif ($post['statut'] == "validee") {
+                            $classe = "statut-validee";
+                            $texte = "VALIDÉE";
+                        } elseif ($post['statut'] == "refusee") {
+                            $classe = "statut-refusee";
+                            $texte = "REFUSÉE";
+                        }
+                        ?>
+                        <div class="statut-post">
+                            <h2 class="<?php echo $classe; ?>"><?php echo $texte; ?></h2>
+                        </div>
+                        <h1><?php echo ($post['titre']); ?></h1>
+                        <h2><strong>Auteur : </strong><?php echo ($post['prenom']); ?></h2>
+                        <?php $photos = explode(',', $post['url_photo']); ?>
+                        <img src="<?php echo ($photos[0]); ?>" alt="Image de l'annonce">
+                        <br>
+                        <h3>Description : <?php echo ($post['description']); ?></h3>
+                    </div>
+                    <div class="publication-bottom">
+                        <div class="ligne-info">
+                            <h3>Catégorie : <span><?php echo ($post['categorie']); ?></span></h3>
+                        </div>
+                        <div class="ligne-info">
+                            <h3>Sous-catégorie : <span><?php echo ($post['sous_categorie']); ?></span></h3>
+                        </div>
+                        <div class="ligne-info">
+                            <h3>Etat : <span><?php echo ($post['etat']); ?></span></h3>
+                        </div>
+                        <div class="ligne-info">
+                            <h3>Prix : <span><?php echo ($post['prix']); ?> $</span></h3>
+                        </div>
+                        <div class="ligne-info">
+                            <h3>Ville : <span><?php echo ($post['ville']); ?></span></h3>
+                        </div>
+                    </div>
+                    <!-- <div class="view-button">
+                        <a href="#"><strong>VOIR</strong></a>
+                    </div> -->
+                    <form method="POST" class="admin-buttons">
+                        <input type="hidden" name="annonce_id" value="<?php echo $post['id']; ?>">
 
-    <div class="annonce-detail-container">
-
-        <div class="annonce-images">
-            <?php foreach ($photos as $photo): ?>
-                <?php if (!empty(trim($photo))): ?>
-                    <img src="<?= htmlspecialchars(trim($photo)) ?>" alt="Photo de l'annonce">
-                <?php endif; ?>
-            <?php endforeach; ?>
+                        <input type="submit" name="action" class="accept-button" value="VALIDER">
+                        <input type="submit" name="action" class="remove-button" value="REFUSER">
+                    </form>
+                </div>
+            <?php } ?>
         </div>
-
-        <div class="annonce-infos">
-            <p class="annonce-categorie">
-                <?= htmlspecialchars($annonce['categorie_nom']) ?> > <?= htmlspecialchars($annonce['sous_categorie_nom']) ?>
-            </p>
-
-            <h1><?= htmlspecialchars($annonce['titre']) ?></h1>
-
-            <div class="annonce-prix"><?= htmlspecialchars($annonce['prix']) ?> €</div>
-
-            <p><strong>État :</strong> <?= htmlspecialchars($annonce['etat']) ?></p>
-            <p><strong>Lieu :</strong> <?= htmlspecialchars($annonce['ville']) ?></p>
-            <p><strong>Publié le :</strong> <?= date('d/m/Y', strtotime($annonce['creation_date'])) ?></p>
-
-            <hr>
-
-            <h3>Description</h3>
-            <p class="annonce-description"><?= nl2br(htmlspecialchars($annonce['description'])) ?></p>
-
-            <button class="btn-favoris">
-                <span class="material-symbols-outlined">favorite</span>
-                Ajouter aux favoris
-            </button>
-
-            <div class="vendeur-box">
-                <h3>Contacter le vendeur</h3>
-                <p><strong>Vendeur :</strong> <?= htmlspecialchars($annonce['prenom']) ?></p>
-                <?php if (!empty($annonce['email'])): ?>
-                    <p><strong>Email :</strong> <a href="mailto:<?= htmlspecialchars($annonce['email']) ?>"><?= htmlspecialchars($annonce['email']) ?></a></p>
-                <?php endif; ?>
-                <?php if (!empty($annonce['phone'])): ?>
-                    <p><strong>Téléphone :</strong> <?= htmlspecialchars($annonce['phone']) ?></p>
-                <?php endif; ?>
+        <div class="zone-menu-admin">
+            <div class="encadre-menu">
+                <h3>Gestion admin</h3>
+                <a href="dashboard_admin.php" class="btn-menu-admin inactif">Modération Annonces</a>
+                <a href="gestion_personnes.php" class="btn-menu-admin inactif">Gestion personne</a>
+                <a href=" visualisation_posts.php" class="btn-menu-admin inactif">Visualisation de tous les posts</a>
+                <a href="graphes_stats.php" class="btn-menu-admin inactif">Evolution des statistiques</a>
+                <a href="gestion_categories.php" class="btn-menu-admin inactif">Gestion catégories</a>
             </div>
-
         </div>
     </div>
-
 </body>
 
 </html>
