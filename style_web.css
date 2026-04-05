@@ -648,7 +648,7 @@ form.connexion label {
     flex: 1;
     margin: 15px 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 40px 30px;
     padding: 20px;
 }
