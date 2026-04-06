@@ -196,7 +196,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                                     <a href="ajout_favoris.php?id=<?= $annonce['id'] ?>" class="button">🤍 Favoris</a>
                                 <?php endif; ?>
                             <?php else: ?>
-                                <a href="login_web.php" class="btn-favori">🤍 Favoris</a>
+                                <a href="login_web.php" class="button">🤍 Favoris</a>
                             <?php endif; ?>
                         </div>
                     </div>
