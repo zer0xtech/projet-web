@@ -20,8 +20,8 @@ if (isset($_POST['action'])) {
             SELECT annonces.titre, annonces.description, annonces.prix, 
                    c1.nom AS cat_nom, c2.nom AS sous_cat_nom 
             FROM annonces 
-            LEFT JOIN categories AS c1 ON annonces.categorie = c1.id 
             LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id 
+            LEFT JOIN categories AS c1 ON c2.parent_id = c1.id 
             WHERE annonces.id = ?
         ");
         $stmt_ia->execute([$id_annonce]);
@@ -68,8 +68,7 @@ if (isset($_POST['action'])) {
         if ($decision_IA == 'validation') {
             $update = $bdd->prepare("UPDATE annonces SET statut = 'validee' WHERE id = ?");
             $update->execute([$id_annonce]);
-        }
-        else if ($decision_IA == 'refus') {
+        } else if ($decision_IA == 'refus') {
             $motif = $_POST['motif_ia'] ?? "";
             $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
             $update->execute([$motif, $id_annonce]);
@@ -83,8 +82,7 @@ if (isset($_POST['action'])) {
         if (!empty($justificatif)) {
             $update = $bdd->prepare("UPDATE annonces SET statut = 'validee', justificatif = ? WHERE id = ?");
             $update->execute([$justificatif, $id_annonce]);
-        }
-        else {
+        } else {
             $update = $bdd->prepare("UPDATE annonces SET statut = 'validee' WHERE id = ?");
             $update->execute([$id_annonce]);
         }
@@ -112,8 +110,8 @@ $requete = $bdd->query("
            c2.nom AS nom_sous_cat
     FROM annonces 
     JOIN users ON annonces.user_id = users.id 
-    LEFT JOIN categories AS c1 ON annonces.categorie = c1.id
     LEFT JOIN categories AS c2 ON annonces.sous_categorie = c2.id
+    LEFT JOIN categories AS c1 ON c2.parent_id = c1.id
     WHERE annonces.statut = 'en_attente' 
     ORDER BY annonces.creation_date ASC
     LIMIT 1
@@ -183,7 +181,7 @@ $annonce = $requete->fetch();
                     </div>
 
                     <?php
-                    if (isset($_POST['action']) && $_POST['action'] === 'analyser_ia' && isset($rapports_ia[$annonce['id']])) : 
+                    if (isset($_POST['action']) && $_POST['action'] === 'analyser_ia' && isset($rapports_ia[$annonce['id']])) :
                         $analyse = $rapports_ia[$annonce['id']];
                     ?>
                         <div class="rapport-ia-container">
@@ -201,8 +199,8 @@ $annonce = $requete->fetch();
                                     <?php if (empty($rapport['suggestions_correction'])): ?>
                                         <li>Aucune suggestion.</li>
                                     <?php else: ?>
-                                        <?php foreach ($rapport['suggestions_correction'] as $sugg): ?>
-                                            <li><?= htmlspecialchars($sugg) ?></li>
+                                        <?php foreach ((array)$rapport['suggestions_correction'] as $sugg): ?>
+                                            <li><?= is_array($sugg) ? implode(', ', $sugg) : htmlspecialchars($sugg) ?></li>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </ul>
@@ -235,15 +233,15 @@ $annonce = $requete->fetch();
                         </div>
                     <?php endif; ?>
 
-                    <?php 
+                    <?php
                     $affichage_ia = (isset($_POST['action']) && $_POST['action'] === 'analyser_ia' && isset($rapports_ia[$annonce['id']]));
-                    if (!$affichage_ia) : 
+                    if (!$affichage_ia) :
                     ?>
                         <div class="buttons-container-admin">
                             <form method="POST" class="form-action-admin">
                                 <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
                                 <input type="hidden" name="action" value="analyser_ia">
-                                <button type="submit" class="btn-analyse-ia">Analyser avec l'IA</button>
+                                <button type="submit" class="btn-analyse-ia" onclick="this.innerHTML='Analyse en cours...'; this.style.opacity='0.7';">Analyser avec l'IA</button>
                             </form>
 
                             <form method="POST" class="form-action-admin">

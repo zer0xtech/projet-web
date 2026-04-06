@@ -6,36 +6,37 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
 
     $liste_cat = implode(", ", $cats_principales);
     $liste_sous_cat = implode(", ", $sous_cats);
-    $prompt = "Tu es un modérateur expert pour TechMarket, un site exclusif de revente de matériel high-tech d'occasion.
-    Analyse scrupuleusement l'annonce suivante :
-    - Titre : $titre
-    - Description : $description
-    - Prix : $prix €
-    - Catégorie actuelle : $categorie
-    - Sous-catégorie actuelle : $sous_categorie
-    
-    CATÉGORIES PRINCIPALES AUTORISÉES : $liste_cat
-    SOUS-CATÉGORIES AUTORISÉES : $liste_sous_cat
-    
-    Tu dois obligatoirement vérifier ces 5 points :
-    1. Contenu inapproprié : signale tout langage vulgaire, contenu illégal, incitation à la violence ou présence de coordonnées.
-    2. Orthographe et grammaire : identifie les fautes majeures.
-    3. Catégorisation : Le TITRE est ton seul indicateur fiable. Ne change la catégorie que si elle est manifestement fausse par rapport au titre.
-    4. Prix : alerte si le prix est anormalement haut ou bas.
-    5. HORS-SUJET STRICT : Si l'objet n'est manifestement PAS un produit High-Tech (ex: marteau, bricolage, vêtements, etc.) :
-       - Tu NE DOIS l'associer à AUCUNE catégorie technologique.
-       - Tu dois mettre 'Hors-sujet' dans les champs catégorie et sous-catégorie suggérées.
-       - Tu dois exiger le refus de l'annonce.
+    $prompt = "Tu es l'IA experte en modération de TechMarket.
+    Analyse l'annonce avec une logique implacable. NE SOIS PAS BAVARD.
 
-    Tu DOIS renvoyer ta réponse UNIQUEMENT sous la forme d'un objet JSON valide.
-    Utilise exactement cette structure :
+    --- DONNÉES DE L'ANNONCE ---
+    Titre : $titre
+    Description : $description
+    Prix : $prix €
+    Catégorie actuelle : $categorie
+    Sous-catégorie actuelle : $sous_categorie
+
+    --- LISTES AUTORISÉES ---
+    Catégories : $liste_cat
+    Sous-catégories : $liste_sous_cat
+
+    --- RÈGLES STRICTES ANTI-HALLUCINATION ---
+    1. DESCRIPTION VIDE : Si la description est vide ou presque vide, n'invente AUCUNE description à la place du vendeur. Écris EXACTEMENT 'Veuillez ajouter une description' dans les suggestions, et ne signale aucune faute d'orthographe (puisqu'il n'y a pas de texte).
+    2. PRIX : Si le prix te semble totalement incohérent (trop haut ou trop bas), indique UNIQUEMENT 'Prix anormal' dans les problèmes détectés. Ne justifie JAMAIS pourquoi et ne dis pas si c'est une arnaque.
+    3. TITRE : Ne suggère JAMAIS de modifier le titre pour remettre exactement le même titre.
+    4. CATÉGORIE : Si la catégorie d'origine est fausse, corrige-la (ex: un iPhone va dans Téléphonie > smartphone). 
+
+    --- FORMAT DE RÉPONSE JSON OBLIGATOIRE ---
+    Renvoie uniquement ce JSON :
     {
         \"approprie\": \"oui\" ou \"non\",
         \"niveau_confiance\": \"élevé\", \"moyen\" ou \"faible\",
-        \"problemes_detectes\": \"Mets le nom exact de l'endroit ou il y a une erreur, par exemple si il y a un problème dans la description, tu mets 'Description'\",
-        \"suggestions_correction\": [\"Si l'objet n'est pas High-Tech, écris UNIQUEMENT : 'Cet objet n'est pas destiné à ce site web (produit non high-tech)'. Sinon, donne tes suggestions classiques.\"],
-        \"categorie_suggeree\": \"Nom exact de la catégorie ou 'Hors-sujet'\",
-        \"sous_categorie_suggeree\": \"Nom exact de la sous-catégorie ou 'Hors-sujet'\",
+        \"problemes_detectes\": \"Indique les problèmes factuels (ex: 'Catégorie fausse', 'Prix anormal', 'Description manquante'). Si l'annonce est normale, écris 'Aucun'.\",
+        \"suggestions_correction\": [
+            \"Mets uniquement des ordres courts. Ex: 'Changez la catégorie', 'Ajoutez une description'. Ne justifie pas tes choix.\"
+        ],
+        \"categorie_suggeree\": \"Nom exact de la catégorie\",
+        \"sous_categorie_suggeree\": \"Nom exact de la sous-catégorie\",
         \"decision_recommandee\": \"validation\", \"refus\" ou \"validation_avec_modifications\"
     }";
 
@@ -43,7 +44,10 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
         'model' => 'qwen2.5:3b',
         'prompt' => $prompt,
         'format' => 'json',
-        'stream' => false
+        'stream' => false,
+        'options' => [
+            'temperature' => 0.0
+        ]
     ];
 
     $ch = curl_init($url);
@@ -75,14 +79,15 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
         return ['success' => false, 'message' => "L'IA n'a pas respecté le format JSON demandé."];
     }
 
+    // Ton excellente idée pour sécuriser les retours de l'IA
     $structure_par_defaut = [
-            'approprie' => 'non défini',
-            'niveau_confiance' => 'faible',
-            'problemes_detectes' => 'Aucun détail fourni',
-            'suggestions_correction' => [],
-            'categorie_suggeree' => 'Inconnue',
-            'sous_categorie_suggeree' => 'Inconnue',
-            'decision_recommandee' => 'refus'
+        'approprie' => 'non défini',
+        'niveau_confiance' => 'faible',
+        'problemes_detectes' => 'Aucun détail fourni',
+        'suggestions_correction' => [],
+        'categorie_suggeree' => 'Inconnue',
+        'sous_categorie_suggeree' => 'Inconnue',
+        'decision_recommandee' => 'refus'
     ];
 
     $donnees_finales = array_merge($structure_par_defaut, $donnees_ia);

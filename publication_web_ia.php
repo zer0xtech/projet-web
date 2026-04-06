@@ -214,7 +214,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     function genererPromptClassique() {
         question = document.getElementById('question');
-        return "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + question.value;
+        return `Tu es un expert en rédaction d'annonces de vente d'occasion de matériel High-Tech.
+        Ton rôle est de réécrire la description suivante pour la rendre professionnelle, vendeuse, claire et sans aucune faute d'orthographe.
+
+        --- TEXTE À RÉÉCRIRE ---    
+        ${question.value}
+        ------------------------
+
+        RÈGLES OBLIGATOIRES :
+    1. N'ajoute aucune introduction du type "Voici votre annonce" ou "Je vous propose".
+    2. N'ajoute aucune conclusion du type "Bonne vente".
+    3. Va directement à l'essentiel et structure le texte de manière aérée (utilise des puces si besoin).
+    4. Ne mens pas et ne rajoute pas d'informations techniques qui ne sont pas dans le texte d'origine.
+    5. Renvoie UNIQUEMENT la description prête à être copiée-collée.`;
     }
 
     function genererPromptAssiste() {
@@ -228,19 +240,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const access = document.getElementById('access_include')?.value ?? '';
         const raison = document.getElementById('reason_sell')?.value ?? '';
 
-        let prompt = `Génère une description professionnelle et sans fautes pour une annonce LeBonCoin avec ces informations :
+        let prompt = `Rédige une description d'annonce de vente d'occasion de manière naturelle, honnête et vendeuse.
+
+RÈGLES STRICTES :
+1. Écris à la première personne du singulier ("Je vends mon...").
+2. Fais un texte fluide sous forme de 2 ou 3 petits paragraphes.
+3. N'utilise AUCUNE liste à puces (pas de tirets ou de bullet points).
+4. Ne mets AUCUNE introduction ("Voici l'annonce") ni AUCUNE conclusion ("Bonne journée"). Renvoie uniquement le texte final.
+
+Voici les informations à intégrer de manière rédigée :
 - Catégorie : ${categorie}
 - Marque : ${marque}
 - Modèle : ${modele}
-- État : ${etat}
-- Détails de l'état : ${detail_etat}
-- Année : ${annee}
+- État général : ${etat}
+- Détails sur l'état : ${detail_etat}
+- Année d'achat/sortie : ${annee}
 - Caractéristiques : ${carac}`;
 
         if (access) prompt += `\n- Accessoires inclus : ${access}`;
-        if (raison) prompt += `\n- Raison de la vente : ${raison}`;
-
-        prompt += `\nRÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce.`;
+        if (raison) prompt += `\n- Cause de la vente : ${raison}`;
 
         return prompt;
     }
