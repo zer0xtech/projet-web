@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php else: ?>
                             <div class="form_ia">
                                 <label for="question">DESCRIPTION (remplissez le formulaire)</label>
-                                <form method="POST" action="">
+                                <div>
                                     <label for="categorie_ia_desc">Catégorie</label>
                                     <input type="text" id="categorie_ia_desc" name="categorie_ia_desc">
                                     <label for="marque">Marque</label>
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <label for="reason_sell">Raison de la vente </label><label for="" style="color: red;">(optionnel)</label>
                                     </div>
                                     <input type="text" id="reason_sell" name="reason_sell">
-                                </form>
+                                </div>
                                 <button type="button" id="submit" style="width: 200px; margin: 10px 0px 10px 0px;">Générer la description</button>
                                 <span id="chargement" style="display: none;">Chargement en cours...</span>
                                 <span id="erreur" style="display: none;"></span>
@@ -140,53 +140,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="category2">CATÉGORIE (Niveau 2)</label>
                             <select id="category2" name="category2">
                                 <?php if ($categorieChoisie === 'informatique'): ?>
-                                    <<optgroup label="Ordinateurs">
+                                    <optgroup label="Ordinateurs">
                                         <option value="portables">Portables</option>
                                         <option value="fixes">Fixes</option>
                                         <option value="gaming">Gaming</option>
-                                        </optgroup>
+                                    </optgroup>
 
-                                        <optgroup label="Composants">
-                                            <option value="cartes_graphiques">Cartes graphiques</option>
-                                            <option value="processeurs">Processeurs</option>
-                                            <option value="carte_mere">Carte mère</option>
-                                        </optgroup>
+                                    <optgroup label="Composants">
+                                        <option value="cartes_graphiques">Cartes graphiques</option>
+                                        <option value="processeurs">Processeurs</option>
+                                        <option value="carte_mere">Carte mère</option>
+                                    </optgroup>
 
-                                        <optgroup label="Périphériques">
-                                            <option value="souris">Souris</option>
-                                            <option value="claviers">Claviers</option>
-                                            <option value="ecrans">Écrans</option>
-                                        </optgroup>
-                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
-                                        <optgroup label="Marques">
-                                            <option value="iphone">iPhone</option>
-                                            <option value="samsung">Samsung</option>
-                                            <option value="xiaomi">Xiaomi</option>
-                                        </optgroup>
+                                    <optgroup label="Périphériques">
+                                        <option value="souris">Souris</option>
+                                        <option value="claviers">Claviers</option>
+                                        <option value="ecrans">Écrans</option>
+                                    </optgroup>
+                                <?php elseif ($categorieChoisie === 'telephone'): ?>
+                                    <optgroup label="Marques">
+                                        <option value="iphone">iPhone</option>
+                                        <option value="samsung">Samsung</option>
+                                        <option value="xiaomi">Xiaomi</option>
+                                    </optgroup>
 
-                                        <optgroup label="Accessoires">
-                                            <option value="coques">Coques</option>
-                                            <option value="chargeurs">Chargeurs</option>
-                                        </optgroup>
-                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
-                                        <optgroup label="Casques">
-                                            <option value="gaming">Gaming</option>
-                                            <option value="musique">Musique</option>
-                                            <option value="confort">Confort</option>
-                                        </optgroup>
+                                    <optgroup label="Accessoires">
+                                        <option value="coques">Coques</option>
+                                        <option value="chargeurs">Chargeurs</option>
+                                    </optgroup>
+                                <?php elseif ($categorieChoisie === 'audio/video'): ?>
+                                    <optgroup label="Casques">
+                                        <option value="gaming">Gaming</option>
+                                        <option value="musique">Musique</option>
+                                        <option value="confort">Confort</option>
+                                    </optgroup>
 
-                                        <optgroup label="Enceintes">
-                                            <option value="hi_fi">Hi-Fi</option>
-                                            <option value="home_cinema">Home Cinéma</option>
-                                            <option value="professionnel">Professionnel</option>
-                                        </optgroup>
+                                    <optgroup label="Enceintes">
+                                        <option value="hi_fi">Hi-Fi</option>
+                                        <option value="home_cinema">Home Cinéma</option>
+                                        <option value="professionnel">Professionnel</option>
+                                    </optgroup>
 
-                                        <optgroup label="Caméras">
-                                            <option value="compacts">Compacts</option>
-                                            <option value="hybrides">Hybrides</option>
-                                            <option value="reflex">Reflex</option>
-                                        </optgroup>
-                                    <?php endif; ?>
+                                    <optgroup label="Caméras">
+                                        <option value="compacts">Compacts</option>
+                                        <option value="hybrides">Hybrides</option>
+                                        <option value="reflex">Reflex</option>
+                                    </optgroup>
+                                <?php endif; ?>
                             </select>
                         </div>
                     </div>
@@ -242,69 +242,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         });
     </script>
-    <script type="text/javascript">
-        // Les éléments de la page avec lesquels on a besoin d'intéragir
-        var question = document.getElementById('question');
-        var submit = document.getElementById('submit');
-        var reponse = document.getElementById('reponse');
-        var chargement = document.getElementById('chargement');
-        var erreur = document.getElementById('erreur');
 
-        function genererPrompt(texte) {
-            return {
+    <script type="text/javascript">
+        var submit = document.getElementById('submit');
+        var reponse, chargement, erreur, question;
+
+        function genererPromptClassique() {
+            question = document.getElementById('question');
+            return "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + question.value;
+        }
+
+        function genererPromptAssiste() {
+            const categorie = document.getElementById('categorie_ia_desc')?.value ?? '';
+            const marque = document.getElementById('marque')?.value ?? '';
+            const modele = document.getElementById('modele')?.value ?? '';
+            const etat = document.getElementById('etat')?.value ?? '';
+            const detail_etat = document.getElementById('detail_etat')?.value ?? '';
+            const annee = document.getElementById('annee')?.value ?? '';
+            const carac = document.getElementById('carac_princ')?.value ?? '';
+            const access = document.getElementById('access_include')?.value ?? '';
+            const raison = document.getElementById('reason_sell')?.value ?? '';
+
+            let prompt = `Génère une description professionnelle et sans fautes pour une annonce LeBonCoin avec ces informations :
+- Catégorie : ${categorie}
+- Marque : ${marque}
+- Modèle : ${modele}
+- État : ${etat}
+- Détails de l'état : ${detail_etat}
+- Année : ${annee}
+- Caractéristiques : ${carac}`;
+
+            if (access) prompt += `\n- Accessoires inclus : ${access}`;
+            if (raison) prompt += `\n- Raison de la vente : ${raison}`;
+
+            prompt += `\nRÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce.`;
+
+            return prompt;
+        }
+
+        function promptOllama(contenu) {
+            var prompt = {
                 "model": "qwen2.5:3b",
                 "messages": [{
                     "role": "user",
-                    "content": "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + texte
+                    "content": contenu
                 }],
-                // Pour pas recevoir la réponse mot par mot
                 "stream": false
             };
-        }
 
-        function promptOllama() {
-            var texteQuestion = question.value;
-            // On génère le prompt
-            var prompt = genererPrompt(texteQuestion);
-            // Affichage du message de chargement
             chargement.style.display = 'inline';
-            // On cache l'éventuelle erreur précédente
             erreur.style.display = 'none';
 
-            // Envoi de la requête à ollama
             fetch('http://localhost:11434/api/chat', {
                     method: "POST",
                     body: JSON.stringify(prompt)
                 })
-                .then((response) => {
-                    // On décode la réponse JSON
-                    return response.json();
+                .then(response => response.json())
+                .then(response => {
+                    if (response.error) throw new Error(response.error);
+                    reponse.value = response.message.content;
                 })
-                .then((response) => {
-                    // Si la réponse contient la clé erreur la requête a échoué
-                    if (response.error) {
-                        throw new Error(response.error);
-                    }
-                    // On met à jour la <div> réponse avec la réponse retournée par ollama
-                    // En convertissant les retours à la ligne (\n) en <br>
-                    reponse.innerHTML = response.message.content.replaceAll('\n', '<br>');
-                })
-                .catch((err) => {
-                    // Si une erreur se produit, on affiche le message "Erreur"
-                    // On met les détail de l'erreur dans la réponse
+                .catch(err => {
                     erreur.style.display = 'inline';
-                    reponse.innerHTML = err;
+                    erreur.innerText = 'Erreur : ' + err.message;
                 })
                 .finally(() => {
-                    // Dans tous les cas (OK ou non) on cache le message de chargement
                     chargement.style.display = 'none';
-                })
-        };
+                });
+        }
 
-        // Réagier au clic sur le bouton
         submit.addEventListener('click', function(event) {
             event.preventDefault();
-            promptOllama();
+
+            reponse = document.getElementById('reponse');
+            chargement = document.getElementById('chargement');
+            erreur = document.getElementById('erreur');
+
+            const estAssiste = document.getElementById('marque') !== null;
+            if (estAssiste) {
+                promptOllama(genererPromptAssiste());
+            } else {
+                promptOllama(genererPromptClassique());
+            }
         });
     </script>
 </body>
