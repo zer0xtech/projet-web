@@ -1,8 +1,15 @@
 <?php
 require_once 'data/user_test.php';
+require_once 'datab_web.php';
 
+$pdo = db();
 $categorieChoisie = $_GET['categorie1'] ?? '';
 $modeChoisie = $_GET['mode'] ?? '';
+
+$reqCat = $pdo->query("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY nom ASC");
+$categories_principales = $reqCat->fetchAll(PDO::FETCH_ASSOC);
+
+$toutes_sous_categories = $pdo->query("SELECT * FROM categories WHERE parent_id IS NOT NULL ORDER BY nom ASC")->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     publication_ia($categorieChoisie);
@@ -30,16 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form method="GET" action="">
                     <button type="submit" class="submit-button" name="mode" value="classique">Mode Classique</button>
                     <button type="submit" class="submit-button" name="mode" value="assiste">Mode Assisté</button>
-                </form>
-            </div>
-        <?php elseif ($categorieChoisie === ''): ?>
-            <div class="overlay-flou">
-                <h2>Dans quelle catégorie souhaitez-vous publier ?</h2>
-                <form method="GET" action="">
-                    <input type="hidden" name="mode" value="<?php echo htmlspecialchars($modeChoisie); ?>">
-                    <button type="submit" class="submit-button" name="categorie1" value="informatique">informatique</button>
-                    <button type="submit" class="submit-button" name="categorie1" value="telephone">telephone</button>
-                    <button type="submit" class="submit-button" name="categorie1" value="audio/video">audio/video</button>
                 </form>
             </div>
         <?php endif; ?>
@@ -118,77 +115,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php endif; ?>
                     </div>
                 </div>
-                <div class="block category-group">
-                    <div class="category-selects">
-                        <div class="category-column">
-                            <label for="category1">CATÉGORIE (Niveau 1)</label>
-                            <select name="categorie1" id="categorie1">
-                                <?php if ($categorieChoisie === ''): ?>
-                                    <option value="" selected disabled>Sélectionner une catégorie...</option>
-                                <?php else: ?>
-                                    <?php if ($categorieChoisie === 'informatique'): ?>
-                                        <option value="informatique" selected disabled>Informatique</option>
-                                    <?php elseif ($categorieChoisie === 'telephone'): ?>
-                                        <option value="telephone" selected disabled>Téléphone</option>
-                                    <?php elseif ($categorieChoisie === 'audio/video'): ?>
-                                        <option value="audio_video" selected disabled>Audio/Vidéo</option>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            </select>
-                        </div>
-                        <div class="category-column">
-                            <label for="category2">CATÉGORIE (Niveau 2)</label>
-                            <select id="category2" name="category2">
-                                <?php if ($categorieChoisie === 'informatique'): ?>
-                                    <optgroup label="Ordinateurs">
-                                        <option value="portables">Portables</option>
-                                        <option value="fixes">Fixes</option>
-                                        <option value="gaming">Gaming</option>
-                                    </optgroup>
-
-                                    <optgroup label="Composants">
-                                        <option value="cartes_graphiques">Cartes graphiques</option>
-                                        <option value="processeurs">Processeurs</option>
-                                        <option value="carte_mere">Carte mère</option>
-                                    </optgroup>
-
-                                    <optgroup label="Périphériques">
-                                        <option value="souris">Souris</option>
-                                        <option value="claviers">Claviers</option>
-                                        <option value="ecrans">Écrans</option>
-                                    </optgroup>
-                                <?php elseif ($categorieChoisie === 'telephone'): ?>
-                                    <optgroup label="Marques">
-                                        <option value="iphone">iPhone</option>
-                                        <option value="samsung">Samsung</option>
-                                        <option value="xiaomi">Xiaomi</option>
-                                    </optgroup>
-
-                                    <optgroup label="Accessoires">
-                                        <option value="coques">Coques</option>
-                                        <option value="chargeurs">Chargeurs</option>
-                                    </optgroup>
-                                <?php elseif ($categorieChoisie === 'audio/video'): ?>
-                                    <optgroup label="Casques">
-                                        <option value="gaming">Gaming</option>
-                                        <option value="musique">Musique</option>
-                                        <option value="confort">Confort</option>
-                                    </optgroup>
-
-                                    <optgroup label="Enceintes">
-                                        <option value="hi_fi">Hi-Fi</option>
-                                        <option value="home_cinema">Home Cinéma</option>
-                                        <option value="professionnel">Professionnel</option>
-                                    </optgroup>
-
-                                    <optgroup label="Caméras">
-                                        <option value="compacts">Compacts</option>
-                                        <option value="hybrides">Hybrides</option>
-                                        <option value="reflex">Reflex</option>
-                                    </optgroup>
-                                <?php endif; ?>
-                            </select>
-                        </div>
+                <div class="category-selects">
+                    <div class="category-column">
+                        <label for="categorie1">CATÉGORIE (Niveau 1)</label>
+                        <select name="categorie1" id="categorie1">
+                            <option value="" selected disabled>Sélectionnez une catégorie...</option>
+                            <?php foreach ($categories_principales as $cat): ?>
+                                <option value="<?= $cat['id'] ?>" <?= $cat['nom'] === $categorieChoisie ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($cat['nom']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="category-column">
+                        <label for="category2">CATÉGORIE (Niveau 2)</label>
+                        <select id="category2" name="category2">
+                            <option value="" disabled selected>Sélectionnez une sous-catégorie</option>
+                        </select>
                     </div>
                 </div>
                 <div class="block photos-group">
@@ -216,54 +159,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3>GÉRER VOS ANNONCES EXISTANTES</h3>
         </div>
     </main>
-    <script>
-        const fileInput = document.getElementById('file');
-        const photoSlots = document.querySelectorAll('.photo-slot');
+</body>
+<script>
+    const toutesLesSousCategories = <?= json_encode($toutes_sous_categories) ?>;
+
+    const selectCat1 = document.getElementById('categorie1');
+    const selectCat2 = document.getElementById('category2');
+
+    selectCat1.addEventListener('change', function() {
+        const parentId = this.value;
+
+        selectCat2.innerHTML = '<option value="" disabled selected>Sélectionnez une sous-catégorie</option>';
+
+        const sousCats = toutesLesSousCategories.filter(c => c.parent_id == parentId);
+
+        sousCats.forEach(sousCat => {
+            const option = document.createElement('option');
+            option.value = sousCat['id'];
+            option.textContent = sousCat['nom'];
+            selectCat2.appendChild(option);
+        });
+    });
+</script>
+<script>
+    const fileInput = document.getElementById('file');
+    const photoSlots = document.querySelectorAll('.photo-slot');
+
+    photoSlots.forEach(slot => {
+        slot.addEventListener('click', () => {
+            fileInput.click();
+        });
+    });
+
+    fileInput.addEventListener('change', function() {
+        const files = Array.from(this.files);
 
         photoSlots.forEach(slot => {
-            slot.addEventListener('click', () => {
-                fileInput.click();
-            });
+            slot.innerHTML = '';
         });
 
-        fileInput.addEventListener('change', function() {
-            const files = Array.from(this.files);
-
-            photoSlots.forEach(slot => {
-                slot.innerHTML = '';
-            });
-
-            files.forEach((file, index) => {
-                if (index < photoSlots.length) {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    photoSlots[index].appendChild(img);
-                }
-            });
+        files.forEach((file, index) => {
+            if (index < photoSlots.length) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                photoSlots[index].appendChild(img);
+            }
         });
-    </script>
+    });
+</script>
 
-    <script type="text/javascript">
-        var submit = document.getElementById('submit');
-        var reponse, chargement, erreur, question;
+<script type="text/javascript">
+    var submit = document.getElementById('submit');
+    var reponse, chargement, erreur, question;
 
-        function genererPromptClassique() {
-            question = document.getElementById('question');
-            return "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + question.value;
-        }
+    function genererPromptClassique() {
+        question = document.getElementById('question');
+        return "Réécris cette description pour LeBonCoin de manière professionnelle, sans fautes. RÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce réécrite : " + question.value;
+    }
 
-        function genererPromptAssiste() {
-            const categorie = document.getElementById('categorie_ia_desc')?.value ?? '';
-            const marque = document.getElementById('marque')?.value ?? '';
-            const modele = document.getElementById('modele')?.value ?? '';
-            const etat = document.getElementById('etat')?.value ?? '';
-            const detail_etat = document.getElementById('detail_etat')?.value ?? '';
-            const annee = document.getElementById('annee')?.value ?? '';
-            const carac = document.getElementById('carac_princ')?.value ?? '';
-            const access = document.getElementById('access_include')?.value ?? '';
-            const raison = document.getElementById('reason_sell')?.value ?? '';
+    function genererPromptAssiste() {
+        const categorie = document.getElementById('categorie_ia_desc')?.value ?? '';
+        const marque = document.getElementById('marque')?.value ?? '';
+        const modele = document.getElementById('modele')?.value ?? '';
+        const etat = document.getElementById('etat')?.value ?? '';
+        const detail_etat = document.getElementById('detail_etat')?.value ?? '';
+        const annee = document.getElementById('annee')?.value ?? '';
+        const carac = document.getElementById('carac_princ')?.value ?? '';
+        const access = document.getElementById('access_include')?.value ?? '';
+        const raison = document.getElementById('reason_sell')?.value ?? '';
 
-            let prompt = `Génère une description professionnelle et sans fautes pour une annonce LeBonCoin avec ces informations :
+        let prompt = `Génère une description professionnelle et sans fautes pour une annonce LeBonCoin avec ces informations :
 - Catégorie : ${categorie}
 - Marque : ${marque}
 - Modèle : ${modele}
@@ -272,60 +237,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 - Année : ${annee}
 - Caractéristiques : ${carac}`;
 
-            if (access) prompt += `\n- Accessoires inclus : ${access}`;
-            if (raison) prompt += `\n- Raison de la vente : ${raison}`;
+        if (access) prompt += `\n- Accessoires inclus : ${access}`;
+        if (raison) prompt += `\n- Raison de la vente : ${raison}`;
 
-            prompt += `\nRÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce.`;
+        prompt += `\nRÈGLE STRICTE : Ne fournis aucune introduction ni conclusion. Renvoie UNIQUEMENT le texte de l'annonce.`;
 
-            return prompt;
+        return prompt;
+    }
+
+    function promptOllama(contenu) {
+        var prompt = {
+            "model": "qwen2.5:3b",
+            "messages": [{
+                "role": "user",
+                "content": contenu
+            }],
+            "stream": false
+        };
+
+        chargement.style.display = 'inline';
+        erreur.style.display = 'none';
+
+        fetch('http://localhost:11434/api/chat', {
+                method: "POST",
+                body: JSON.stringify(prompt)
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) throw new Error(response.error);
+                reponse.value = response.message.content;
+            })
+            .catch(err => {
+                erreur.style.display = 'inline';
+                erreur.innerText = 'Erreur : ' + err.message;
+            })
+            .finally(() => {
+                chargement.style.display = 'none';
+            });
+    }
+
+    submit.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        reponse = document.getElementById('reponse');
+        chargement = document.getElementById('chargement');
+        erreur = document.getElementById('erreur');
+
+        const estAssiste = document.getElementById('marque') !== null;
+        if (estAssiste) {
+            promptOllama(genererPromptAssiste());
+        } else {
+            promptOllama(genererPromptClassique());
         }
+    });
+</script>
 
-        function promptOllama(contenu) {
-            var prompt = {
-                "model": "qwen2.5:3b",
-                "messages": [{
-                    "role": "user",
-                    "content": contenu
-                }],
-                "stream": false
-            };
-
-            chargement.style.display = 'inline';
-            erreur.style.display = 'none';
-
-            fetch('http://localhost:11434/api/chat', {
-                    method: "POST",
-                    body: JSON.stringify(prompt)
-                })
-                .then(response => response.json())
-                .then(response => {
-                    if (response.error) throw new Error(response.error);
-                    reponse.value = response.message.content;
-                })
-                .catch(err => {
-                    erreur.style.display = 'inline';
-                    erreur.innerText = 'Erreur : ' + err.message;
-                })
-                .finally(() => {
-                    chargement.style.display = 'none';
-                });
-        }
-
-        submit.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            reponse = document.getElementById('reponse');
-            chargement = document.getElementById('chargement');
-            erreur = document.getElementById('erreur');
-
-            const estAssiste = document.getElementById('marque') !== null;
-            if (estAssiste) {
-                promptOllama(genererPromptAssiste());
-            } else {
-                promptOllama(genererPromptClassique());
-            }
-        });
-    </script>
-</body>
 
 </html>
