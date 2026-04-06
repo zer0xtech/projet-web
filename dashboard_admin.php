@@ -149,14 +149,17 @@ $annonce = $requete->fetch();
                         </div>
                     </div>
 
-                    <?php if (isset($rapports_ia[$annonce['id']])): ?>
-                        <?php $analyse = $rapports_ia[$annonce['id']]; ?>
+                    <?php
+                    if (isset($_POST['action']) && $_POST['action'] === 'analyser_ia' && isset($rapports_ia[$annonce['id']])) : 
+                        $analyse = $rapports_ia[$annonce['id']];
+                    ?>
                         <div class="rapport-ia-container">
                             <h3>Rapport de Modération IA</h3>
-
                             <?php if ($analyse['success'] === false): ?>
                                 <p class="erreur-ia">Erreur : <?= ($analyse['message']) ?></p>
                             <?php else: $rapport = $analyse['data']; ?>
+                                <p><strong>Approprié ? :</strong> <?= ($rapport['approprie']) ?></p>
+                                <p><strong>Problèmes détectés :</strong> <?= ($rapport['problemes_detectes']) ?></p>
                                 <p><strong>Décision recommandée :</strong> <?= ($rapport['decision_recommandee']) ?></p>
                                 <p><strong>Niveau de confiance :</strong> <?= ($rapport['niveau_confiance']) ?></p>
                                 <p><strong>Catégorisation suggérée :</strong> <?= ($rapport['categorie_suggeree']) ?> > <?= ($rapport['sous_categorie_suggeree']) ?></p>
@@ -170,37 +173,59 @@ $annonce = $requete->fetch();
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </ul>
+                                <div class="buttons-ai-container-admin">
+                                    <form method="POST" class="form-action-admin">
+                                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                        <input type="hidden" name="action" value="recommandation_IA">
+                                        <button type="submit" class="btn-analyse-ia">Suivre la recommandation de l'IA : <?php echo ($rapport['decision_recommandee']) ?></button>
+                                    </form>
+                                    <form method="POST" class="form-action-admin">
+                                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                        <input type="hidden" name="action" value="valider">
+                                        <button type="submit" class="btn-valider-admin">Valider l'annonce</button>
+                                    </form>
+                                    <form method="POST" class="form-action-admin">
+                                        <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                        <input type="hidden" name="action" value="refus">
+                                        <button type="submit" class="btn-refuser-admin">Refuser l'annonce</button>
+                                    </form>
+                                </div>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
-                    <div class="buttons-container-admin">
-                        <form method="POST" class="form-action-admin">
-                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                            <input type="hidden" name="action" value="analyser_ia">
-                            <button type="submit" class="btn-analyser-ia">Analyser avec l'IA</button>
-                        </form>
+                    <?php 
+                    $affichage_ia = (isset($_POST['action']) && $_POST['action'] === 'analyser_ia' && isset($rapports_ia[$annonce['id']]));
+                    if (!$affichage_ia) : 
+                    ?>
+                        <div class="buttons-container-admin">
+                            <form method="POST" class="form-action-admin">
+                                <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                <input type="hidden" name="action" value="analyser_ia">
+                                <button type="submit" class="btn-analyse-ia">Analyser avec l'IA</button>
+                            </form>
 
-                        <form method="POST" class="form-action-admin">
-                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                            <input type="hidden" name="action" value="valider">
-                            <button type="submit" class="btn-valider-admin">Valider</button>
-                        </form>
+                            <form method="POST" class="form-action-admin">
+                                <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                <input type="hidden" name="action" value="valider">
+                                <button type="submit" class="btn-valider-admin">Valider</button>
+                            </form>
 
-                        <form method="POST" class="form-action-admin">
-                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                            <input type="hidden" name="action" value="modifier">
-                            <input type="text" name="motif_modification" placeholder="Modifications à prévoir">
-                            <button type="submit" class="btn-modifier-admin">Modifier</button>
-                        </form>
+                            <form method="POST" class="form-action-admin">
+                                <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                <input type="hidden" name="action" value="modifier">
+                                <input type="text" name="motif_modification" placeholder="Modifications à prévoir">
+                                <button type="submit" class="btn-modifier-admin">Modifier</button>
+                            </form>
 
-                        <form method="POST" class="form-action-admin">
-                            <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                            <input type="hidden" name="action" value="refuser">
-                            <input type="text" name="motif_refus" placeholder="Motif du refus">
-                            <button type="submit" class="btn-refuser-admin">Refuser</button>
-                        </form>
-                    </div>
+                            <form method="POST" class="form-action-admin">
+                                <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
+                                <input type="hidden" name="action" value="refuser">
+                                <input type="text" name="motif_refus" placeholder="Motif du refus">
+                                <button type="submit" class="btn-refuser-admin">Refuser</button>
+                            </form>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div class="moderation-container-admin">

@@ -30,9 +30,9 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
     Tu DOIS renvoyer ta réponse UNIQUEMENT sous la forme d'un objet JSON valide.
     Utilise exactement cette structure :
     {
-        \"approprie\": true ou false,
+        \"approprie\": \"oui\" ou \"non\"
         \"niveau_confiance\": \"élevé\", \"moyen\" ou \"faible\",
-        \"problemes_detectes\": [\"problème 1\"...],
+        \"problemes_detectes\": \"Mets le nom exact de l'endroit ou il y a une erreur, par exemple si il y a un problème dans la description, tu mets 'Description'\",
         \"suggestions_correction\": [\"Si l'objet n'est pas High-Tech, écris UNIQUEMENT : 'Cet objet n'est pas destiné à ce site web (produit non high-tech)'. Sinon, donne tes suggestions classiques.\"],
         \"categorie_suggeree\": \"Nom exact de la catégorie ou 'Hors-sujet'\",
         \"sous_categorie_suggeree\": \"Nom exact de la sous-catégorie ou 'Hors-sujet'\",

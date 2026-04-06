@@ -643,6 +643,14 @@ form.connexion label {
     margin: 0;
 }
 
+.rapport-ia-container {
+    border: 2px solid #5D3FD3;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+    margin-top: 10px;
+}
+
 /* vue de tous les posts */
 .total-posts {
     flex: 1;
@@ -778,11 +786,26 @@ h3 {
     cursor: pointer;
 }
 
+.btn-analyse-ia {
+    background-color: #5D3FD3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .input-motif {
     padding: 10px;
     border: 2px solid #ccc;
     border-radius: 5px;
     outline: none;
+}
+
+.buttons-ai-container-admin {
+    display: flex;
+    gap: 5px;
 }
 
 /* Menu droite */
