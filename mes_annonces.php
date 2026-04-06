@@ -48,7 +48,7 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
         <a href="publication_web.php" class="button">Publie ton annonce</a>
     </section>
     <div class="">
-        <h1 style="margin-top: 5vh;">Mes annonces (<?= count($annonces) ?>)</h1>
+        <h1 style="margin-top: 5vh; color: #5D3FD3;">Mes annonces (<?= count($annonces) ?>)</h1>
         <div class="infos_annonces">
 
             <?php if (empty($annonces)): ?>
