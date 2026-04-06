@@ -62,6 +62,39 @@ if (isset($_POST['action'])) {
         $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
         $update->execute([$motif, $id_annonce]);
     }
+
+    if ($action_choisie == 'recommandation_IA') {
+        $decision_IA = $_POST['decision_IA'] ?? "";
+        if ($decision_IA == 'validation') {
+            $update = $bdd->prepare("UPDATE annonces SET statut = 'validee' WHERE id = ?");
+            $update->execute([$id_annonce]);
+        }
+        else if ($decision_IA == 'refus') {
+            $motif = $_POST['motif_ia'] ?? "";
+            $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
+            $update->execute([$motif, $id_annonce]);
+        }
+    }
+
+    if ($action_choisie == 'validation_IA') {
+        $decision_IA = $_POST['decision_IA'] ?? "";
+        $justificatif = $_POST['justificatif'] ?? null;
+
+        if (!empty($justificatif)) {
+            $update = $bdd->prepare("UPDATE annonces SET statut = 'validee', justificatif = ? WHERE id = ?");
+            $update->execute([$justificatif, $id_annonce]);
+        }
+        else {
+            $update = $bdd->prepare("UPDATE annonces SET statut = 'validee' WHERE id = ?");
+            $update->execute([$id_annonce]);
+        }
+    }
+
+    if ($action_choisie == 'refus_IA') {
+        $motif = $_POST['motif_ia'] ?? "";
+        $update = $bdd->prepare("UPDATE annonces SET statut = 'refusee', motif_refus = ? WHERE id = ?");
+        $update->execute([$motif, $id_annonce]);
+    }
 }
 
 $reqUsers = $bdd->query("SELECT COUNT(*) FROM users");
@@ -177,16 +210,24 @@ $annonce = $requete->fetch();
                                     <form method="POST" class="form-action-admin">
                                         <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
                                         <input type="hidden" name="action" value="recommandation_IA">
+                                        <input type="hidden" name="motif_ia" value="<?= ($rapport['problemes_detectes']) ?>">
+                                        <input type="hidden" name="decision_IA" value="<?= ($rapport['decision_recommandee']) ?>">
                                         <button type="submit" class="btn-analyse-ia">Suivre la recommandation de l'IA : <?php echo ($rapport['decision_recommandee']) ?></button>
                                     </form>
                                     <form method="POST" class="form-action-admin">
                                         <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                                        <input type="hidden" name="action" value="valider">
+                                        <input type="hidden" name="action" value="validation_IA">
+                                        <input type="hidden" name="decision_IA" value="<?= ($rapport['decision_recommandee']) ?>">
+                                        <?php if (($rapport['decision_recommandee']) === 'refus'): ?>
+                                            <p>L'IA conseille de refuser. Pour valider quand meme, justifiez :</p>
+                                            <input type="text" name="justificatif" required>
+                                        <?php endif; ?>
                                         <button type="submit" class="btn-valider-admin">Valider l'annonce</button>
                                     </form>
                                     <form method="POST" class="form-action-admin">
                                         <input type="hidden" name="annonce_id" value="<?php echo $annonce['id']; ?>">
-                                        <input type="hidden" name="action" value="refus">
+                                        <input type="hidden" name="action" value="refus_IA">
+                                        <input type="hidden" name="motif_ia" value="<?= ($rapport['problemes_detectes']) ?>">
                                         <button type="submit" class="btn-refuser-admin">Refuser l'annonce</button>
                                     </form>
                                 </div>

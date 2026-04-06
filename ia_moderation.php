@@ -30,7 +30,7 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
     Tu DOIS renvoyer ta réponse UNIQUEMENT sous la forme d'un objet JSON valide.
     Utilise exactement cette structure :
     {
-        \"approprie\": \"oui\" ou \"non\"
+        \"approprie\": \"oui\" ou \"non\",
         \"niveau_confiance\": \"élevé\", \"moyen\" ou \"faible\",
         \"problemes_detectes\": \"Mets le nom exact de l'endroit ou il y a une erreur, par exemple si il y a un problème dans la description, tu mets 'Description'\",
         \"suggestions_correction\": [\"Si l'objet n'est pas High-Tech, écris UNIQUEMENT : 'Cet objet n'est pas destiné à ce site web (produit non high-tech)'. Sinon, donne tes suggestions classiques.\"],
@@ -75,5 +75,17 @@ function analyserAnnonceAvecOllama($titre, $description, $prix, $categorie, $sou
         return ['success' => false, 'message' => "L'IA n'a pas respecté le format JSON demandé."];
     }
 
-    return ['success' => true, 'data' => $donnees_ia];
+    $structure_par_defaut = [
+            'approprie' => 'non défini',
+            'niveau_confiance' => 'faible',
+            'problemes_detectes' => 'Aucun détail fourni',
+            'suggestions_correction' => [],
+            'categorie_suggeree' => 'Inconnue',
+            'sous_categorie_suggeree' => 'Inconnue',
+            'decision_recommandee' => 'refus'
+    ];
+
+    $donnees_finales = array_merge($structure_par_defaut, $donnees_ia);
+
+    return ['success' => true, 'data' => $donnees_finales];
 }
