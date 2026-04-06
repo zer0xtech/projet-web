@@ -74,6 +74,8 @@ switch ($tri) {
         break;
 }
 
+$userId = isset($_SESSION['userid']) ? $_SESSION['userid'] : null;
+
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $resultats = $stmt->fetchAll();
@@ -180,6 +182,22 @@ if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                             <p>Prix : <?= htmlspecialchars($annonce['prix']) ?>€</p>
                             <p>État : <?= htmlspecialchars($annonce['etat']) ?></p>
                             <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
+                        </div>
+                        <div>
+                            <?php if ($userId): ?>
+                                <?php
+                                $verifFav = $pdo->prepare("SELECT COUNT(*) FROM favoris WHERE id_annonce = ? AND id_user = ?");
+                                $verifFav->execute([$annonce['id'], $userId]);
+                                $estFavori = $verifFav->fetchColumn() > 0;
+                                ?>
+                                <?php if ($estFavori): ?>
+                                    <a href="supp_favoris.php?id=<?= $annonce['id'] ?>" class="button">❤️ Retirer</a>
+                                <?php else: ?>
+                                    <a href="ajout_favoris.php?id=<?= $annonce['id'] ?>" class="button">🤍 Favoris</a>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <a href="login_web.php" class="button">🤍 Favoris</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

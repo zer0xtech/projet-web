@@ -46,37 +46,36 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php require_once 'includes/navbar.php'; ?>
 
-    <div class="infos_favoris">
-        <h1>Mes favoris (<?= count($favoris) ?>)</h1>
-
-        <?php if (empty($favoris)): ?>
-            <div class="infos_favoris_container">
-                <p>Vous n'avez pas encore d'annonces en favoris.</p>
-                <a href="index.php">Parcourir les annonces</a>
-            </div>
-        <?php else: ?>
-            <div class="infos_favoris_container">
-                <?php foreach ($favoris as $fav): ?>
-                    <div class="favori-card">
-                        <img src="<?= htmlspecialchars($fav['url_photo']) ?>" alt="photo annonce">
-                        <div class="favori-info">
-                            <h3><?= htmlspecialchars($fav['titre']) ?></h3>
-                            <p class="categorie"> <?= htmlspecialchars($fav['categorie']) ?></p>
-                            <p class="vendeur"> <?= htmlspecialchars($fav['vendeur_prenom']) ?> <?= htmlspecialchars($fav['vendeur_nom']) ?></p>
-                            <p class="ville"> <?= htmlspecialchars($fav['ville']) ?></p>
-                            <div class="favori-footer">
-                                <span class="prix"><?= number_format($fav['prix'], 2, ',', ' ') ?> €</span>
-                                <div class="favori-actions">
-                                    <a href="annonce.php?id=<?= $fav['id'] ?>" class="bouton">Voir l'annonce</a>
-                                    <a href="supp_favori.php?id=<?= $fav['id'] ?>" class="bouton"> Retirer</a>
-                                </div>
-                            </div>
-                        </div>
+    <?php if (empty($favoris)): ?>
+        <div class="annonces">
+            <p>Vous n'avez pas encore d'annonces en favoris.</p>
+            <a href="index.php">Parcourir les annonces</a>
+        </div>
+    <?php else: ?>
+        <div class="blocs_annonces">
+            <h1 class="Titre" style="color: #5D3FD3;"> Mes Favoris (<?= count($favoris) ?>)</h1>
+            <?php foreach ($favoris as $fav): ?>
+                <div class="annonces">
+                    <div class="titre">
+                        <h2><?= htmlspecialchars($fav['titre']) ?></h2>
+                        <?php
+                        $photos = explode(',', $fav['url_photo']);
+                        ?>
+                        <img src="<?= htmlspecialchars($photos[0]) ?>" alt="Photo de l'annonce" class="imagesannonces">
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </div>
+                    <div class="bio">
+                        <p>Prix : <?= htmlspecialchars($fav['prix']) ?> €</p>
+                        <p>Catégorie : <?= htmlspecialchars($fav['categorie']) ?></p>
+                        <p>Ville : <?= htmlspecialchars($fav['ville']) ?></p>
+                        <p>Vendeur : <?= htmlspecialchars($fav['vendeur_prenom']) ?> <?= htmlspecialchars($fav['vendeur_nom']) ?></p>
+                    </div>
+                    <div>
+                        <a href="supprimer_favori.php?id=<?= $fav['id'] ?>" class="bouton"> ❤️ Retirer</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
 </body>
 

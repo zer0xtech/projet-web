@@ -45,10 +45,10 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php require_once 'includes/navbar.php'; ?>
     <section class="bouton-temporaire">
-        <a href="publication_web.php" class="button">Publie ton annonce</a>
+        <a href="publication_web_ia.php" class="button">Publie ton annonce</a>
     </section>
     <div class="">
-        <h1 style="margin-top: 5vh;">Mes annonces (<?= count($annonces) ?>)</h1>
+        <h1 style="margin-top: 5vh; color: #5D3FD3;">Mes annonces (<?= count($annonces) ?>)</h1>
         <div class="infos_annonces">
 
             <?php if (empty($annonces)): ?>
@@ -61,8 +61,8 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                         <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width=350px height=300px>
                         <div>
                             <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
-                            <p>Catégorie : <?= htmlspecialchars($annonce['categorie_nom']) ?></p>
-                            <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie_nom']) ?></p>
+                            <p>Catégorie : <?= htmlspecialchars($annonce['categorie'] ?? 'Non définie') ?></p>
+                            <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie'] ?? 'Non définie') ?></p>
                             <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
                             <p>Description : <?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
                             <p>Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</p>
