@@ -61,8 +61,8 @@ $annonces = $stmtAnnonces->fetchAll(PDO::FETCH_ASSOC);
                         <img src="<?= htmlspecialchars($annonce['url_photo']) ?>" alt="photo annonce" width=350px height=300px>
                         <div>
                             <h3><?= htmlspecialchars($annonce['titre']) ?></h3>
-                            <p>Catégorie : <?= htmlspecialchars($annonce['categorie'] ?? 'Non définie') ?></p>
-                            <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie'] ?? 'Non définie') ?></p>
+                            <p>Catégorie : <?= htmlspecialchars($annonce['categorie_nom'] ?? 'Non définie') ?></p>
+                            <p>Sous-catégorie : <?= htmlspecialchars($annonce['sous_categorie_nom'] ?? 'Non définie') ?></p>
                             <p>Ville : <?= htmlspecialchars($annonce['ville']) ?></p>
                             <p>Description : <?= htmlspecialchars(substr($annonce['description'], 0, 100)) ?>...</p>
                             <p>Prix : <?= number_format($annonce['prix'], 2, ',', ' ') ?> €</p>

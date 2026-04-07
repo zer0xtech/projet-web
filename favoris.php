@@ -70,7 +70,7 @@ $favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p>Vendeur : <?= htmlspecialchars($fav['vendeur_prenom']) ?> <?= htmlspecialchars($fav['vendeur_nom']) ?></p>
                     </div>
                     <div>
-                        <a href="supprimer_favori.php?id=<?= $fav['id'] ?>" class="bouton"> ❤️ Retirer</a>
+                        <a href="supp_favoris.php?id=<?= $fav['id'] ?>" class="bouton"> ❤️ Retirer</a>
                     </div>
                 </div>
             <?php endforeach; ?>
